@@ -1,5 +1,5 @@
 {
-  "name": "resources",
+  "name": "pro-resources",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,12 +8,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yanshibainu/resources.git"
+    "url": "git+https://github.com/yanshibainu/pro-resources.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/yanshibainu/resources/issues"
+    "url": "https://github.com/yanshibainu/pro-resources/issues"
   },
-  "homepage": "https://github.com/yanshibainu/resources#readme"
+  "homepage": "https://github.com/yanshibainu/pro-resources#readme"
 }
