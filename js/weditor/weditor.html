@@ -1,0 +1,54 @@
+<html xmlns="http://www.w3.org/1999/xhtml" style="overflow:hidden">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <link rel="stylesheet" href="/static/bower_components/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/static/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
+
+    <script type="text/javascript" src="/static/bower_components/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/bower_components/moment/min/moment.min.js"></script>
+    <script type="text/javascript" src="/static/bower_components/moment/locale/zh-tw.js"></script>
+
+    <script type="text/javascript" src="/static/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/static/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+    
+    <script type="text/javascript" src="/static/bower_components/jquery-ui-sortable/jquery-ui-sortable.min.js"></script>
+
+    <script type="text/javascript" src="/static/master/js/form-designer/assets/js/form-render.min.js"></script>
+    
+    <script type="text/javascript" src="bluebird.min.js"></script>
+    <script type="text/javascript" src="weditor.js"></script>
+    <script>
+        /*
+
+        window.onload = function () {
+            window.editor = new window.weditor({
+
+                config: {
+                    說明文字: {
+                        wrap: true,
+                        autoList: "Numbered", //Numbered Bullet, none
+                    }
+                }
+            });
+        };
+        */
+       
+        function formRender(formData){
+            debugger
+            return $('.render-wrap').formRender({
+                formData: formData,
+            });
+        }
+       
+    </script>
+
+
+</head>
+
+<body ondragstart="return false;" ondrop="return false;" style="background-color:transparent;">
+
+</body>
+
+</html>
+
