@@ -2585,7 +2585,7 @@
             },
             get name() {
                 return "input";
-            },
+            },          
             get selectedValue() {
                 return this.htmlElement.value;
             },
@@ -2604,6 +2604,12 @@
             set min(value) {
                 this.htmlElement.setAttribute("min", value);
             },
+            get checked() {
+                return this.htmlElement.checked;
+            },  
+            get type() {
+                return this.htmlElement.type;
+            }, 
         }
 
         input.prototype.__proto__ = UndoRedoEditor.prototype;
