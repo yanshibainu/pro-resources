@@ -1551,7 +1551,7 @@ section {
     display: block;
     color: #333;
     padding: 15px 25px;
-    font-size: 14px;
+    font-size: 20px;
 }
 
 .account-dropdown__footer a:hover {
@@ -1902,7 +1902,7 @@ section {
     line-height: -webkit-calc(29/14);
     line-height: -moz-calc(29/14);
     line-height: calc(29/14);
-    font-size: 14px;
+    font-size: 20px;
     color: #808080;
 }
 
@@ -1910,7 +1910,7 @@ section {
     display: block;
     text-transform: capitalize;
     text-align: center;
-    font-size: 14px;
+    font-size: 20px;
     color: #4272d7;
     padding: 24px 0;
 }
@@ -2073,7 +2073,7 @@ section {
     width: -moz-calc(100% - 55px);
     width: calc(100% - 55px);
     text-align: left;
-    font-size: 14px;
+    font-size: 20px;
 }
 
 .notifi__item .content p {
