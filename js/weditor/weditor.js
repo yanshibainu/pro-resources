@@ -7310,7 +7310,7 @@
                 var getEditorByIdFunction = function (id) {
                     return InstanceManager.getInstance(targetEditor.htmlElement.ownerDocument.querySelector("#" + id));
                 }
-                handler(targetEditor, getEditorByIdFunction);
+                handler(name, targetEditor, getEditorByIdFunction);
             };
 
             IOverride.call(this);
