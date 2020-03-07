@@ -2587,11 +2587,10 @@
                 return "input";
             },          
             get selectedValue() {
-                return this.htmlElement.value;
+                return this.value;
             },
             set selectedValue(value) {
-                if(this.type != "file")
-                    this.htmlElement.value = value;
+                this.value = value;
             },
             get value() {
                 return this.htmlElement.value;
@@ -2599,6 +2598,8 @@
             set value(value) {
                 if(this.type != "file")
                     this.htmlElement.value = value;
+                else
+                    this.htmlElement.value = "";
             },
             get min() {
                 return this.htmlElement.getAttribute("min");
@@ -2612,13 +2613,13 @@
             get type() {
                 return this.htmlElement.type;
             }, 
-            getBase64File() {
+            getBase64File: function () {
                 var self = this;
                 
                 var promise = new Promise(function (resolve, reject) {
                     
                     var reader = new FileReader();
-                    reader.readAsDataURL(self.htmlElement);
+                    reader.readAsDataURL(self.htmlElement.files[0]);
                     reader.onload = function () {
                         resolve(reader.result);
                         console.log(reader.result);
@@ -2918,6 +2919,118 @@
         return colgroup;
     }());
 
+    var FileBlock = (function () {
+        var FileBlock = function (htmlElement /** HTMLElement **/) {
+
+            this._file;
+            this._a;
+            this._i;
+            this._base64;
+            this._base64ChangedFlag = false;
+
+            EditorHTMLElement.call(this, htmlElement);
+        };      
+
+        FileBlock.prototype = {
+            _createChildren: function () {
+                EditorHTMLElement.prototype._createChildren.call(this);
+            },
+            _childrenMapping: function () {
+                EditorHTMLElement.prototype._childrenMapping.call(this);
+
+                this._a = InstanceManager.getInstance(document.createElement("a"));
+                this._i = InstanceManager.getInstance(new DOMParser().parseFromString('<i class="fas fa-trash-alt" style="display: none"></i>', "text/html").body.children[0]);
+
+                this.addChild(this._a);  
+                this.addChild(this._i);    
+            },
+            _creationComplete: function () {
+                UndoRedoEditor.prototype._creationComplete.call(this);
+
+                var self = this;
+                this._i.htmlElement.addEventListener("click", function () {
+                    self.removeFile();
+
+                }, false);                 
+            },
+            _updateDisplayList: function () {
+
+                EditorHTMLElement.prototype._updateDisplayList.call(this);
+                var self = this;
+                if (this._childrenChangedFlag) {
+
+                    if (this.htmlElement.querySelector("input[type=file]")){
+                        this._file = InstanceManager.getInstance(this.htmlElement.querySelector("input[type=file]"));  
+                        this._file.htmlElement.addEventListener("change", function () {
+                            var files = self._file.htmlElement.files;
+                            if(files && files.length > 0){
+                                self._a.htmlElement.href = window.URL.createObjectURL(files[0]);
+                                self._a.textContent = self._file.value;
+                                self._i.setStyle("display", "inline-block");
+                                
+                                self._file.getBase64File().done(function(base64){
+                                    self.base64 = base64;
+                                });
+                            }
+
+                        }, false);                    
+                    }                  
+                }
+            },
+            _commitProperties: function () {
+                
+                EditorHTMLElement.prototype._commitProperties.call(this);
+
+                if(this._base64ChangedFlag){
+                    this._modeChangedFlag = false;
+                }
+
+                if (this._modeChangedFlag) {
+                    debugger;
+                    this._modeChangedFlag = false;
+                    
+                    switch (this._mode.name) {
+                        case "編輯":
+                            
+                            for (var i = this.htmlElement.childNodes.length - 1; i >= 2; i--) {
+                                this.htmlElement.removeChild(this.htmlElement.childNodes[i]);
+                            }
+                            break;
+                        case "追蹤修訂":
+                        case "唯讀":
+                            // if (this.children.length > 0) {
+                                
+                            //     this.textContent = this._value = this.selectedValue;
+
+                            //     this.validateProperties();
+                            // }
+                            break;
+                    }
+                }
+            },
+            set base64(value) {
+
+                this._base64 = value;
+                this._base64ChangedFlag = true;
+
+                this._invalidateProperties();
+            },
+            get base64() {
+                return this._base64;
+            },
+            removeFile: function(){
+                this._a.htmlElement.href = "";
+                this._a.textContent = "";
+                this._file.value = "";
+                this._i.setStyle("display", "none");
+            }
+        };
+
+        FileBlock.prototype.__proto__ = EditorHTMLElement.prototype;
+        
+        return FileBlock;
+    }());
+
     var InputSelectBlock = (function () {
 
         var InputSelectBlock = function (htmlElement /** HTMLElement **/) {
@@ -2939,7 +3052,6 @@
 
         InputSelectBlock.prototype = {
             _createChildren: function () {
-
                 EditorHTMLElement.prototype._createChildren.call(this);
             },
             _childrenMapping: function () {
@@ -3015,7 +3127,7 @@
                     this._modeChangedFlag = false;
                     
                     switch (this._mode.name) {
-                        case "Task_09xnpoc":
+                        // case "Task_09xnpoc":
                         case "編輯":
                             for (var i = this.htmlElement.childNodes.length - 1; i >= 0; i--) {
                                 this.htmlElement.removeChild(this.htmlElement.childNodes[i]);
@@ -3027,6 +3139,7 @@
                             if (this.children.length > 0) {
                                 
                                 this.textContent = this._value = this.selectedValue;
+
                                 this.validateProperties();
                             }
 
