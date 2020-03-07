@@ -1,0 +1,12 @@
+{
+  "name": "bpm-ui-2",
+  "dependencies": {
+    "jquery-ui-sortable": "*",
+    "jquery": "^3.4.1",
+    "bootstrap": "^4.4.1",
+    "bootstrap-datepicker": "^1.9.0",
+    "eonasdan-bootstrap-datetimepicker": "^4.17.47",
+    "moment": "^2.24.0"
+  }
+}
+ 
