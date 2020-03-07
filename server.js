@@ -9,11 +9,8 @@ app.get("/", function(req, res) {
 });
 
 app.get(/(.*)\.(htm|html|)/i, function(req, res) {
-
   const filePath = __dirname + req.path;
-  console.log('%c⧭', 'color: #e50000', filePath);
   res.sendfile(filePath, function(err) {
-      console.log('%c⧭', 'color: #aa00ff', err);
       if (err) res.send(404);
   });
 });
