@@ -3,14 +3,13 @@ const express = require("express");
 const app = express();
 
 app.get("/", function(req, res) {
-  res.sendfile(__dirname + '/index.html', function(err) {
+  res.sendfile(__dirname + '/js/weditorTester.html', function(err) {
       if (err) res.send(404);
   });
 });
 
 app.get(/(.*)\.(htm|html|)/i, function(req, res) {
 
-  
   const filePath = __dirname + req.path;
   console.log('%c⧭', 'color: #e50000', filePath);
   res.sendfile(filePath, function(err) {
