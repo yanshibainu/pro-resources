@@ -2590,13 +2590,15 @@
                 return this.htmlElement.value;
             },
             set selectedValue(value) {
-                this.htmlElement.value = value;
+                if(this.type != "file")
+                    this.htmlElement.value = value;
             },
             get value() {
                 return this.htmlElement.value;
             },
             set value(value) {
-                this.htmlElement.value = value;
+                if(this.type != "file")
+                    this.htmlElement.value = value;
             },
             get min() {
                 return this.htmlElement.getAttribute("min");
@@ -2609,6 +2611,25 @@
             },  
             get type() {
                 return this.htmlElement.type;
+            }, 
+            getBase64File() {
+                var self = this;
+                
+                var promise = new Promise(function (resolve, reject) {
+                    
+                    var reader = new FileReader();
+                    reader.readAsDataURL(self.htmlElement);
+                    reader.onload = function () {
+                        resolve(reader.result);
+                        console.log(reader.result);
+                    };
+                    reader.onerror = function (error) {
+                        reject(error)
+                        console.log('Error: ', error);
+                    };
+                });
+
+                return promise;
             }, 
         }
 
