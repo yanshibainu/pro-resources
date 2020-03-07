@@ -2969,7 +2969,7 @@
                                 self._i.setStyle("display", "inline-block");
                                 
                                 self._file.getBase64File().done(function(base64){
-                                    self.base64 = base64;
+                                    self._base64 = base64;
                                 });
                             }
 
@@ -2982,7 +2982,7 @@
                 EditorHTMLElement.prototype._commitProperties.call(this);
 
                 if(this._base64ChangedFlag){
-                    this._modeChangedFlag = false;
+                    this._base64ChangedFlag = false;
                 }
 
                 if (this._modeChangedFlag) {
@@ -10153,6 +10153,19 @@
             
             return undefined;
         },
+        queryEditorSelectorAll: function (selectors) {
+            debugger
+            var htmlElementList;
+            var editorList = [];
+
+            htmlElementList = self.optioins.container.querySelectorAll(selectors);
+
+            htmlElementList.forEach(function (item) {
+                editorList.push(InstanceManager.getInstance(item));
+            });
+
+            return editorList;
+        }, 
         pageCount: function () {
             
             var documentNode = self.optioins.container.querySelector("[data-class=Document]");
