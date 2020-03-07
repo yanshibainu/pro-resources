@@ -1,0 +1,118 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <script>
+        function undo() {
+            action("undo");
+        }
+
+        function redo() {
+            action("redo");
+        }
+
+        function increaseIndent() {
+            action("increaseIndent");
+        }
+
+        function decreaseIndent() {
+            action("decreaseIndent");
+        }
+
+        function bold() {
+            action("bold");
+        }
+
+        function underline() {
+            action("underline");
+        }
+
+        function sup() {
+            action("sup");
+        }
+ 
+        function sub() {
+            action("sub");
+        }
+        
+
+        function save() {
+            action("html");
+        }
+
+        function paging() {
+            action("paging");
+        }
+        function single() {
+            action("single");
+        }
+        function print() {
+            action("print");
+        }
+
+        function insertText(textContent) {
+            action("insertText", textContent);
+        }
+
+        function addParagraph(paragraphName) {
+            action("addParagraph", paragraphName);
+        }
+
+        function action(name) {
+            
+            document.activeElement.blur();
+            document.querySelector("iframe").focus();
+
+            var editor = document.querySelector("iframe").contentWindow.editor;
+            editor.action.apply(editor, arguments);
+        }
+
+        window.onload = function () {
+            var iframe = document.querySelector("iframe");
+            var height = iframe.contentDocument.body.scrollHeight;
+
+            iframe.contentDocument.addEventListener('DOMSubtreeModified', function () {
+                
+                if (iframe.contentDocument.body.scrollHeight != height) {
+                    height = iframe.contentDocument.body.scrollHeight;
+                    
+                    iframe.style.height = height + "px";
+                    //console.debug("DOMSubtreeModifiedDOMSubtreeModifiedDOMSubtreeModifiedDOMSubtreeModifiedDOMSubtreeModifiedDOMSubtreeModifiedDOMSubtreeModifiedDOMSubtreeModifiedDOMSubtreeModified")
+                }
+            }, false);
+
+            iframe.style.height = height + "px";
+        };
+    </script>
+</head>
+<body>
+    <div style="position:fixed">
+        <button onclick="undo()">undo</button>
+        <button onclick="redo()">redo</button>
+        <button onclick="increaseIndent()">增加縮排</button>
+        <button onclick="decreaseIndent()">減少縮排</button>
+        <button onclick="bold()">粗體</button>
+        <button onclick="underline()">底線</button>
+        <button onclick="sup()">上標</button>
+        <button onclick="sub()">下標</button>
+        <button onclick="save()">儲存</button>
+        <button onclick="paging()">分頁預覽</button>
+        <button onclick="single()">不分頁預覽</button>
+        <button onclick="print()">列印</button>
+        <button onclick="insertText(this.textContent)">【】</button>
+        <button onclick="action('changeSatae', '唯讀')">唯讀模式</button>
+        <button onclick="action('changeSatae', '編輯')">編輯模式</button>
+        <button onclick="action('changeSatae', '追蹤修訂')">追蹤修訂模式</button>
+        <input id="paragraphName" />
+        <button onclick="addParagraph(paragraphName.value)">新增段落</button>
+        <button onclick="action('insertTable', 5, 5)">插入表格</button>
+        <button onclick="action('finalVersionMode', true)">完稿模式</button>
+        <button onclick="action('symbol')">項次符號</button>
+        <button onclick="action('mark')">螢光筆</button>
+    </div>
+
+    
+    <iframe frameborder="0" allowtransparency="true" src='/js/weditor/weditorForTest.html' style="width: 100%; display: block;"></iframe>
+</body>
+</html>

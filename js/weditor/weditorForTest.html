@@ -1,0 +1,1887 @@
+﻿<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <link rel="stylesheet" href="/static/bower_components/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/static/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
+
+    <script type="text/javascript" src="/static/bower_components/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/bower_components/moment/min/moment.min.js"></script>
+    <script type="text/javascript" src="/static/bower_components/moment/locale/zh-tw.js"></script>
+
+    <script type="text/javascript" src="/static/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/static/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+    
+    <script type="text/javascript" src="/static/bower_components/jquery-ui-sortable/jquery-ui-sortable.min.js"></script>
+
+    <script type="text/javascript" src="../form-designer/assets/js/form-render.min.js"></script>
+    
+    <script type="text/javascript" src="bluebird.min.js"></script>
+    <script type="text/javascript" src="weditor.js"></script>
+    <script>
+
+
+        window.onload = function () {
+            window.editor = new window.weditor({
+
+                config: {
+                    //Selector:{
+                    //    說明文字: {
+                    //        wrap: true,
+                    //        autoList: "Numbered", //Numbered Bullet, none
+                    //    },
+                    //},
+                    States: {
+                        唯讀: {
+                            iOverrides: []
+                        },
+                        分頁: {
+                            iOverrides: [],
+                            basedOn: "唯讀"
+                        },
+                        "編輯": {
+                            "actions": [
+                                //{
+                                //  "name": "儲存",
+                                //  "handler": "draftSave",
+                                //  "bsStyle": "default"
+                                //},
+                                //{
+                                //  "name": "送出",
+                                //  "handler": "draftSubmit",
+                                //  "bsStyle": "success"
+                                //}
+                            ],
+                            "iOverrides": [
+                                //{
+                                //  "iOverride": "AddChild",
+                                //  "relativeTo": "主持人部門名稱",
+                                //  "target": "<input style='font-size: 16pt; padding: 0; width: 100mm; margin-top: 5px; margin-bottom: 5px;' type='text'></input>"
+                                //},
+                                //{
+                                //  "iOverride": "AddChild",
+                                //  "relativeTo": "主持人姓名",
+                                //  "target": "<input style='font-size: 16pt; padding: 0; width: 100mm; margin-top: 5px; margin-bottom: 5px;' type='text'></input>"
+                                //},
+
+                                //{
+                                //  "iOverride": "AddChild",
+                                //  "relativeTo": "主持人職稱",
+                                //  "target": "<input style='font-size: 16pt; padding: 0; width: 100mm; margin-top: 5px; margin-bottom: 5px;' type='text'></input>"
+                                //},
+                                //{
+                                //  "iOverride": "AddChild",
+                                //  "relativeTo": "主持人分機",
+                                //  "target": "<input style='font-size: 16pt; padding: 0; width: 100mm; margin-top: 5px; margin-bottom: 5px;' type='text'></input>"
+                                //},
+                                //{
+                                //  "iOverride": "AddChild",
+                                //  "relativeTo": "主持人電子信箱",
+                                //  "target": "<input style='font-size: 16pt; padding: 0; width: 100mm; margin-top: 5px; margin-bottom: 5px;' type='text'></input>"
+                                //},
+                                //{
+                                //  "iOverride": "AddChild",
+                                //  "relativeTo": "聯絡人部門名稱",
+                                //  "target": "<input style='font-size: 16pt; padding: 0; width: 100mm; margin-top: 5px; margin-bottom: 5px;' type='text'></input>"
+                                //},
+                                //{
+                                //  "iOverride": "AddChild",
+                                //  "relativeTo": "聯絡人姓名",
+                                //  "target": "<input style='font-size: 16pt; padding: 0; width: 100mm; margin-top: 5px; margin-bottom: 5px;' type='text'></input>"
+                                //},
+                                //{
+                                //  "iOverride": "AddChild",
+                                //  "relativeTo": "聯絡人職稱",
+                                //  "target": "<input style='font-size: 16pt; padding: 0; width: 100mm; margin-top: 5px; margin-bottom: 5px;' type='text'></input>"
+                                //},
+                                //{
+                                //  "iOverride": "AddChild",
+                                //  "relativeTo": "聯絡人分機",
+                                //  "target": "<input style='font-size: 16pt; padding: 0; width: 100mm; margin-top: 5px; margin-bottom: 5px;' type='text'></input>"
+                                //},
+                                //{
+                                //  "iOverride": "AddChild",
+                                //  "relativeTo": "聯絡人電子信箱",
+                                //  "target": "<input style='font-size: 16pt; padding: 0; width: 100mm; margin-top: 5px; margin-bottom: 5px;' type='text'></input>"
+                                //},
+
+                                {
+                                    "iOverride": "AddChild",
+                                    "relativeTo": "計畫名稱",
+                                    "target": "<input style='font-size: 16pt; padding: 0; width: 100mm; margin-top: 5px; margin-bottom: 5px;' type='text'></input>"
+                                },
+                                {
+                                    "iOverride": "AddChild",
+                                    "relativeTo": "執行期限",
+                                    "target": "<input style='font-size: 16pt; padding: 0; width: 100mm; margin-top: 5px; margin-bottom: 5px;' type='text'></input>"
+                                },
+                                {
+                                    "iOverride": "AddChild",
+                                    "relativeTo": "微生物名稱",
+                                    "target": "<input style='font-size: 16pt; padding: 0; width: 25mm; margin-top: 5px; margin-bottom: 5px;' type='text'></input>"
+                                },
+                                {
+                                    "iOverride": "AddChild",
+                                    "relativeTo": "微生物法規清單",
+                                    "target": "<input style='font-size: 16pt; padding: 0; width: 25mm; margin-top: 5px; margin-bottom: 5px;' type='text'></input>"
+                                },
+                                {
+                                    "iOverride": "AddChild",
+                                    "relativeTo": "重組基因來源動物名稱",
+                                    "target": "<input style='font-size: 16pt; padding: 0; width: 60mm; margin-top: 5px; margin-bottom: 5px;' type='text'></input>"
+                                },
+                                {
+                                    "iOverride": "AddChild",
+                                    "relativeTo": "重組基因來源植物名稱",
+                                    "target": "<input style='font-size: 16pt; padding: 0; width: 60mm; margin-top: 5px; margin-bottom: 5px;' type='text'></input>"
+                                },
+                                {
+                                    "iOverride": "AddChild",
+                                    "relativeTo": "重組基因來源合成名稱",
+                                    "target": "<input style='font-size: 16pt; padding: 0; width: 60mm; margin-top: 5px; margin-bottom: 5px;' type='text'></input>"
+                                },
+                                {
+                                    "iOverride": "AddChild",
+                                    "relativeTo": "載體質體名稱",
+                                    "target": "<input style='font-size: 16pt; padding: 0; width: 60mm; margin-top: 5px; margin-bottom: 5px;' type='text'></input>"
+                                },
+                                {
+                                    "iOverride": "AddChild",
+                                    "relativeTo": "病毒載體名稱",
+                                    "target": "<input style='font-size: 16pt; padding: 0; width: 60mm; margin-top: 5px; margin-bottom: 5px;' type='text'></input>"
+                                },
+                                {
+                                    "iOverride": "AddChild",
+                                    "relativeTo": "載體其他名稱",
+                                    "target": "<input style='font-size: 16pt; padding: 0; width: 60mm; margin-top: 5px; margin-bottom: 5px;' type='text'></input>"
+                                },
+                                {
+                                    "iOverride": "AddChild",
+                                    "relativeTo": "宿主微生物名稱",
+                                    "target": "<input style='font-size: 16pt; padding: 0; width: 25mm; margin-top: 5px; margin-bottom: 5px;' type='text'></input>"
+                                },
+                                {
+                                    "iOverride": "AddChild",
+                                    "relativeTo": "宿主微生物法規清單",
+                                    "target": "<input style='font-size: 16pt; padding: 0; width: 25mm; margin-top: 5px; margin-bottom: 5px;' type='text'></input>"
+                                },
+                                {
+                                    "iOverride": "AddChild",
+                                    "relativeTo": "宿主細胞株名稱",
+                                    "target": "<input style='font-size: 16pt; padding: 0; width: 60mm; margin-top: 5px; margin-bottom: 5px;' type='text'></input>"
+                                },
+                                {
+                                    "iOverride": "AddChild",
+                                    "relativeTo": "宿主動物名稱",
+                                    "target": "<input style='font-size: 16pt; padding: 0; width: 60mm; margin-top: 5px; margin-bottom: 5px;' type='text'></input>"
+                                },
+                                {
+                                    "iOverride": "AddChild",
+                                    "relativeTo": "宿主植物名稱",
+                                    "target": "<input style='font-size: 16pt; padding: 0; width: 60mm; margin-top: 5px; margin-bottom: 5px;' type='text'></input>"
+                                },
+                                {
+                                    "iOverride": "AddChild",
+                                    "relativeTo": "基因轉殖供應商",
+                                    "target": "<input style='font-size: 16pt; padding: 0; width: 60mm; margin-top: 5px; margin-bottom: 5px;' type='text'></input>"
+                                },
+                                {
+                                    "iOverride": "AddChild",
+                                    "relativeTo": "基因轉殖其他說明",
+                                    "target": "<input style='font-size: 16pt; padding: 0; width: 60mm; margin-top: 5px; margin-bottom: 5px;' type='text'></input>"
+                                },
+
+                                {
+                                    "iOverride": "AddChild",
+                                    "relativeTo": "動物實驗設備其他說明",
+                                    "target": "<input style='font-size: 16pt; padding: 0; width: 60mm; margin-top: 5px; margin-bottom: 5px;' type='text'></input>"
+                                },
+                                {
+                                    "iOverride": "AddChild",
+                                    "relativeTo": "植物實驗設備其他說明",
+                                    "target": "<input style='font-size: 16pt; padding: 0; width: 60mm; margin-top: 5px; margin-bottom: 5px;' type='text'></input>"
+                                },
+
+                                {
+                                    "iOverride": "AddChild",
+                                    "relativeTo": "實驗室樓層",
+                                    "target": "<input style='font-size: 16pt; padding: 0; width: 10mm; margin-top: 5px; margin-bottom: 5px;' type='text'></input>"
+                                },
+                                {
+                                    "iOverride": "AddChild",
+                                    "relativeTo": "實驗室房號",
+                                    "target": "<input style='font-size: 16pt; padding: 0; width: 10mm; margin-top: 5px; margin-bottom: 5px;' type='text'></input>"
+                                },
+                                {
+                                    "iOverride": "AddChild",
+                                    "relativeTo": "實驗室其他",
+                                    "target": "<input style='font-size: 16pt; padding: 0; width: 15mm; margin-top: 5px; margin-bottom: 5px;' type='text'></input>"
+                                },
+                                {
+                                    "iOverride": "AddChild",
+                                    "relativeTo": "實驗地點其他",
+                                    "target": "<input style='font-size: 16pt; padding: 0; width: 20mm; margin-top: 5px; margin-bottom: 5px;' type='text'></input>"
+                                },
+                                {
+                                    "iOverride": "AddChild",
+                                    "relativeTo": "是否基因重組",
+                                    "target": "<div class='form-check form-check-inline'><input type='radio' class='form-check-input' name='是否基因重組' pro-variable-name='是否基因重組' value='是'/><label class='form-check-label' for='g1'>是</label><input type='radio' class='form-check-input' name='是否基因重組' pro-variable-name='是否基因重組' value=''/><label class='form-check-label' for='g1'>否</label></div>"
+                                },
+                                {
+                                    "iOverride": "AddChild",
+                                    "relativeTo": "實驗室其他",
+                                    "position": "after",
+                                    "target": "<button id='選擇實驗室'>選擇實驗室</button>"
+                                },
+                                {
+                                    "iOverride": "SetEventHandler",
+                                    "name": "click",
+                                    "handler": "after",
+                                    "target": "#選擇實驗室"
+                                },
+                                {
+                                    "iOverride": "AddChild",
+                                    "relativeTo": "中英文摘要",
+                                    "target": "<input type='file' name='中英文摘要' class='form-control-file'/>"
+                                }
+
+                                //{
+                                //  "iOverride": "AddChild",
+                                //  "relativeTo": "請假人員",
+                                //  "target": "<input style='font-size: 16pt; padding: 0; width: 50mm;' type='text'></input>"
+                                //},
+                                //{
+                                //  "iOverride": "AddChild",
+                                //  "relativeTo": "主持人職稱",
+                                //  "target": "<input style='font-size: 16pt; padding: 0; width: 50mm;' type='date'></input>"
+                                //},
+                                //{
+                                //  "iOverride": "AddChild",
+                                //  "relativeTo": "開始時間",
+                                //  "target": "<input style='font-size: 16pt; padding: 0; width: 50mm;' type='time'></input>"
+                                //},
+                                //{
+                                //  "iOverride": "AddChild",
+                                //  "relativeTo": "結束時間",
+                                //  "target": "<input style='font-size: 16pt; padding: 0; width: 50mm;' type='time'></input>"
+                                //},
+                                //{
+                                //  "iOverride": "AddChild",
+                                //  "relativeTo": "請假時數",
+                                //  "target": "<input style='font-size: 16pt; padding: 0; width: 25mm;' type='number'></input>"
+                                //},
+                                //{
+                                //  "iOverride": "SetProperty",
+                                //  "target": "備註文字",
+                                //  "name": "contenteditable",
+                                //  "value": true
+                                //}
+                            ]
+                        },
+
+                    },
+                    stateName: "編輯"
+                }
+            });
+        };
+
+    </script>
+
+    <style>
+    </style>
+</head>
+
+<body style="background-color: silver;" ondragstart="return false;" ondrop="return false;">
+    <div templateName="簽"
+        style="width:210mm; position:relative; font-family:  standard, kaiu, 標楷體; margin: 10px auto; text-align:justify">
+        <div id="od" data-twedr="文稿" data-editor="weditor">
+            <div data-twedr="文稿頁面" data-class="Document" style="color: black; background-color:white;"
+                data-page-width="210mm" data-page-content-height="247mm" data-page-head-height="25mm"
+                data-page-footer-height="25mm">
+                <div data-twedr="page" data-class="Page"
+                    style="box-shadow: 1px 1px 10px rgba(0,0,0,.3); background-color: white; width: 210mm; position: relative; overflow: hidden; ">
+                    <div data-twedr="header" data-class="PageHeader"
+                        style="position: relative; width: 100%; height: 25mm;">
+                        <span></span>
+                        <span
+                            style="font-size: 18pt;top: 10mm;margin: auto;/* left: 50%; */position: absolute;/* right: 50%; */left: 65mm;">國家衛生研究院生物安全會</span>
+                        <span data-twedr="表單類別"
+                            style="font-size: 18pt;top: 18mm;margin: auto;/* left: 50%; */position: absolute;/* right: 50%; */left: 60mm;">基因重組實驗申請同意書</span>
+                    </div>
+                    <article id="ArticleBlock" data-class="ArticleBlock"
+                        style="min-height:247mm;width: 80%;box-shadow: none; border: 0px solid; margin: auto;">
+                        <div style="left:0mm;top:10mm;width:100%;height:15mm;position:absolute;">
+                            <!-- <div data-twedr="擬辦方式" style="font-size: 12pt;width: 100mm;display: inline-block;">
+                              <div style="display:inline-block;margin-left: 27mm;">
+                              </div>
+                            </div> -->
+
+                            <!--<span pro-variable-name="approved" pro-variable-type="Boolean" style="display: none;">false</span>
+                            <span pro-variable-name="haveDaysOff" pro-variable-type="Boolean" style="display: none;"></span>-->
+                        </div>
+                        <div>
+                            <span>Ⅰ.計畫主持人</span>
+                        </div>
+                        <table width=100% cellpadding=7 cellspacing=0>
+                            <tr valign=top>
+                                <td width=20%
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <span>部門：</span>
+                                </td>
+                                <td width=80%
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <!--<span id="主持人部門名稱" data-class="InputSelectBlock" pro-variable-name="主持人部門名稱" data-twedr="主持人部門名稱" data-label-field="text" data-data-field="text"></span>-->
+                                    <span id="主持人部門名稱" pro-variable-name="主持人部門名稱"
+                                        data-twedr="主持人部門名稱">${user.boss.department}</span>
+                                </td>
+                            </tr>
+                            <tr valign=top>
+                                <td width=20%
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <span>姓名：</span>
+                                </td>
+                                <td width=80%
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <!--<span id="主持人姓名" data-class="InputSelectBlock" pro-variable-name="主持人姓名" data-twedr="主持人姓名" data-label-field="text" data-data-field="text"></span>-->
+                                    <span id="主持人姓名" pro-variable-name="主持人姓名"
+                                        data-twedr="主持人姓名">${user.boss.name}</span>
+                                </td>
+                            </tr>
+                            <tr valign=top>
+                                <td width=20%
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <span>職稱：</span>
+                                </td>
+                                <td width=80%
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <!--<span id="主持人職稱" data-class="InputSelectBlock" pro-variable-name="主持人職稱" data-twedr="主持人職稱" data-label-field="text" data-data-field="text"></span>-->
+                                    <span id="主持人職稱" pro-variable-name="主持人職稱"
+                                        data-twedr="主持人職稱">${user.boss.name}</span>
+                                </td>
+                            </tr>
+                            <tr valign=top>
+                                <td width=20%
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <span>分機：</span>
+                                </td>
+                                <td width=80%
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <!--<span id="主持人分機" data-class="InputSelectBlock" pro-variable-name="主持人分機" data-twedr="主持人分機" data-label-field="text" data-data-field="text"></span>-->
+                                    <span id="主持人分機" pro-variable-name="主持人分機"
+                                        data-twedr="主持人分機">${user.boss.telephone}</span>
+                                </td>
+                            </tr>
+                            <tr valign=top>
+                                <td width=20%
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <span>電子信箱：</span>
+                                <td width=80%
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <!--<span id="主持人電子信箱" data-class="InputSelectBlock" pro-variable-name="主持人電子信箱" data-twedr="主持人電子信箱" data-label-field="text" data-data-field="text"></span>-->
+                                    <span id="主持人電子信箱" pro-variable-name="主持人電子信箱"
+                                        data-twedr="主持人電子信箱">${user.boss.email}</span>
+                                </td>
+                            </tr>
+                        </table>
+                        <span>Ⅱ.聯絡人</span>
+                        <table width=100% cellpadding=7 cellspacing=0>
+                            <tr valign=top>
+                                <td width=20%
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <span>部門：</span>
+                                </td>
+                                <td width=80%
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <span id="聯絡人部門名稱" pro-variable-name="聯絡人部門名稱"
+                                        data-twedr="聯絡人部門名稱">${user.department}</span>
+                                </td>
+                            </tr>
+                            <tr valign=top>
+                                <td width=20%
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <span>姓名：</span>
+                                </td>
+                                <td width=80%
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <span id="聯絡人姓名" pro-variable-name="聯絡人姓名" data-twedr="聯絡人姓名">${user.name}</span>
+                                </td>
+                            </tr>
+                            <tr valign=top>
+                                <td width=20%
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <span>職稱：</span>
+                                </td>
+                                <td width=80%
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <span id="聯絡人職稱" pro-variable-name="聯絡人職稱" data-twedr="聯絡人職稱">${user.title}</span>
+                                </td>
+                            </tr>
+                            <tr valign=top>
+                                <td width=20%
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <span>分機：</span>
+                                </td>
+                                <td width=80%
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <span id="聯絡人分機" pro-variable-name="聯絡人分機"
+                                        data-twedr="聯絡人分機">${user.telephone}</span>
+                                </td>
+                            </tr>
+                            <tr valign=top>
+                                <td width=20%
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <span>電子信箱：</span>
+                                </td>
+                                <td width=80%
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <span id="聯絡人電子信箱" pro-variable-name="聯絡人電子信箱"
+                                        data-twedr="聯絡人電子信箱">${user.email}</span>
+                                </td>
+                            </tr>
+                        </table>
+                        <span>Ⅲ.計畫名稱及執行期間</span>
+                        <table width=100% cellpadding=7 cellspacing=0>
+                            <tr valign=top>
+                                <td width=20%
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <span>計畫名稱：</span>
+                                </td>
+                                <td width=80%
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <span id="計畫名稱" data-class="InputSelectBlock" pro-variable-name="計畫名稱"
+                                        data-twedr="計畫名稱" data-label-field="text" data-data-field="text"></span>
+                                </td>
+                            </tr>
+                            <tr valign=top>
+                                <td width=20%
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <span>執行期限：</span>
+                                </td>
+                                <td width=80%
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <span id="執行期限" data-class="InputSelectBlock" pro-variable-name="執行期限"
+                                        data-twedr="執行期限" data-label-field="text" data-data-field="text"></span>
+                                </td>
+                            </tr>
+                        </table>
+                        <span>Ⅲ.計畫名稱及執行期間</span>
+                        <table width=100% cellpadding=7 cellspacing=0>
+                            <tr valign=top>
+                                <td width=53%
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <span>是否涉及基因重組之實驗</span>
+                                </td>
+                                <td width=47%
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <span id="是否基因重組" data-class="InputSelectBlock" pro-variable-name="是否基因重組"></span>
+                                    <!--<div class="form-check form-check-inline">
+                                        <input type="radio" class="form-check-input" name="是否基因重組" pro-variable-name="是否基因重組" value="1">
+                                        <label class="form-check-label" for="g1">是</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input type="radio" class="form-check-input" name="是否基因重組" pro-variable-name="是否基因重組" value="0">
+                                        <label class="form-check-label" for="g1">否</label>
+                                    </div>-->
+                                </td>
+                            </tr>
+                            <tr valign=top>
+                                <td width=53%
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <span>是否進行微生物培養的實驗</span>
+                                </td>
+                                <td width=47%
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <div class="form-check form-check-inline">
+                                        <input type="radio" class="form-check-input" name="是否微生物培養"
+                                            pro-variable-name="是否微生物培養" value="1">
+                                        <label class="form-check-label" for="g2">是</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input type="radio" class="form-check-input" name="是否微生物培養"
+                                            pro-variable-name="是否微生物培養" value="0">
+                                        <label class="form-check-label" for="g2">否</label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr valign=top>
+                                <td width=53%
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <span>是否進行動物實驗</span>
+                                </td>
+                                <td width=47%
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <div class="form-check form-check-inline">
+                                        <input type="radio" class="form-check-input" name="是否動物實驗"
+                                            pro-variable-name="是否動物實驗" value="1">
+                                        <label class="form-check-label" for="g3">是</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input type="radio" class="form-check-input" name="是否動物實驗"
+                                            pro-variable-name="是否動物實驗" value="0">
+                                        <label class="form-check-label" for="g3">否</label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr valign=top>
+                                <td width=53%
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <span>是否進行基因轉殖之動物實驗</span>
+                                </td>
+                                <td width=47%
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <div class="form-check form-check-inline">
+                                        <input type="radio" class="form-check-input" name="是否基因轉殖動物"
+                                            pro-variable-name="是否基因轉殖動物" value="1">
+                                        <label class="form-check-label" for="g4">是</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input type="radio" class="form-check-input" name="是否基因轉殖動物"
+                                            pro-variable-name="是否基因轉殖動物" value="0">
+                                        <label class="form-check-label" for="g4">否</label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr valign=top>
+                                <td width=53%
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <span>是否進行基因轉殖之植物實驗</span>
+                                </td>
+                                <td width=47%
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <div style="margin-top:0.5mm">
+                                        <div class="form-check form-check-inline">
+                                            <input type="radio" class="form-check-input" name="是否基因轉殖植物"
+                                                pro-variable-name="是否基因轉殖植物" value="1">
+                                            <label class="form-check-label" for="g5">是</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input type="radio" class="form-check-input" name="是否基因轉殖植物"
+                                                pro-variable-name="是否基因轉殖植物" value="0">
+                                            <label class="form-check-label" for="g5">否</label>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr valign=top>
+                                <td width=53%
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <span>是否為自交植物</span>
+                                </td>
+                                <td width=47%
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <div style="margin-top:0.5mm">
+                                        <div class="form-check form-check-inline">
+                                            <input type="radio" class="form-check-input" name="是否自交植物"
+                                                pro-variable-name="是否自交植物" value="1">
+                                            <label class="form-check-label" for="g6">是</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input type="radio" class="form-check-input" name="是否自交植物"
+                                                pro-variable-name="是否自交植物" value="0">
+                                            <label class="form-check-label" for="g6">否</label>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                        <span>Ⅴ.實驗使用之生物材料</span>
+                        <table width=100% cellpadding=7 cellspacing=0>
+                            <tr>
+                                <td rowspan=4 width=20%
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <span>重組基因來源</span>
+                                </td>
+                                <td width=19%
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <div class="form-check form-check-inline">
+                                        <input type="radio" class="form-check-input" id="微生物" name="重組基因來源">
+                                        <label class="form-check-label" for="a1">微生物 </label>
+                                    </div>
+                                </td>
+                                <td width=61% valign=top
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+
+                                    <span>名稱：</span>
+                                    <span id="微生物名稱" data-class="InputSelectBlock" pro-variable-name="微生物名稱"
+                                        data-twedr="微生物名稱" data-label-field="text" data-data-field="text"></span>
+                                    <span>法規清單：</span>
+                                    <span id="微生物法規清單" data-class="InputSelectBlock" pro-variable-name="微生物法規清單"
+                                        data-twedr="微生物法規清單" data-label-field="text" data-data-field="text"></span>
+                                    <div>
+                                        <span>危險群：</span>
+                                        <div class="form-check form-check-inline">
+                                            <input type="radio" class="form-check-input" id="RG1" name="重組基因來源危險群">
+                                            <label class="form-check-label" for="r1">RG1</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input type="radio" class="form-check-input" id="RG2" name="重組基因來源危險群">
+                                            <label class="form-check-label" for="r1">RG2</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input type="radio" class="form-check-input" id="RG3" name="重組基因來源危險群">
+                                            <label class="form-check-label" for="r1">RG3</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input type="radio" class="form-check-input" id="RG4" name="重組基因來源危險群">
+                                            <label class="form-check-label" for="r1">RG4</label>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width=19%
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <div class="form-check form-check-inline">
+                                        <input type="radio" class="form-check-input" id="動物" name="重組基因來源">
+                                        <label class="form-check-label" for="a1">動物 </label>
+                                    </div>
+                                </td>
+                                <td width=61% valign=top
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <span>名稱：</span>
+                                    <span id="重組基因來源動物名稱" data-class="InputSelectBlock" pro-variable-name="重組基因來源動物名稱"
+                                        data-twedr="重組基因來源動物名稱" data-label-field="text" data-data-field="text"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width=19%
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <div class="form-check form-check-inline">
+                                        <input type="radio" class="form-check-input" id="植物" name="重組基因來源">
+                                        <label class="form-check-label" for="a1">植物 </label>
+                                    </div>
+                                </td>
+                                <td width=61% valign=top
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <span>名稱：</span>
+                                    <span id="重組基因來源植物名稱" data-class="InputSelectBlock" pro-variable-name="重組基因來源植物名稱"
+                                        data-twedr="重組基因來源植物名稱" data-label-field="text" data-data-field="text"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width=19%
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <div class="form-check form-check-inline">
+                                        <input type="radio" class="form-check-input" id="合成" name="重組基因來源">
+                                        <label class="form-check-label" for="a1">合成</label>
+                                    </div>
+                                </td>
+                                <td width=61% valign=top
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <span>名稱：</span>
+                                    <span id="重組基因來源合成名稱" data-class="InputSelectBlock" pro-variable-name="重組基因來源合成名稱"
+                                        data-twedr="重組基因來源合成名稱" data-label-field="text" data-data-field="text"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td rowspan=3 width=20%
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <span>載體</span>
+                                </td>
+                                <td width=19%
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <div class="form-check form-check-inline">
+                                        <input type="radio" class="form-check-input" id="質體" name="載體">
+                                        <label class="form-check-label" for="r1">質體</label>
+                                    </div>
+                                </td>
+                                <td width=61% valign=top
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <span>名稱：</span>
+                                    <span id="載體質體名稱" data-class="InputSelectBlock" pro-variable-name="載體質體名稱"
+                                        data-twedr="載體質體名稱" data-label-field="text" data-data-field="text"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width=19%
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <div class="form-check form-check-inline">
+                                        <input type="radio" class="form-check-input" id="病毒載體" name="載體">
+                                        <label class="form-check-label" for="r1">病毒載體</label>
+                                    </div>
+                                </td>
+                                <td width=61% valign=top
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <span>名稱：</span>
+                                    <span id="病毒載體名稱" data-class="InputSelectBlock" pro-variable-name="病毒載體名稱"
+                                        data-twedr="病毒載體名稱" data-label-field="text" data-data-field="text"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width=19%
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <div class="form-check form-check-inline">
+                                        <input type="radio" class="form-check-input" id="其他" name="載體">
+                                        <label class="form-check-label" for="r1">其他</label>
+                                    </div>
+                                </td>
+                                <td width=61% valign=top
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <span>名稱：</span>
+                                    <span id="載體其他名稱" data-class="InputSelectBlock" pro-variable-name="載體其他名稱"
+                                        data-twedr="載體其他名稱" data-label-field="text" data-data-field="text"></span>
+
+                                    <div>
+                                        <span>危險群：</span>
+                                        <div class="form-check form-check-inline">
+                                            <input type="radio" class="form-check-input" id="RG1" name="載體危險群">
+                                            <label class="form-check-label" for="rg2">RG1</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input type="radio" class="form-check-input" id="RG2" name="載體危險群">
+                                            <label class="form-check-label" for="rg2">RG2</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input type="radio" class="form-check-input" id="RG3" name="載體危險群">
+                                            <label class="form-check-label" for="rg2">RG3</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input type="radio" class="form-check-input" id="RG4" name="載體危險群">
+                                            <label class="form-check-label" for="rg2">RG4</label>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td rowspan=4 width=20%
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <span>宿主</span>
+                                </td>
+                                <td width=19%
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <div class="form-check form-check-inline">
+                                        <input type="radio" class="form-check-input" id="微生物" name="宿主">
+                                        <label class="form-check-label" for="m1">微生物 </label>
+                                    </div>
+                                </td>
+                                <td width=61% valign=top
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <span>名稱：</span>
+                                    <span id="宿主微生物名稱" data-class="InputSelectBlock" pro-variable-name="宿主微生物名稱"
+                                        data-twedr="宿主微生物名稱" data-label-field="text" data-data-field="text"></span>
+                                    <span>法規清單：</span>
+                                    <span id="宿主微生物法規清單" data-class="InputSelectBlock" pro-variable-name="宿主微生物法規清單"
+                                        data-twedr="宿主微生物法規清單" data-label-field="text" data-data-field="text"></span>
+                                    <div>
+                                        <span>危險群：</span>
+                                        <div class="form-check form-check-inline">
+                                            <input type="radio" class="form-check-input" id="RG1" name="宿主危險群">
+                                            <label class="form-check-label" for="rg3">RG1</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input type="radio" class="form-check-input" id="RG2" name="宿主危險群">
+                                            <label class="form-check-label" for="rg3">RG2</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input type="radio" class="form-check-input" id="RG3" name="宿主危險群">
+                                            <label class="form-check-label" for="rg3">RG3</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input type="radio" class="form-check-input" id="RG4" name="宿主危險群">
+                                            <label class="form-check-label" for="rg3">RG4</label>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width=19%
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <div class="form-check form-check-inline">
+                                        <input type="radio" class="form-check-input" id="細胞株" name="宿主">
+                                        <label class="form-check-label" for="m1">細胞株</label>
+                                    </div>
+                                </td>
+                                <td width=61% valign=top
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <span>名稱：</span>
+                                    <span id="宿主細胞株名稱" data-class="InputSelectBlock" pro-variable-name="宿主細胞株名稱"
+                                        data-twedr="宿主細胞株名稱" data-label-field="text" data-data-field="text"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width=19%
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <div class="form-check form-check-inline">
+                                        <input type="radio" class="form-check-input" id="動物" name="宿主">
+                                        <label class="form-check-label" for="m1">動物</label>
+                                    </div>
+                                </td>
+                                <td width=61% valign=top
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <span>名稱：</span>
+                                    <span id="宿主動物名稱" data-class="InputSelectBlock" pro-variable-name="宿主動物名稱"
+                                        data-twedr="宿主動物名稱" data-label-field="text" data-data-field="text"></span>
+                                </td>
+                            </tr>
+                            <tr valign=top>
+                                <td width=19%
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <div class="form-check form-check-inline">
+                                        <input type="radio" class="form-check-input" id="植物" name="宿主">
+                                        <label class="form-check-label" for="m1">植物</label>
+                                    </div>
+                                </td>
+                                <td width=61%
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <span>名稱：</span>
+                                    <span id="宿主植物名稱" data-class="InputSelectBlock" pro-variable-name="宿主植物名稱"
+                                        data-twedr="宿主植物名稱" data-label-field="text" data-data-field="text"></span>
+                                </td>
+                            </tr>
+                        </table>
+                        <span>Ⅵ.基因轉殖方法及實驗設備</span>
+                        <table width=100% cellpadding=7 cellspacing=0>
+                            <tr>
+                                <td rowspan=3 width=32%
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <span>基因轉殖方法</span>
+                                </td>
+                                <td width=15%
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <div class="form-check form-check-inline">
+                                        <input type="radio" class="form-check-input" id="自行轉殖" name="基因轉殖方法">
+                                        <label class="form-check-label" for="g4">自行轉殖 </label>
+                                    </div>
+                                </td>
+                                <td width=53% valign=top
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <span>方式：</span>
+                                    <div class="form-check form-check-inline">
+                                        <input type="radio" class="form-check-input" id="virus" name="基因轉殖方式">
+                                        <label class="form-check-label" for="m4">virus</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input type="radio" class="form-check-input" id="chemicalreagent" name="基因轉殖方式">
+                                        <label class="form-check-label" for="m4">chemical reagent</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input type="radio" class="form-check-input" id="liposome" name="基因轉殖方式">
+                                        <label class="form-check-label" for="m4">liposome</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input type="radio" class="form-check-input" id="microinjection" name="基因轉殖方式">
+                                        <label class="form-check-label" for="m4">microinjection</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input type="radio" class="form-check-input" id="electroporation" name="基因轉殖方式">
+                                        <label class="form-check-label" for="m4">electroporation</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input type="radio" class="form-check-input" id="genegun" name="基因轉殖方式">
+                                        <label class="form-check-label" for="m4">gene gun</label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width=15%
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <div class="form-check form-check-inline">
+                                        <input type="radio" class="form-check-input" id="外購" name="基因轉殖方法">
+                                        <label class="form-check-label" for="g4">外購</label>
+                                    </div>
+                                </td>
+                                <td width=53% valign=top
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <span>供應商：</span>
+                                    <span id="基因轉殖供應商" data-class="InputSelectBlock" pro-variable-name="基因轉殖供應商"
+                                        data-twedr="基因轉殖供應商" data-label-field="text" data-data-field="text"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width=15%
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <div class="form-check form-check-inline">
+                                        <input type="radio" class="form-check-input" id="其他" name="基因轉殖方法">
+                                        <label class="form-check-label" for="g4">其他</label>
+                                    </div>
+                                </td>
+                                <td width=53% valign=top
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <span>說明：</span>
+                                    <span id="基因轉殖其他說明" data-class="InputSelectBlock" pro-variable-name="基因轉殖其他說明"
+                                        data-twedr="基因轉殖其他說明" data-label-field="text" data-data-field="text"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td rowspan=3 width=32%
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <span>基因轉殖之動物實驗設備</span>
+                                </td>
+                                <td COLSPAN=2 width=68% valign=top
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <div class="form-check ">
+                                        <input type="radio" class="form-check-input" id="SPF " name="動物實驗設備">
+                                        <label class="form-check-label" for="materialInline1">SPF</label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td COLSPAN=2 width=68% valign=top
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <div class="form-check ">
+                                        <input type="radio" class="form-check-input" id="IVC" name="動物實驗設備">
+                                        <label class="form-check-label" for="materialInline1">IVC</label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr valign=top>
+                                <td COLSPAN=2 width=68%
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <div class="form-check ">
+                                        <input type="radio" class="form-check-input" id="其他" name="動物實驗設備">
+                                        <label class="form-check-label" for="materialInline1">其他，說明：</label>
+                                        <span id="動物實驗設備其他說明" data-class="InputSelectBlock"
+                                            pro-variable-name="動物實驗設備其他說明" data-twedr="動物實驗設備其他說明"
+                                            data-label-field="text" data-data-field="text"></span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td rowspan=4 width=32%
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <span>基因轉殖之植物實驗設備</span>
+                                </td>
+                                <td COLSPAN=2 width=68% valign=top
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <div class="form-check ">
+                                        <input type="radio" class="form-check-input" id="生長箱" name="植物實驗設備">
+                                        <label class="form-check-label" for="materialInline1">生長箱</label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td COLSPAN=2 width=68% valign=top
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <div class="form-check ">
+                                        <input type="radio" class="form-check-input" id="溫室" name="植物實驗設備">
+                                        <label class="form-check-label" for="materialInline1">溫室</label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td COLSPAN=2 width=68% valign=top
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <div class="form-check ">
+                                        <input type="radio" class="form-check-input" id="農場" name="植物實驗設備">
+                                        <label class="form-check-label" for="materialInline1">農場</label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr valign=top>
+                                <td COLSPAN=2 width=68%
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <div class="form-check ">
+                                        <input type="radio" class="form-check-input" id="其他" name="植物實驗設備">
+                                        <label class="form-check-label" for="materialInline1">其他，說明：</label>
+                                        <span id="植物實驗設備其他說明" data-class="InputSelectBlock"
+                                            pro-variable-name="植物實驗設備其他說明" data-twedr="植物實驗設備其他說明"
+                                            data-label-field="text" data-data-field="text"></span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                        <span>Ⅶ.本研究計畫所需之實驗室生物安全等級</span>
+                        <table width=100% cellpadding=7 cellspacing=0>
+                            <tr>
+                                <td width=100% valign=top
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <div class="row" style="margin-top:0.5mm;margin-left:1mm">
+                                        <div class="form-check form-check-inline">
+                                            <input type="radio" class="form-check-input" id="BSL1" name="所需生物安全等級">
+                                            <label class="form-check-label" for="m5">BSL1/ABSL1</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input type="radio" class="form-check-input" id="BSL2" name="所需生物安全等級">
+                                            <label class="form-check-label" for="m5">BSL2/ABSL2</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input type="radio" class="form-check-input" id="BSL3" name="所需生物安全等級">
+                                            <label class="form-check-label" for="m5">BSL3/ABSL3</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input type="radio" class="form-check-input" id="BSL4" name="所需生物安全等級">
+                                            <label class="form-check-label" for="m5">BSL4/ABSL4</label>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                        <span>Ⅷ.進行實驗之地點</span>
+                        <table width=100% cellpadding=7 cellspacing=0>
+                            <tr valign=top>
+                                <td width=28%
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <span>進行研究之實驗室</span>
+                                </td>
+                                <td width=72%
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <div class="form-check form-check-inline">
+                                        <input type="radio" class="form-check-input" id="院區" name="實驗室">
+                                        <label class="form-check-label" for="r1">院區</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input type="radio" class="form-check-input" id="BSL2" name="實驗室">
+                                        <label class="form-check-label" for="r1">大樓</label>
+                                    </div>
+
+                                    <span id="實驗室樓層" data-class="InputSelectBlock" pro-variable-name="實驗室樓層"
+                                        data-twedr="實驗室樓層" data-label-field="text" data-data-field="text"></span>
+                                    <span>樓層</span>
+                                    <span id="實驗室房號" data-class="InputSelectBlock" pro-variable-name="實驗室房號"
+                                        data-twedr="實驗室房號" data-label-field="text" data-data-field="text"></span>
+                                    <span>房號；其他：</span>
+                                    <span id="實驗室其他" data-class="InputSelectBlock" pro-variable-name="實驗室其他"
+                                        data-twedr="實驗室其他" data-label-field="text" data-data-field="text"></span>
+
+                                    <span pro-variable-name="實驗室代碼" style="display: none;"></span>
+                                </td>
+                            </tr>
+                            <tr valign=top>
+                                <td width=28%
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <span>進行動物實驗地點</span>
+                                </td>
+                                <td width=72%
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <div class="form-check form-check-inline">
+                                        <input type="radio" class="form-check-input" id="院區實驗動物中心" name="實驗地點">
+                                        <label class="form-check-label" for="r1">院區實驗動物中心</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input type="radio" class="form-check-input" id="區" name="實驗地點">
+                                        <label class="form-check-label" for="r1">區</label>
+                                    </div>
+                                    <span>；其他：</span>
+                                    <span id="實驗地點其他" data-class="InputSelectBlock" pro-variable-name="實驗地點其他"
+                                        data-twedr="實驗地點其他" data-label-field="text" data-data-field="text"></span>
+                                </td>
+                            </tr>
+                            <tr valign=top>
+                                <td width=28%
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <span>實驗室生物安全等級</span>
+                                </td>
+                                <td width=72%
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+
+                                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9" style="padding:0px">
+                                        <div class="form-check form-check-inline">
+                                            <input type="radio" class="form-check-input" id="BSL1" name="生物安全等級">
+                                            <label class="form-check-label" for="m8">BSL1/ABSL1</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input type="radio" class="form-check-input" id="BSL2" name="生物安全等級">
+                                            <label class="form-check-label" for="m8">BSL2/ABSL2</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input type="radio" class="form-check-input" id="BSL3" name="生物安全等級">
+                                            <label class="form-check-label" for="m8">BSL3/ABSL3</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input type="radio" class="form-check-input" id="BSL4" name="生物安全等級">
+                                            <label class="form-check-label" for="m8">BSL4/ABSL4</label>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                        <span>Ⅸ.附件</span>
+                        <table width=100% cellpadding=7 cellspacing=0>
+                            <tr valign=top>
+                                <td width=29%
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <span>＊中英文摘要</span>
+                                </td>
+                                <td width=71%
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <span id="中英文摘要" data-class="FileBlock" pro-variable-name='中英文摘要'
+                                        pro-variable-type='File'></span>
+                                </td>
+                            </tr>
+                            <tr valign=top>
+                                <td width=29%
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <span>＊生物材料資訊</span>
+                                </td>
+                                <td width=71%
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <input type="file" class="form-control-file" id="生物材料資訊" name="生物材料資訊">
+                                </td>
+                            </tr>
+                            <tr valign=top>
+                                <td width=29%
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <span>＊動物實驗計畫書</span>
+                                </td>
+                                <td width=71%
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <input type="file" class="form-control-file" id="動物實驗計畫書" name="動物實驗計畫書">
+                                </td>
+                            </tr>
+                            <tr valign=top>
+                                <td width=29%
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <span>＊生物安全櫃檢測報告</span>
+                                </td>
+                                <td width=71%
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <input type="file" class="form-control-file" id="生物安全櫃檢測報告" name="生物安全櫃檢測報告">
+                                </td>
+                            </tr>
+                            <tr valign=top>
+                                <td width=29%
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <span>其他補充資料</span>
+                                </td>
+                                <td width=71%
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <input type="file" class="form-control-file" id="其他補充資料" name="其他補充資料">
+                                </td>
+                            </tr>
+                        </table>
+                        <span>列印後會增加之欄位</span>
+                        <table width=100% cellpadding=7 cellspacing=0>
+                            <tr>
+                                <td width=100% valign=top
+                                    style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
+                                    <div><span>生物安全會審核欄：</span></div>
+                                    <div class="form-check">
+                                        <input type="radio" class="form-check-input" id="同意" name="生物安全會審核">
+                                        <label class="form-check-label" for="r1">同意</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input type="radio" class="form-check-input" id="不同意" name="生物安全會審核">
+                                        <label class="form-check-label" for="r1">不同意</label>
+                                        <span>，理由: </span>
+                                        <span id="生物安全會不同意理由" data-class="InputSelectBlock"
+                                            pro-variable-name="生物安全會不同意理由" data-twedr="生物安全會不同意理由"
+                                            data-label-field="text" data-data-field="text"></span>
+                                    </div>
+                                    <div><span>生物安全會/生安專責人員簽章：</span></div>
+                                    <div>
+                                        <span>日期：</span>
+
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+
+                    </article>
+                    <div data-twedr="footer" data-class="PageFooter" style="width: 100%; height: 25mm;">
+                        <div id="條碼" data-twedr="條碼" data-first-page="true"
+                            style="position:absolute;right:35mm;bottom: 5mm;"></div>
+                        <div data-twedr="頁碼" align="center"
+                            style="width: 100%; position:absolute;text-align: center;bottom: 10mm;"></div>
+                    </div>
+                </div>
+            </div>
+            <div data-class="Data" data-twedr="異動紀錄" style="display:none;"></div>
+            <div data-class="Data" data-twedr="行文機關資訊" style="display:none;"></div>
+        </div>
+    </div>
+
+    <!--
+    <section style="padding: 1mm; font-size: 16pt; border-bottom: 1px solid;background-color:#FFBB73;">
+        <div style="margin-top:0.5mm">
+            <span>Ⅰ.計畫主持人</span>
+        </div>
+    </section>
+    <section style="padding: 1mm; font-size: 16pt; border-bottom: 1px solid;">
+        <div style="margin-top:0.5mm">
+            <span>部門名稱：</span>
+           <span id="主持人部門名稱" data-twedr="主持人部門名稱" pro-variable-name="主持人部門名稱">#{user.name}</span>
+    <span id="主持人部門名稱" data-class="InputSelectBlock" pro-variable-name="主持人部門名稱" data-twedr="主持人部門名稱" data-label-field="text" data-data-field="text"></span>
+        </div>
+    </section>
+    <section style="padding: 1mm;font-size: 16pt;border-bottom: 1px solid;">
+        <div style="margin-top:0.5mm">
+            <span>姓名：</span>
+            <span id="主持人姓名" data-class="InputSelectBlock" pro-variable-name="主持人姓名" data-twedr="主持人姓名" data-label-field="text" data-data-field="text"></span>
+        </div>
+    </section>
+    <section style="padding: 1mm; font-size: 16pt; border-bottom: 1px solid;">
+        <div style="margin-top:0.5mm">
+            <span>職稱：</span>
+            <span id="主持人職稱" data-class="InputSelectBlock" pro-variable-name="主持人職稱" data-twedr="主持人職稱" data-label-field="text" data-data-field="text"></span>
+        </div>
+    </section>
+    <section style="padding: 1mm; font-size: 16pt; border-bottom: 1px solid;">
+        <div style="margin-top:0.5mm">
+            <span>分機：</span>
+            <span id="主持人分機" data-class="InputSelectBlock" pro-variable-name="主持人分機" data-twedr="主持人分機" data-label-field="text" data-data-field="text"></span>
+        </div>
+    </section>
+    <section style="padding: 1mm; font-size: 16pt; border-bottom: 1px solid;">
+        <div style="margin-top:0.5mm">
+            <span>電子信箱：</span>
+            <span id="主持人電子信箱" data-class="InputSelectBlock" pro-variable-name="主持人電子信箱" data-twedr="主持人電子信箱" data-label-field="text" data-data-field="text"></span>
+    
+        </div>
+    </section>
+    <section style="padding: 1mm; font-size: 16pt; border-bottom: 1px solid;background-color:#FFBB73;">
+        <div style="margin-top:0.5mm">
+            <span>Ⅱ.聯絡人</span>
+        </div>
+    </section>
+    <section style="padding: 1mm; font-size: 16pt; border-bottom: 1px solid;">
+        <div style="margin-top:0.5mm">
+            <span>部門名稱：</span>
+            <span id="聯絡人部門名稱" data-class="InputSelectBlock" pro-variable-name="聯絡人部門名稱" data-twedr="聯絡人部門名稱" data-label-field="text" data-data-field="text">${user.department}</span>
+        </div>
+    </section>
+    <section style="padding: 1mm;font-size: 16pt;border-bottom: 1px solid;">
+        <div style="margin-top:0.5mm">
+            <span>姓名：</span>
+            <span id="聯絡人姓名" data-class="InputSelectBlock" pro-variable-name="聯絡人姓名" data-twedr="聯絡人姓名" data-label-field="text" data-data-field="text">${user.name}</span>
+        </div>
+    </section>
+    <section style="padding: 1mm; font-size: 16pt; border-bottom: 1px solid;">
+        <div style="margin-top:0.5mm">
+            <span>職稱：</span>
+            <span id="聯絡人職稱" data-class="InputSelectBlock" pro-variable-name="聯絡人職稱" data-twedr="聯絡人職稱" data-label-field="text" data-data-field="text">${user.title}</span>
+        </div>
+    </section>
+    <section style="padding: 1mm; font-size: 16pt; border-bottom: 1px solid;">
+        <div style="margin-top:0.5mm">
+            <span>分機：</span>
+            <span id="聯絡人分機" data-class="InputSelectBlock" pro-variable-name="聯絡人分機" data-twedr="聯絡人分機" data-label-field="text" data-data-field="text"></span>
+        </div>
+    </section>
+    <section style="padding: 1mm; font-size: 16pt; border-bottom: 1px solid;">
+        <div style="margin-top:0.5mm">
+            <span>電子信箱：</span>
+            <span id="聯絡人電子信箱" data-class="InputSelectBlock" pro-variable-name="聯絡人電子信箱" data-twedr="聯絡人電子信箱" data-label-field="text" data-data-field="text"></span>
+        </div>
+    </section>
+    <section style="padding: 1mm; font-size: 16pt; border-bottom: 1px solid;background-color:#FFBB73;">
+        <div style="margin-top:0.5mm">
+            <span>Ⅲ.計畫名稱及期間</span>
+        </div>
+    </section>
+    <section style="padding: 1mm; font-size: 16pt; border-bottom: 1px solid;">
+        <div style="margin-top:0.5mm">
+            <span>計畫名稱：</span>
+            <span id="計畫名稱" data-class="InputSelectBlock" pro-variable-name="計畫名稱" data-twedr="計畫名稱" data-label-field="text" data-data-field="text"></span>
+        </div>
+    </section>
+    <section style="padding: 1mm;font-size: 16pt;border-bottom: 1px solid;">
+        <div style="margin-top:0.5mm">
+            <span>執行期限：</span>
+            <span id="執行期限" data-class="InputSelectBlock" pro-variable-name="執行期限" data-twedr="執行期限" data-label-field="text" data-data-field="text"></span>
+        </div>
+    </section>
+    <section style="padding: 1mm; font-size: 16pt; border-bottom: 1px solid;background-color:#FFBB73;">
+        <div style="margin-top:0.5mm">
+            <span>Ⅳ.實驗內容</span>
+        </div>
+    </section>
+    <section style="padding: 1mm;font-size: 16pt;border-bottom: 1px solid;">
+        <div style="margin-top:0.5mm">
+            <span>是否涉及基因重組之實驗?</span>
+            <div class="form-check form-check-inline">
+                <input type="radio" class="form-check-input" id="基因重組" name="是否基因重組">
+                <label class="form-check-label" for="g1">是</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input type="radio" class="form-check-input" id="基因重組" name="是否基因重組">
+                <label class="form-check-label" for="g1">否</label>
+            </div>
+        </div>
+    </section>
+    <section style="padding: 1mm;font-size: 16pt;border-bottom: 1px solid;">
+        <div style="margin-top:0.5mm">
+            <span>是否進行微生物培養的實驗?</span>
+            <div class="form-check form-check-inline">
+                <input type="radio" class="form-check-input" id="微生物培養" name="是否微生物培養">
+                <label class="form-check-label" for="g2">是</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input type="radio" class="form-check-input" id="微生物培養" name="是否微生物培養">
+                <label class="form-check-label" for="g2">否</label>
+            </div>
+        </div>
+    </section>
+    <section style="padding: 1mm;font-size: 16pt;border-bottom: 1px solid;">
+        <div style="margin-top:0.5mm">
+            <span>是否進行動物實驗?</span>
+            <div class="form-check form-check-inline">
+                <input type="radio" class="form-check-input" id="動物實驗" name="是否動物實驗">
+                <label class="form-check-label" for="g3">是</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input type="radio" class="form-check-input" id="動物實驗" name="是否動物實驗">
+                <label class="form-check-label" for="g3">否</label>
+            </div>
+        </div>
+    </section>
+    <section style="padding: 1mm;font-size: 16pt;border-bottom: 1px solid;">
+        <div style="margin-top:0.5mm">
+            <span>是否進行基因轉殖之動物實驗?</span>
+            <div class="form-check form-check-inline">
+                <input type="radio" class="form-check-input" id="基因轉殖動物" name="是否基因轉殖動物">
+                <label class="form-check-label" for="g4">是</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input type="radio" class="form-check-input" id="基因轉殖動物" name="是否基因轉殖動物">
+                <label class="form-check-label" for="g4">否</label>
+            </div>
+        </div>
+    </section>
+    <section style="padding: 1mm;font-size: 16pt;border-bottom: 1px solid;">
+        <div style="margin-top:0.5mm">
+            <span>是否進行基因轉殖之植物實驗?</span>
+            <div class="form-check form-check-inline">
+                <input type="radio" class="form-check-input" id="基因轉殖植物" name="是否基因轉殖植物">
+                <label class="form-check-label" for="g5">是</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input type="radio" class="form-check-input" id="基因轉殖植物" name="是否基因轉殖植物">
+                <label class="form-check-label" for="g5">否</label>
+            </div>
+        </div>
+    </section>
+    <section style="padding: 1mm;font-size: 16pt;border-bottom: 1px solid;">
+        <div style="margin-top:0.5mm">
+            <span>是否為自交植物?</span>
+            <div class="form-check form-check-inline">
+                <input type="radio" class="form-check-input" id="自交植物" name="是否自交植物">
+                <label class="form-check-label" for="g6">是</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input type="radio" class="form-check-input" id="自交植物" name="是否自交植物">
+                <label class="form-check-label" for="g6">否</label>
+            </div>
+        </div>
+    </section>
+    <section style="padding: 1mm; font-size: 16pt; border-bottom: 1px solid;background-color:#FFBB73;">
+        <div style="margin-top:0.5mm">
+            <span>Ⅴ.實驗使用之生物材料</span>
+        </div>
+    </section>
+    <section style="padding: 1mm; font-size: 16pt; border-bottom: 1px solid;">
+        <div class="row" style="margin-top:0.5mm;">
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" style="">重組基因來源</div>
+            <div class="col-lg-2 col-md-2 col-sm-3 col-xs-2" style="padding:0px">
+                <div class="form-check form-check-inline">
+                    <input type="radio" class="form-check-input" id="微生物" name="重組基因來源">
+                    <label class="form-check-label" for="a1">微生物 </label>
+    
+                </div>
+                <br />
+                <br />
+                <br />
+                <div class="form-check form-check-inline">
+                    <input type="radio" class="form-check-input" id="動物" name="重組基因來源">
+                    <label class="form-check-label" for="a1">動物</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input type="radio" class="form-check-input" id="植物" name="重組基因來源">
+                    <label class="form-check-label" for="a1">植物</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input type="radio" class="form-check-input" id="合成" name="重組基因來源">
+                    <label class="form-check-label" for="a1">合成</label>
+                </div>
+            </div>
+            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7" style="padding:0px">
+                <div class="row">
+                    <div class="col-md-12">
+                        <span>名稱：</span>
+                        <span id="微生物名稱" data-class="InputSelectBlock" pro-variable-name="微生物名稱" data-twedr="微生物名稱" data-label-field="text" data-data-field="text"></span>
+                    </div>
+                    <div class="col-md-12">
+                        <span>法規清單：</span>
+                        <span id="微生物法規清單" data-class="InputSelectBlock" pro-variable-name="微生物法規清單" data-twedr="微生物法規清單" data-label-field="text" data-data-field="text"></span>
+    
+                    </div>
+                    <div class="col-md-12">
+                        <span>危險群：</span>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" class="form-check-input" id="RG1" name="重組基因來源危險群">
+                            <label class="form-check-label" for="r1">RG1</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" class="form-check-input" id="RG2" name="重組基因來源危險群">
+                            <label class="form-check-label" for="r1">RG2</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" class="form-check-input" id="RG3" name="重組基因來源危險群">
+                            <label class="form-check-label" for="r1">RG3</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" class="form-check-input" id="RG4" name="重組基因來源危險群">
+                            <label class="form-check-label" for="r1">RG4</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <span>名稱：</span>
+                        <span id="重組基因來源動物名稱" data-class="InputSelectBlock" pro-variable-name="重組基因來源動物名稱" data-twedr="重組基因來源動物名稱" data-label-field="text" data-data-field="text"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <span>名稱：</span>
+                        <span id="重組基因來源植物名稱" data-class="InputSelectBlock" pro-variable-name="重組基因來源植物名稱" data-twedr="重組基因來源植物名稱" data-label-field="text" data-data-field="text"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <span>名稱：</span>
+                        <span id="重組基因來源合成名稱" data-class="InputSelectBlock" pro-variable-name="重組基因來源合成名稱" data-twedr="重組基因來源合成名稱" data-label-field="text" data-data-field="text"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section style="padding: 1mm; font-size: 16pt; border-bottom: 1px solid;">
+        <div style="margin-top:0.5mm">
+            <div class="row" style="margin-top:0.5mm">
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" style="">載體</div>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="padding:0px">
+                    <div class="form-check form-check-inline">
+                        <input type="radio" class="form-check-input" id="質體" name="載體">
+                        <label class="form-check-label" for="r1">質體</label>
+                    </div>
+    
+                    <div class="form-check form-check-inline">
+                        <input type="radio" class="form-check-input" id="病毒載體" name="載體">
+                        <label class="form-check-label" for="r1">病毒載體</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input type="radio" class="form-check-input" id="其他" name="載體">
+                        <label class="form-check-label" for="r1">其他</label>
+                    </div>
+                </div>
+                <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7" style="padding:0px">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <span>名稱：</span>
+                            <span id="載體質體名稱" data-class="InputSelectBlock" pro-variable-name="載體質體名稱" data-twedr="載體質體名稱" data-label-field="text" data-data-field="text"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <span>名稱：</span>
+                            <span id="病毒載體名稱" data-class="InputSelectBlock" pro-variable-name="病毒載體名稱" data-twedr="病毒載體名稱" data-label-field="text" data-data-field="text"></span>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-md-12">
+                            <span>名稱：</span>
+                            <span id="載體其他名稱" data-class="InputSelectBlock" pro-variable-name="載體其他" data-twedr="載體其他" data-label-field="text" data-data-field="text"></span>
+                        </div>
+                        <div class="col-md-12">
+                            <span>法規清單：</span>
+                            <span id="載體其他法規清單" data-class="InputSelectBlock" pro-variable-name="載體其他法規清單" data-twedr="載體其他法規清單" data-label-field="text" data-data-field="text"></span>
+    
+                        </div>
+                        <div class="col-md-12">
+                            <span>危險群：</span>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" class="form-check-input" id="RG1" name="載體危險群">
+                                <label class="form-check-label" for="rg2">RG1</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" class="form-check-input" id="RG2" name="載體危險群">
+                                <label class="form-check-label" for="rg2">RG2</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" class="form-check-input" id="RG3" name="載體危險群">
+                                <label class="form-check-label" for="rg2">RG3</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" class="form-check-input" id="RG4" name="載體危險群">
+                                <label class="form-check-label" for="rg2">RG4</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section style="padding: 1mm;font-size: 16pt;border-bottom: 1px solid;">
+        <div style="margin-top:0.5mm">
+            <div class="row" style="margin-top:0.5mm">
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" style="">宿主</div>
+                <div class="col-lg-2 col-md-2 col-sm-3 col-xs-2" style="padding:0px">
+                    <div class="form-check form-check-inline">
+                        <input type="radio" class="form-check-input" id="微生物" name="宿主">
+                        <label class="form-check-label" for="m1">微生物 </label>
+    
+                    </div>
+                    <br />
+                    <br />
+                    <br />
+                    <div class="form-check form-check-inline">
+                        <input type="radio" class="form-check-input" id="細胞株" name="宿主">
+                        <label class="form-check-label" for="m1">細胞株</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input type="radio" class="form-check-input" id="動物" name="宿主">
+                        <label class="form-check-label" for="m1">植物</label>
+                    </div>
+    
+                </div>
+                <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7" style="padding:0px">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <span>名稱：</span>
+                            <span id="宿主微生物名稱" data-class="InputSelectBlock" pro-variable-name="宿主微生物名稱" data-twedr="宿主微生物名稱" data-label-field="text" data-data-field="text"></span>
+                        </div>
+                        <div class="col-md-12">
+                            <span>法規清單：</span>
+                            <span id="宿主微生物法規清單" data-class="InputSelectBlock" pro-variable-name="宿主微生物法規清單" data-twedr="宿主微生物" data-label-field="text" data-data-field="text"></span>
+    
+                        </div>
+                        <div class="col-md-12">
+                            <span>危險群：</span>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" class="form-check-input" id="RG1" name="宿主危險群">
+                                <label class="form-check-label" for="rg3">RG1</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" class="form-check-input" id="RG2" name="宿主危險群">
+                                <label class="form-check-label" for="rg3">RG2</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" class="form-check-input" id="RG3" name="宿主危險群">
+                                <label class="form-check-label" for="rg3">RG3</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" class="form-check-input" id="RG4" name="宿主危險群">
+                                <label class="form-check-label" for="rg3">RG4</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <span>名稱：</span>
+                            <span id="宿主細胞株名稱" data-class="InputSelectBlock" pro-variable-name="宿主細胞株名稱" data-twedr="宿主細胞株名稱" data-label-field="text" data-data-field="text"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <span>名稱：</span>
+                            <span id="宿主動物名稱" data-class="InputSelectBlock" pro-variable-name="宿主動物名稱" data-twedr="宿主動物名稱" data-label-field="text" data-data-field="text"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section style="padding: 1mm; font-size: 16pt; border-bottom: 1px solid;background-color:#FFBB73;">
+        <div style="margin-top:0.5mm">
+            <span>Ⅵ.基因轉殖方法及實驗設備</span>
+        </div>
+    </section>
+    <section style="padding: 1mm; font-size: 16pt; border-bottom: 1px solid;">
+        <div class="row" style="margin-top:0.5mm">
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" style="">基因轉殖方法</div>
+            <div class="col-lg-2 col-md-2 col-sm-3 col-xs-2" style="padding:0px">
+                <div class="form-check form-check-inline">
+                    <input type="radio" class="form-check-input" id="自行轉殖" name="基因轉殖方法">
+                    <label class="form-check-label" for="g4">自行轉殖 </label>
+    
+                </div>
+                <br />
+                <br />
+                <div class="form-check form-check-inline">
+                    <input type="radio" class="form-check-input" id="外購" name="基因轉殖方法">
+                    <label class="form-check-label" for="g4">外購</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input type="radio" class="form-check-input" id="其他" name="基因轉殖方法">
+                    <label class="form-check-label" for="g4">其他</label>
+                </div>
+            </div>
+            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7" style="padding:0px">
+                <div class="row">
+                    <div class="col-md-12">
+                        <span>方式：</span>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" class="form-check-input" id="virus" name="基因轉殖方式">
+                            <label class="form-check-label" for="m4">virus</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" class="form-check-input" id="chemicalreagent" name="基因轉殖方式">
+                            <label class="form-check-label" for="m4">chemical reagent</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" class="form-check-input" id="liposome" name="基因轉殖方式">
+                            <label class="form-check-label" for="m4">liposome</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" class="form-check-input" id="microinjection" name="基因轉殖方式">
+                            <label class="form-check-label" for="m4">microinjection</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" class="form-check-input" id="electroporation" name="基因轉殖方式">
+                            <label class="form-check-label" for="m4">electroporation</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" class="form-check-input" id="genegun" name="基因轉殖方式">
+                            <label class="form-check-label" for="m4">gene gun</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <span>供應商：</span>
+                        <span id="基因轉殖供應商" data-class="InputSelectBlock" pro-variable-name="基因轉殖供應商" data-twedr="基因轉殖供應商" data-label-field="text" data-data-field="text"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <span>說明：</span>
+                        <span id="基因轉殖其他說明" data-class="InputSelectBlock" pro-variable-name="基因轉殖其他說明" data-twedr="基因轉殖其他說明" data-label-field="text" data-data-field="text"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section style="padding: 1mm;font-size: 16pt;border-bottom: 1px solid;">
+        <div class="row" style="margin-top:0.5mm">
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" style="">基因轉殖之動物實驗設備</div>
+            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9" style="padding:0px">
+                <div class="form-check ">
+                    <input type="radio" class="form-check-input" id="SPF " name="動物實驗設備">
+                    <label class="form-check-label" for="materialInline1">SPF</label>
+    
+                </div>
+                <div class="form-check ">
+                    <input type="radio" class="form-check-input" id="IVC" name="動物實驗設備">
+                    <label class="form-check-label" for="materialInline1">IVC</label>
+                </div>
+                <div class="form-check ">
+                    <input type="radio" class="form-check-input" id="其他" name="動物實驗設備">
+                    <label class="form-check-label" for="materialInline1">其他，說明：</label>
+                    <span id="動物實驗設備其他說明" data-class="InputSelectBlock" pro-variable-name="動物實驗設備其他說明" data-twedr="動物實驗設備其他說明" data-label-field="text" data-data-field="text"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section style="padding: 1mm;font-size: 16pt;border-bottom: 1px solid;">
+        <div class="row" style="margin-top:0.5mm">
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" style="">基因轉殖之植物實驗設備</div>
+            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9" style="padding:0px">
+                <div class="form-check ">
+                    <input type="radio" class="form-check-input" id="生長箱" name="植物實驗設備">
+                    <label class="form-check-label" for="materialInline1">生長箱</label>
+                </div>
+                <div class="form-check ">
+                    <input type="radio" class="form-check-input" id="溫室" name="植物實驗設備">
+                    <label class="form-check-label" for="materialInline1">溫室</label>
+                </div>
+                <div class="form-check ">
+                    <input type="radio" class="form-check-input" id="農場" name="植物實驗設備">
+                    <label class="form-check-label" for="materialInline1">農場</label>
+                </div>
+                <div class="form-check ">
+                    <input type="radio" class="form-check-input" id="其他" name="植物實驗設備">
+                    <label class="form-check-label" for="materialInline1">其他，說明：</label>
+                    <span id="植物實驗設備其他說明" data-class="InputSelectBlock" pro-variable-name="植物實驗設備其他說明" data-twedr="植物實驗設備其他說明" data-label-field="text" data-data-field="text"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section style="padding: 1mm; font-size: 16pt; border-bottom: 1px solid;background-color:#FFBB73;">
+        <div style="margin-top:0.5mm">
+            <span>Ⅶ.本研究計畫所需之實驗室生物安全等級</span>
+        </div>
+    </section>
+    <section style="padding: 1mm;font-size: 16pt;border-bottom: 1px solid;">
+        <div class="row" style="margin-top:0.5mm;margin-left:1mm">
+            <div class="form-check form-check-inline">
+                <input type="radio" class="form-check-input" id="BSL1" name="所需生物安全等級">
+                <label class="form-check-label" for="m5">BSL1/ABSL1</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input type="radio" class="form-check-input" id="BSL2" name="所需生物安全等級">
+                <label class="form-check-label" for="m5">BSL2/ABSL2</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input type="radio" class="form-check-input" id="BSL3" name="所需生物安全等級">
+                <label class="form-check-label" for="m5">BSL3/ABSL3</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input type="radio" class="form-check-input" id="BSL4" name="所需生物安全等級">
+                <label class="form-check-label" for="m5">BSL4/ABSL4</label>
+            </div>
+        </div>
+    </section>
+    <section style="padding: 1mm; font-size: 16pt; border-bottom: 1px solid;background-color:#FFBB73;">
+        <div style="margin-top:0.5mm">
+            <span>Ⅷ.進行實驗之地點</span>
+        </div>
+    </section>
+    <section style="padding: 1mm;font-size: 16pt;border-bottom: 1px solid;">
+        <div class="row" style="margin-top:0.5mm">
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" style="">進行研究之實驗室</div>
+            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9" style="padding:0px">
+                <div class="form-check form-check-inline">
+                    <input type="radio" class="form-check-input" id="院區" name="實驗室地點">
+                    <label class="form-check-label" for="m6">院區</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input type="radio" class="form-check-input" id="大樓" name="實驗室地點">
+                    <label class="form-check-label" for="m6">大樓</label>
+                </div>
+                <span id="實驗室樓層" data-class="InputSelectBlock" pro-variable-name="實驗室樓層" data-twedr="實驗室樓層" data-label-field="text" data-data-field="text"></span>
+                <span>樓層</span>
+                <span id="實驗室房號" data-class="InputSelectBlock" pro-variable-name="實驗室房號" data-twedr="實驗室房號" data-label-field="text" data-data-field="text"></span>
+                <span>房號</span>
+                <div class="form-check form-check-inline">
+                    <input type="radio" class="form-check-input" id="大樓" name="實驗室地點">
+                    <label class="form-check-label" for="m6">其他</label>
+                </div>
+                <span id="實驗室其他" data-class="InputSelectBlock" pro-variable-name="實驗室其他" data-twedr="實驗室其他" data-label-field="text" data-data-field="text"></span>
+            </div>
+        </div>
+    </section>
+    <section style="padding: 1mm;font-size: 16pt;border-bottom: 1px solid;">
+        <div class="row" style="margin-top:0.5mm">
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" style="">進行動物實驗地點</div>
+            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9" style="padding:0px">
+                <div class="form-check form-check-inline">
+                    <input type="radio" class="form-check-input" id="院區實驗動物中心" name="實驗地點">
+                    <label class="form-check-label" for="m7">院區實驗動物中心</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input type="radio" class="form-check-input" id="區" name="實驗地點">
+                    <label class="form-check-label" for="m7">區</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input type="radio" class="form-check-input" id="其他" name="實驗地點">
+                    <label class="form-check-label" for="m7">其他</label>
+                </div>
+                <span id="實驗地點其他" data-class="InputSelectBlock" pro-variable-name="實驗地點其他" data-twedr="實驗地點其他" data-label-field="text" data-data-field="text"></span>
+            </div>
+        </div>
+    </section>
+    <section style="padding: 1mm;font-size: 16pt;border-bottom: 1px solid;">
+        <div class="row" style="margin-top:0.5mm">
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" style="">實驗室生物安全等級</div>
+            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9" style="padding:0px">
+                <div class="form-check form-check-inline">
+                    <input type="radio" class="form-check-input" id="BSL1" name="生物安全等級">
+                    <label class="form-check-label" for="m8">BSL1/ABSL1</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input type="radio" class="form-check-input" id="BSL2" name="生物安全等級">
+                    <label class="form-check-label" for="m8">BSL2/ABSL2</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input type="radio" class="form-check-input" id="BSL3" name="生物安全等級">
+                    <label class="form-check-label" for="m8">BSL3/ABSL3</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input type="radio" class="form-check-input" id="BSL4" name="生物安全等級">
+                    <label class="form-check-label" for="m8">BSL4/ABSL4</label>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section style="padding: 1mm; font-size: 16pt; border-bottom: 1px solid;background-color:#FFBB73;">
+        <div style="margin-top:0.5mm">
+            <span>Ⅸ.附件</span>
+        </div>
+    </section>
+    <section style="padding: 1mm;font-size: 16pt;border-bottom: 1px solid;">
+        <div class="row" style="margin-top:0.5mm">
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" style="">＊中英文摘要</div>
+            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9" style="padding:0px">
+                <div>
+                    <input type="file" class="form-check-input" id="摘要" name="中英文摘要">
+                </div>
+                <br />
+                <br />
+            </div>
+        </div>
+    </section>
+    <section style="padding: 1mm;font-size: 16pt;border-bottom: 1px solid;">
+        <div class="row" style="margin-top:0.5mm">
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" style="">＊生物材料資訊</div>
+            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9" style="padding:0px">
+                <div>
+                    <input type="file" class="form-check-input" id="生物材料資訊" name="生物材料資訊">
+                </div>
+                <br />
+                <br />
+                <div>
+                    <span>1.於BSL2操作之感染性生物材料需檢附</span>
+    
+                </div>
+                <div>
+                    <span>2.為衛生福利部感染性生物材料管理作業要點之附表一至五及科技部基因重組守則附表二之微生物免附</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section style="padding: 1mm;font-size: 16pt;border-bottom: 1px solid;">
+        <div class="row" style="margin-top:0.5mm">
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" style="">＊動物實驗計畫書</div>
+            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9" style="padding:0px">
+                <div>
+                    <input type="file" class="form-check-input" id="動物實驗計畫書" name="動物實驗計畫書">
+                </div>
+                <br />
+                <br />
+               <div>
+                    <span>1.有操作動物實驗需檢附</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section style="padding: 1mm;font-size: 16pt;border-bottom: 1px solid;">
+        <div class="row" style="margin-top:0.5mm">
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" style="">＊生物安全櫃檢測報告</div>
+            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9" style="padding:0px">
+                <div>
+                    <input type="file" class="form-check-input" id="生物安全櫃檢測報告" name="生物安全櫃檢測報告">
+                </div>
+                <br />
+                <br />
+                <div>
+                    <span>1.有選到RG2或BSL2以上的感染性生物材料需檢附</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section style="padding: 1mm;font-size: 16pt;border-bottom: 1px solid;">
+        <div class="row" style="margin-top:0.5mm">
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" style="">＊其他補充資料</div>
+            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9" style="padding:0px">
+                <div>
+                    <input type="file" class="form-check-input" id="其他補充資料" name="其他補充資料">
+                </div>
+                <br />
+                <br />
+            </div>
+        </div>
+    </section>
+    <!--<section style="padding: 1mm; font-size: 16pt; border-bottom: 1px solid;">
+        <div style="margin-top:0.5mm">
+            <span>請假時數：</span>
+            <span id="請假時數" data-class="InputSelectBlock" pro-variable-name="請假時數" pro-variable-type="Double" data-twedr="請假時數" data-label-field="text" data-data-field="text"></span>
+        </div>
+    </section>
+    <section data-class="Paragraph" data-twedr="段落" style="padding: 1mm;font-size: 0px;width: 160mm;">
+        <div data-class="ParagraphDiv" contenteditable="false">
+            <span data-class="ParagraphName" data-twedr="段名" style="display:inline-block; font-size: 16pt;line-height: 24pt; float: left;" contenteditable="false">備註</span>
+            <span data-class="ParagraphSuffix" style="display:inline-block; font-size: 16pt; line-height: 24pt; float: left;" contenteditable="false">：</span>
+            <div data-class="ParagraphTextBlock" id="備註文字" contenteditable="false" data-auto-list="Numbered" style="display: table-cell; font-size: 16pt; line-height: 24pt; outline: none; min-height: 7mm; min-width: 50mm;">
+                <span data-class="TextBlock" data-twedr="文字"></span>
+            </div>
+        </div>
+    </section>-->
+
+</body>
+
+
+
+</html>
