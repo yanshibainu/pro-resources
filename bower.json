@@ -6,7 +6,8 @@
     "bootstrap": "^4.4.1",
     "bootstrap-datepicker": "^1.9.0",
     "eonasdan-bootstrap-datetimepicker": "^4.17.47",
-    "moment": "^2.24.0"
+    "moment": "^2.24.0",
+    "Font-Awesome": "^5.12.0"
   }
 }
  
