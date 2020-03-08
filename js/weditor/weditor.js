@@ -2921,10 +2921,10 @@
 
     var FileBlock = (function () {
         var FileBlock = function (htmlElement /** HTMLElement **/) {
-
-            this._file;
+ 
             this._a;
             this._i;
+            this._fileInput;
             this._base64;
             this._base64ChangedFlag = false;
 
@@ -2938,11 +2938,21 @@
             _childrenMapping: function () {
                 EditorHTMLElement.prototype._childrenMapping.call(this);
 
-                this._a = InstanceManager.getInstance(document.createElement("a"));
-                this._i = InstanceManager.getInstance(new DOMParser().parseFromString('<i class="fas fa-trash-alt" style="display: none"></i>', "text/html").body.children[0]);
-
-                this.addChild(this._a);  
-                this.addChild(this._i);    
+                if (this.htmlElement.querySelector("a") == null){
+                    this._a = InstanceManager.getInstance(document.createElement("a"));
+                    this.addChild(this._a);  
+                }    
+                else
+                    this._a = InstanceManager.getInstance(this.htmlElement.querySelector("a"));
+                    
+                if (this.htmlElement.querySelector("i") == null){
+                    this._i = InstanceManager.getInstance(
+                        new DOMParser().parseFromString('<i class="fas fa-trash-alt" style="display: none"></i>', "text/html").
+                        body.children[0]);
+                    this.addChild(this._i);                       
+                }
+                else
+                    this._i = InstanceManager.getInstance(this.htmlElement.querySelector("i"));                   
             },
             _creationComplete: function () {
                 UndoRedoEditor.prototype._creationComplete.call(this);
@@ -2960,16 +2970,19 @@
                 if (this._childrenChangedFlag) {
 
                     if (this.htmlElement.querySelector("input[type=file]")){
-                        this._file = InstanceManager.getInstance(this.htmlElement.querySelector("input[type=file]"));  
-                        this._file.htmlElement.addEventListener("change", function () {
-                            var files = self._file.htmlElement.files;
+                        this._fileInput = InstanceManager.getInstance(this.htmlElement.querySelector("input[type=file]"));  
+                        this._fileInput.htmlElement.addEventListener("change", function () {
+
+                            var files = self._fileInput.htmlElement.files;
+
                             if(files && files.length > 0){
-                                self._a.htmlElement.href = window.URL.createObjectURL(files[0]);
-                                self._a.textContent = self._file.value;
+                                self.fileName = files[0].name;
+
+                                self._a.htmlElement.href = window.URL.createObjectURL(files[0]);    
                                 self._i.setStyle("display", "inline-block");
                                 
-                                self._file.getBase64File().done(function(base64){
-                                    self._base64 = base64;
+                                self._fileInput.getBase64File().done(function(dataURI){
+                                    self._base64 = self.dataURItoBase64(dataURI);
                                 });
                             }
 
@@ -2981,9 +2994,12 @@
                 
                 EditorHTMLElement.prototype._commitProperties.call(this);
 
-                if(this._base64ChangedFlag){
-                    this._base64ChangedFlag = false;
-                }
+                // if(this._base64ChangedFlag){
+                //     this._base64ChangedFlag = false;
+
+                //     var blob = base64toBlob(this._base64);
+                //     self._a.htmlElement.href = window.URL.createObjectURL(blob);   
+                // }
 
                 if (this._modeChangedFlag) {
                     debugger;
@@ -2991,19 +3007,14 @@
                     
                     switch (this._mode.name) {
                         case "編輯":
-                            
-                            for (var i = this.htmlElement.childNodes.length - 1; i >= 2; i--) {
-                                this.htmlElement.removeChild(this.htmlElement.childNodes[i]);
+                            if(this.contains(this._fileInput)){
+                                this.removeChild(this._fileInput);
+                                this._i.setStyle("display", "inline-block");    
                             }
                             break;
                         case "追蹤修訂":
                         case "唯讀":
-                            // if (this.children.length > 0) {
-                                
-                            //     this.textContent = this._value = this.selectedValue;
-
-                            //     this.validateProperties();
-                            // }
+                            this._i.setStyle("display", "none");
                             break;
                     }
                 }
@@ -3011,17 +3022,39 @@
             set base64(value) {
 
                 this._base64 = value;
-                this._base64ChangedFlag = true;
+                // this._base64ChangedFlag = true;
 
-                this._invalidateProperties();
+                // this._invalidateProperties();
             },
             get base64() {
                 return this._base64;
             },
+            set fileName(value) {
+                this._a.textContent = value;
+            },   
+            get fileName() {
+                return this._a.textContent;
+            },       
+            dataURItoBase64: function(dataURI){
+                return dataURI.split(',')[1];
+            },
+            base64toBlob: function(dataURI) {
+
+                var byteString = atob(dataURItoBase64(dataURI));
+                var type = dataURI.split(";")[0].split(":")[1];
+                var ab = new ArrayBuffer(byteString.length);
+                var ia = new Uint8Array(ab);
+            
+                for (var i = 0; i < byteString.length; i++) {
+                    ia[i] = byteString.charCodeAt(i);
+                }
+                
+                return new Blob([ab], { type: type });
+            },
             removeFile: function(){
+                this.fileName = ""
                 this._a.htmlElement.href = "";
-                this._a.textContent = "";
-                this._file.value = "";
+                this._fileInput.value = "";
                 this._i.setStyle("display", "none");
             }
         };
