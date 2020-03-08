@@ -2966,7 +2966,7 @@
                 EditorHTMLElement.prototype._childrenMapping.call(this);
 
                 if (this.htmlElement.querySelector("a") == null){
-                    this._a = InstanceManager.getInstance(document.createElement("a"));
+                    this._a = new a();
                     this.addChild(this._a);  
                 }    
                 else
@@ -3108,7 +3108,8 @@
             },
             removeFile: function(){
                 this.fileName = ""
-                this._a.htmlElement.href = "";
+                window.URL.revokeObjectURL(this._a.url);
+                this._a.url = "";
                 this._fileInput.value = "";
                 this._i.setStyle("display", "none");
             }
