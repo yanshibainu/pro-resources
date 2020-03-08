@@ -2644,6 +2644,8 @@
 
             this._url = "";
             this._urlChangedFlag = false;
+            this._fileName;
+            this._fileNameChangedFlag = false;
 
             UndoRedoEditor.call(this, htmlElement);
         };
@@ -2671,6 +2673,17 @@
                     this._invalidateProperties();
                 }
             },
+            get fileName() {
+                return this._fileName;
+            },
+            set fileName(value) {
+
+                if (value != undefined && value != this._fileName) {
+                    this._fileName = value;
+                    this._fileNameChangedFlag = true;
+                    this._invalidateProperties();
+                }
+            },
             _commitProperties: function () {
                 UndoRedoEditor.prototype._commitProperties.call(this);
 
@@ -2678,6 +2691,13 @@
                     this._urlChangedFlag = false;
 
                     this.htmlElement.href = this.url;
+                }
+
+                if (this._fileNameChangedFlag) {
+                    this._fileNameChangedFlag = false;
+
+                    this.htmlElement.setAttribute("download", this._fileName);
+                    this.htmlElement.textContent = this._fileName;
                 }
             }
         }
@@ -2925,6 +2945,13 @@
             this._a;
             this._i;
             this._fileInput;
+
+            this._url;
+            this._urlChangedFlag = false;
+
+            this._fileName;
+            this._fileNameChangedFlag = false;
+
             this._base64;
             this._base64ChangedFlag = false;
 
@@ -2978,7 +3005,7 @@
                             if(files && files.length > 0){
                                 self.fileName = files[0].name;
 
-                                self._a.htmlElement.href = window.URL.createObjectURL(files[0]);    
+                                self.url = window.URL.createObjectURL(files[0]);                                
                                 self._i.setStyle("display", "inline-block");
                                 
                                 self._fileInput.getBase64File().done(function(dataURI){
@@ -3000,6 +3027,18 @@
                 //     var blob = base64toBlob(this._base64);
                 //     self._a.htmlElement.href = window.URL.createObjectURL(blob);   
                 // }
+
+                if(this._urlChangedFlag){
+                    this._urlChangedFlag = false;
+
+                    this._a.url = this._url;    
+                }
+
+                if(this._fileNameChangedFlag){
+                    this._fileNameChangedFlag = false;
+
+                    this._a.fileName = this._fileName;                    
+                }
 
                 if (this._modeChangedFlag) {
                     debugger;
@@ -3030,11 +3069,27 @@
                 return this._base64;
             },
             set fileName(value) {
-                this._a.textContent = value;
+
+                if(value != undefined && this._fileName != value){
+                    this._fileName = value;
+                    this._fileNameChangedFlag = true;
+                    this._invalidateProperties();
+                }                
             },   
             get fileName() {
-                return this._a.textContent;
-            },       
+                return this._fileName;
+            },  
+            set url(value) {
+                
+                if(value != undefined && this._url != value){
+                    this._url = value;
+                    this._urlChangedFlag = true;
+                    this._invalidateProperties();
+                }
+            },   
+            get url() {
+                return this._url;
+            },        
             dataURItoBase64: function(dataURI){
                 return dataURI.split(',')[1];
             },
@@ -3048,7 +3103,7 @@
                 for (var i = 0; i < byteString.length; i++) {
                     ia[i] = byteString.charCodeAt(i);
                 }
-                
+
                 return new Blob([ab], { type: type });
             },
             removeFile: function(){
