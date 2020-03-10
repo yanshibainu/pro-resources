@@ -14699,7 +14699,7 @@ section {
   }
 
 
-  
+
 .action-bar {
     text-align: right;
     background: #4272d7;
@@ -14713,8 +14713,10 @@ section {
     margin-right: 5px;
 }
 
-@media (max-width: 991px)
-.action-bar {
-    left: 0;
-    position: relative;
+@media (max-width: 991px){
+    .action-bar {
+        left: 0;
+        position: relative;
+    }
 }
+
