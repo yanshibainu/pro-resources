@@ -14697,3 +14697,24 @@ section {
   tr.details td.details-control.level-2 {
       padding-left:50px;
   }
+
+
+  
+.action-bar {
+    text-align: right;
+    background: #4272d7;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 300px;
+}
+
+.action-bar > button {
+    margin-right: 5px;
+}
+
+@media (max-width: 991px)
+.action-bar {
+    left: 0;
+    position: relative;
+}
