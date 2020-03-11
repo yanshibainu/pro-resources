@@ -7,14 +7,17 @@
     <link rel="stylesheet" href="/static/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
     <link rel="stylesheet" href="/static/bower_components/Font-Awesome-4.7.0/css/font-awesome.css" />
     <link rel="stylesheet" href="/static/bower_components/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" />
-    
+    <link rel="stylesheet" href="/static/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker3.standalone.min.css" />
+
     <script type="text/javascript" src="/static/bower_components/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="/static/bower_components/moment/min/moment.min.js"></script>
     <script type="text/javascript" src="/static/bower_components/moment/locale/zh-tw.js"></script>
 
     <script type="text/javascript" src="/static/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/static/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
-    
+    <script type="text/javascript" src="/static/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript" src="/static/bower_components/bootstrap-datepicker/dist/locales/bootstrap-datepicker.zh-TW.min.js"></script>
+   
     <script type="text/javascript" src="/static/bower_components/jquery-ui-sortable/jquery-ui-sortable.min.js"></script>
 
     <script type="text/javascript" src="../form-designer/assets/js/form-render.min.js"></script>
@@ -113,11 +116,11 @@
                                     "relativeTo": "計畫名稱",
                                     "target": "<input style='font-size: 16pt; padding: 0; width: 100mm; margin-top: 5px; margin-bottom: 5px;' type='text'></input>"
                                 },
-                                {
-                                    "iOverride": "AddChild",
-                                    "relativeTo": "執行期限",
-                                    "target": "<input style='font-size: 16pt; padding: 0; width: 100mm; margin-top: 5px; margin-bottom: 5px;' type='text'></input>"
-                                },
+                                // {
+                                //     "iOverride": "AddChild",
+                                //     "relativeTo": "執行期限",
+                                //     "target": "<input style='font-size: 16pt; padding: 0; width: 100mm; margin-top: 5px; margin-bottom: 5px;' type='text'></input>"
+                                // },
                                 {
                                     "iOverride": "AddChild",
                                     "relativeTo": "微生物名稱",
@@ -285,6 +288,11 @@
                     stateName: "編輯"
                 }
             });
+
+            $.fn.datepicker.defaults.format = "yyyy/mm/dd";
+            $.fn.datepicker.defaults.language = "zh-TW";
+            $.fn.datepicker.defaults.autoclose = true;
+            $.fn.datepicker.defaults.clearBtn = true;
         };
 
     </script>
@@ -461,8 +469,11 @@
                                 </td>
                                 <td width=80%
                                     style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
-                                    <span id="執行期限" data-class="InputSelectBlock" pro-variable-name="執行期限"
-                                        data-twedr="執行期限" data-label-field="text" data-data-field="text"></span>
+                                    <div class="input-daterange input-group" data-provide="datepicker">
+                                        <input type="text" class="input-sm form-control" name="BookDateStart" id="bookDateStart" autocomplete="off"/>
+                                        <span class="input-group-addon">～</span>
+                                        <input type="text" class="input-sm form-control" name="BookDateEnd" id="bookDateEnd"  autocomplete="off"/>
+                                    </div>
                                 </td>
                             </tr>
                         </table>

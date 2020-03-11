@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="/static/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
     <link rel="stylesheet" href="/static/bower_components/Font-Awesome-4.7.0/css/font-awesome.css" />
     <link rel="stylesheet" href="/static/bower_components/awesome-bootstrap-checkbox/demo/build.css" />
+    <link rel="stylesheet" href="/static/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker3.standalone.min.css" />
 
     <script type="text/javascript" src="/static/bower_components/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="/static/bower_components/moment/min/moment.min.js"></script>
@@ -13,7 +14,9 @@
 
     <script type="text/javascript" src="/static/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/static/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
-    
+    <script type="text/javascript" src="/static/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript" src="/static/bower_components/bootstrap-datepicker/dist/locales/bootstrap-datepicker.zh-TW.min.js"></script>
+
     <script type="text/javascript" src="/static/bower_components/jquery-ui-sortable/jquery-ui-sortable.min.js"></script>
 
     <script type="text/javascript" src="../form-designer/assets/js/form-render.min.js"></script>
@@ -21,20 +24,15 @@
     <script type="text/javascript" src="bluebird.min.js"></script>
     <script type="text/javascript" src="weditor.js"></script>
     <script>
-        /*
+        
 
         window.onload = function () {
-            window.editor = new window.weditor({
-
-                config: {
-                    說明文字: {
-                        wrap: true,
-                        autoList: "Numbered", //Numbered Bullet, none
-                    }
-                }
-            });
+            $.fn.datepicker.defaults.format = "yyyy/mm/dd";
+            $.fn.datepicker.defaults.language = "zh-TW";
+            $.fn.datepicker.defaults.autoclose = true;
+            $.fn.datepicker.defaults.clearBtn = true;
         };
-        */
+        
        
         function formRender(formData){
             debugger
