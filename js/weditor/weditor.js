@@ -3218,6 +3218,8 @@
                     switch (this._mode.name) {
                         // case "Task_09xnpoc":
                         case "編輯":
+                            this._value = this.textContent;
+                            
                             for (var i = this.htmlElement.childNodes.length - 1; i >= 0; i--) {
                                 this.htmlElement.removeChild(this.htmlElement.childNodes[i]);
                             }
