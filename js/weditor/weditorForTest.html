@@ -116,11 +116,16 @@
                                     "relativeTo": "計畫名稱",
                                     "target": "<input style='font-size: 16pt; padding: 0; width: 100mm; margin-top: 5px; margin-bottom: 5px;' type='text'></input>"
                                 },
-                                // {
-                                //     "iOverride": "AddChild",
-                                //     "relativeTo": "執行期限",
-                                //     "target": "<input style='font-size: 16pt; padding: 0; width: 100mm; margin-top: 5px; margin-bottom: 5px;' type='text'></input>"
-                                // },
+                                {
+                                    "iOverride": "AddChild",
+                                    "relativeTo": "執行期限起",
+                                    "target": '<input type="text" class="input-sm form-control" name="dateStart" id="dateStart" style="padding: 0; margin-top: 5px; margin-bottom: 5px;" autocomplete="off"/>'
+                                },
+                                {
+                                    "iOverride": "AddChild",
+                                    "relativeTo": "執行期限訖",
+                                    "target": '<input type="text" class="input-sm form-control" name="dateEnd" id="dateEnd" style="padding: 0; margin-top: 5px; margin-bottom: 5px;" autocomplete="off"/>'
+                                },
                                 {
                                     "iOverride": "AddChild",
                                     "relativeTo": "微生物名稱",
@@ -469,11 +474,16 @@
                                 </td>
                                 <td width=80%
                                     style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
-                                    <div class="input-daterange input-group" data-provide="datepicker">
-                                        <input type="text" class="input-sm form-control" name="BookDateStart" id="bookDateStart" autocomplete="off"/>
+                                    <div class="input-daterange" data-provide="datepicker">
+                                        <div id="執行期限起" data-class="InputSelectBlock" style="display: inline-block;" pro-variable-name="執行期限">
+
+                                        </div>
                                         <span class="input-group-addon">～</span>
-                                        <input type="text" class="input-sm form-control" name="BookDateEnd" id="bookDateEnd"  autocomplete="off"/>
+                                        <div id="執行期限訖" data-class="InputSelectBlock" style="display: inline-block;" pro-variable-name="執行期限">
+
+                                        </div>
                                     </div>
+
                                 </td>
                             </tr>
                         </table>
