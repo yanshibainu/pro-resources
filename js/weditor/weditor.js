@@ -2632,6 +2632,16 @@
 
                 return promise;
             }, 
+            get disabled() {
+                return this.htmlElement.getAttribute("disabled");
+            },
+            set disabled(value) {
+                if(value == "disabled")
+                    this.htmlElement.setAttribute("disabled", value);
+                else
+                    this.htmlElement.removeAttribute("disabled");
+            },
+            
         }
 
         input.prototype.__proto__ = UndoRedoEditor.prototype;
@@ -2974,7 +2984,7 @@
                     
                 if (this.htmlElement.querySelector("i") == null){
                     this._i = InstanceManager.getInstance(
-                        new DOMParser().parseFromString('<i class="fas fa-trash-alt" style="display: none"></i>', "text/html").
+                        new DOMParser().parseFromString('<i class="fa fa-trash" style="display: none"></i>', "text/html").
                         body.children[0]);
                     this.addChild(this._i);                       
                 }

@@ -5,8 +5,8 @@
     <title></title>
     <link rel="stylesheet" href="/static/bower_components/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="/static/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
-    <link rel="stylesheet" href="/static/bower_components/Font-Awesome/css/fontawesome.min.css" />
-    <link rel="stylesheet" href="/static/bower_components/Font-Awesome/css/all.min.css" />
+    <link rel="stylesheet" href="/static/bower_components/Font-Awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="/static/bower_components/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" />
     
     <script type="text/javascript" src="/static/bower_components/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="/static/bower_components/moment/min/moment.min.js"></script>
@@ -227,11 +227,6 @@
                                 },
                                 {
                                     "iOverride": "AddChild",
-                                    "relativeTo": "是否基因重組",
-                                    "target": "<div class='form-check form-check-inline'><input type='radio' class='form-check-input' name='是否基因重組' pro-variable-name='是否基因重組' value='是'/><label class='form-check-label' for='g1'>是</label><input type='radio' class='form-check-input' name='是否基因重組' pro-variable-name='是否基因重組' value=''/><label class='form-check-label' for='g1'>否</label></div>"
-                                },
-                                {
-                                    "iOverride": "AddChild",
                                     "relativeTo": "實驗室其他",
                                     "position": "after",
                                     "target": "<button id='選擇實驗室'>選擇實驗室</button>"
@@ -246,9 +241,13 @@
                                     "iOverride": "AddChild",
                                     "relativeTo": "中英文摘要",
                                     "target": "<input type='file' name='中英文摘要' class='form-control-file'/>"
+                                },
+                                {
+                                    "iOverride": "SetProperty",
+                                    "name": "disabled",
+                                    "value": "false",
+                                    "target": "#是否基因重組"
                                 }
-
-                                //{
                                 //  "iOverride": "AddChild",
                                 //  "relativeTo": "請假人員",
                                 //  "target": "<input style='font-size: 16pt; padding: 0; width: 50mm;' type='text'></input>"
@@ -476,15 +475,10 @@
                                 </td>
                                 <td width=47%
                                     style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
-                                    <span id="是否基因重組" data-class="InputSelectBlock" pro-variable-name="是否基因重組"></span>
-                                    <!--<div class="form-check form-check-inline">
-                                        <input type="radio" class="form-check-input" name="是否基因重組" pro-variable-name="是否基因重組" value="1">
-                                        <label class="form-check-label" for="g1">是</label>
+                                    <div class="form-check abc-checkbox abc-checkbox-primary">
+                                        <input class="form-check-input" id="是否基因重組" type="checkbox" pro-variable-name="是否基因重組" disabled="disabled">
+                                        <label class="form-check-label" for="是否基因重組">是</label>
                                     </div>
-                                    <div class="form-check form-check-inline">
-                                        <input type="radio" class="form-check-input" name="是否基因重組" pro-variable-name="是否基因重組" value="0">
-                                        <label class="form-check-label" for="g1">否</label>
-                                    </div>-->
                                 </td>
                             </tr>
                             <tr valign=top>
