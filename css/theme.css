@@ -14702,7 +14702,7 @@ section {
 
 .action-bar {
     text-align: right;
-    background: #4272d7;
+    background: powderblue;
     position: fixed;
     bottom: 0;
     right: 0;
@@ -14716,7 +14716,7 @@ section {
 @media (max-width: 991px){
     .action-bar {
         left: 0;
-        position: relative;
+        /* position: relative; */
     }
 }
 
