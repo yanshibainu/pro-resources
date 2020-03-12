@@ -1,30 +1,79 @@
 <html xmlns="http://www.w3.org/1999/xhtml" style="overflow:hidden">
+
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title></title>
-    <link rel="stylesheet" href="/static/bower_components/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="/static/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
+    <!-- <link rel="stylesheet" href="/static/bower_components/bootstrap/dist/css/bootstrap.min.css" /> -->
+    <link rel="stylesheet" href="/vendor/bootstrap-wihtout-print-3.4.1/css/bootstrap.min.css" />
+    <link rel="stylesheet"
+        href="/static/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
     <link rel="stylesheet" href="/static/bower_components/Font-Awesome-4.7.0/css/font-awesome.css" />
-    <link rel="stylesheet" href="/static/bower_components/awesome-bootstrap-checkbox/demo/build.css" />
-    <link rel="stylesheet" href="/static/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker3.standalone.min.css" />
+    <link rel="stylesheet" href="/static/bower_components/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" />
+    <link rel="stylesheet"
+        href="/static/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker3.standalone.min.css" />
+        href="/static/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker3.standalone.min.css" />
+    <style>
+        label {
+            font-weight: inherit;
+        }
 
+        @page {
+            size: A4;
+            margin: 0;
+            padding: 0;
+            border-width: 0px;
+        }
+
+        @media print {
+            div[data-class='Page'] {
+                margin: 0 !important;
+                padding: 0 !important;
+                border-width: 0px !important;
+                page-break-after: always;
+                background-color: #FFFFFF;
+                width: 210mm;
+                /* height: 296.8mm; */
+                overflow: hidden !important;
+                position: relative !important;
+                font-family: standard, kaiu, 標楷體;
+                box-shadow: none !important;
+            }
+
+            html {
+                margin: 0 !important;
+            }
+
+            body {
+                margin: 0 !important;
+                -webkit-print-color-adjust: exact;
+            }
+
+            body>div {
+                margin: 0 !important;
+                -webkit-print-color-adjust: exact;
+            }
+        }
+    </style>
     <script type="text/javascript" src="/static/bower_components/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="/static/bower_components/moment/min/moment.min.js"></script>
     <script type="text/javascript" src="/static/bower_components/moment/locale/zh-tw.js"></script>
 
     <script type="text/javascript" src="/static/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="/static/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
-    <script type="text/javascript" src="/static/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
-    <script type="text/javascript" src="/static/bower_components/bootstrap-datepicker/dist/locales/bootstrap-datepicker.zh-TW.min.js"></script>
+    <script type="text/javascript"
+        src="/static/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript"
+        src="/static/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript"
+        src="/static/bower_components/bootstrap-datepicker/dist/locales/bootstrap-datepicker.zh-TW.min.js"></script>
 
     <script type="text/javascript" src="/static/bower_components/jquery-ui-sortable/jquery-ui-sortable.min.js"></script>
 
     <script type="text/javascript" src="../form-designer/assets/js/form-render.min.js"></script>
-    
+
     <script type="text/javascript" src="bluebird.min.js"></script>
     <script type="text/javascript" src="weditor.js"></script>
     <script>
-        
+
 
         window.onload = function () {
             $.fn.datepicker.defaults.format = "yyyy/mm/dd";
@@ -32,15 +81,15 @@
             $.fn.datepicker.defaults.autoclose = true;
             $.fn.datepicker.defaults.clearBtn = true;
         };
-        
-       
-        function formRender(formData){
+
+
+        function formRender(formData) {
             debugger
             return $('.render-wrap').formRender({
                 formData: formData,
             });
         }
-       
+
     </script>
 
 
@@ -51,4 +100,3 @@
 </body>
 
 </html>
-
