@@ -14720,3 +14720,6 @@ section {
     }
 }
 
+.fixedHeader-floating{
+    top: 50px !important;
+}
