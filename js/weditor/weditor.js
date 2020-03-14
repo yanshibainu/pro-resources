@@ -9773,6 +9773,8 @@
             debugger
             if (html)
                 this.html(html);
+            else
+                $('[data-toggle="tooltip"]').tooltip()
 
             self.currentState = new State();
             self.currentState.name = getConfig("stateName");
@@ -10410,6 +10412,7 @@
                 InstanceManager.release();
                 self.optioins.container.uid = undefined;
                 self.optioins.container.appendChild(htmlElement);
+                $('[data-toggle="tooltip"]').tooltip()
             }              
             else {
 
@@ -10420,6 +10423,7 @@
                 InstanceManager.release();
 
                 self.optioins.container.appendChild(value);
+                $('[data-toggle="tooltip"]').tooltip()
             }               
         },
         revised: function (name) {
