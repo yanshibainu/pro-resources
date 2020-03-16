@@ -7298,10 +7298,10 @@
 
         SetStyle.prototype = {
             initialize: function () {
-                this._oldValue = this.target.getStyle[this.name];
+                var t = this.target;
+                this._oldValue = t.getStyle(this.name);
             },
             apply: function () {
-
                 var newValue = this.value;
                 this.target.setStyle(this.name, newValue);
             },
@@ -7791,19 +7791,8 @@
 
                                 IOverride = new (IOverrideClassName)(eval(IOverrideInfo.controller), arg);
                                 break;
+                            case "SetStyle":
                             case "SetProperty":
-                                //var htmlElement = document.getElementById(IOverrideInfo.target);
-
-                                //if (!htmlElement)
-                                //    htmlElement = document.querySelector(IOverrideInfo.target);
-
-                                //if (!htmlElement)
-                                //    throw new Error("not querySelector =" + IOverrideInfo.target);
-
-                                //var undoRedoEditor = InstanceManager.getInstance(htmlElement);
-                                //IOverride = new (IOverrideClassName)(undoRedoEditor, IOverrideInfo.name, IOverrideInfo.value, IOverrideInfo.onlyFirst);
-
-                                //break;
                             case "SetEventHandler":
                                 var htmlElement = document.getElementById(IOverrideInfo.target);
 
@@ -7826,7 +7815,9 @@
 
                                     IOverride = new (IOverrideClassName)(undoRedoEditor, IOverrideInfo.name, IOverrideInfo.value, IOverrideInfo.onlyFirst);
                                 }
-                                    
+                                else if(type == "SetStyle")
+                                    IOverride = new (IOverrideClassName)(undoRedoEditor, IOverrideInfo.name, IOverrideInfo.value);
+
                                 break;
                             case "RemoveChild":
                                 var htmlElement = document.getElementById(IOverrideInfo.target);
