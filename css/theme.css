@@ -14757,6 +14757,6 @@ section {
 @media (max-width: 991px){
     
     .fixedHeader-floating{
-        top: opx !important;
+        top: 0opx !important;
     }
 }
