@@ -1,6 +1,3 @@
-.fixedHeader-floating{
-    top: 50px !important;
-}
 
 .checkbox input[type="checkbox"]:disabled + label, .checkbox input[type="radio"]:disabled + label {
     opacity: 1

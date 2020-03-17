@@ -14748,3 +14748,15 @@ section {
   .tooltip.right > .tooltip-arrow {
     border-right: 5px solid black;
   }
+
+.fixedHeader-floating{
+    top: 75px !important;
+    z-index: 1001;
+}
+
+@media (max-width: 991px){
+    
+    .fixedHeader-floating{
+        top: opx !important;
+    }
+}
