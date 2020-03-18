@@ -4755,7 +4755,8 @@ section {
 
 @media (max-width: 991px) {
     .au-breadcrumb {
-        height: 130px;
+        /* height: 130px; */
+        height: 0px;
     }
 
     .au-breadcrumb.m-t-75 {
