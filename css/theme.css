@@ -276,7 +276,7 @@ section {
 
 /*Page Objects*/
 .page-wrapper {
-    overflow: hidden;
+    overflow: auto;
 }
 
 .page-container {
