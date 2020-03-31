@@ -1,3 +1,6 @@
+.checkbox.checkbox-inline {
+    margin-left: 0;
+}
 
 .checkbox input[type="checkbox"]:disabled + label, .checkbox input[type="radio"]:disabled + label {
     opacity: 1
