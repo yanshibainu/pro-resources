@@ -2610,6 +2610,9 @@
             get checked() {
                 return this.htmlElement.checked;
             },  
+            set checked(value) {
+                this.htmlElement.checked = value;
+            },              
             get type() {
                 return this.htmlElement.type;
             }, 
