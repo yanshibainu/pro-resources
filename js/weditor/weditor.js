@@ -2955,18 +2955,20 @@
     var FileBlock = (function () {
         var FileBlock = function (htmlElement /** HTMLElement **/) {
  
-            this._a;
-            this._i;
+            // this._a;
+            // this._i;
             this._fileInput;
 
-            this._url;
-            this._urlChangedFlag = false;
+            this._filesProps = [];
 
-            this._fileName;
-            this._fileNameChangedFlag = false;
+            // this._url;
+            // this._urlChangedFlag = false;
 
-            this._base64;
-            this._base64ChangedFlag = false;
+            // this._fileName;
+            // this._fileNameChangedFlag = false;
+
+            // this._base64;
+            // this._base64ChangedFlag = false;
 
             EditorHTMLElement.call(this, htmlElement);
         };      
@@ -2978,30 +2980,30 @@
             _childrenMapping: function () {
                 EditorHTMLElement.prototype._childrenMapping.call(this);
 
-                if (this.htmlElement.querySelector("a") == null){
-                    this._a = new a();
-                    this.addChild(this._a);  
-                }    
-                else
-                    this._a = InstanceManager.getInstance(this.htmlElement.querySelector("a"));
+                // if (this.htmlElement.querySelector("a") == null){
+                //     this._a = new a();
+                //     this.addChild(this._a);  
+                // }    
+                // else
+                //     this._a = InstanceManager.getInstance(this.htmlElement.querySelector("a"));
                     
-                if (this.htmlElement.querySelector("i") == null){
-                    this._i = InstanceManager.getInstance(
-                        new DOMParser().parseFromString('<i class="fa fa-trash" style="display: none"></i>', "text/html").
-                        body.children[0]);
-                    this.addChild(this._i);                       
-                }
-                else
-                    this._i = InstanceManager.getInstance(this.htmlElement.querySelector("i"));                   
+                // if (this.htmlElement.querySelector("i") == null){
+                //     this._i = InstanceManager.getInstance(
+                //         new DOMParser().parseFromString('<i class="fa fa-trash" style="display: none"></i>', "text/html").
+                //         body.children[0]);
+                //     this.addChild(this._i);                       
+                // }
+                // else
+                //     this._i = InstanceManager.getInstance(this.htmlElement.querySelector("i"));                   
             },
             _creationComplete: function () {
                 UndoRedoEditor.prototype._creationComplete.call(this);
 
-                var self = this;
-                this._i.htmlElement.addEventListener("click", function () {
-                    self.removeFile();
+                // var self = this;
+                // this._i.htmlElement.addEventListener("click", function () {
+                //     self.removeFile();
 
-                }, false);                 
+                // }, false);                 
             },
             _updateDisplayList: function () {
 
@@ -3016,15 +3018,52 @@
                             var files = self._fileInput.htmlElement.files;
 
                             if(files && files.length > 0){
-                                self.fileName = files[0].name;
 
-                                self.url = window.URL.createObjectURL(files[0]);                                
-                                self._i.setStyle("display", "inline-block");
-                                
-                                self._fileInput.getBase64File().done(function(dataURI){
-                                    self._base64 = self.dataURItoBase64(dataURI);
+                                Array.prototype.slice.call(files).forEach(function (f) {
+                                    var url =  window.URL.createObjectURL(f);
+
+                                    var a = InstanceManager.getInstance(
+                                        new DOMParser().parseFromString('<a href="' + url + '" target="_blank">' + f.name + '</a>', "text/html").
+                                        body.children[0]);                       
+
+                                    self.addChildAt(a, self._fileInput.childIndex);  
+
+                                    var i = InstanceManager.getInstance(
+                                        new DOMParser().parseFromString('<i class="fa fa-trash"></i>', "text/html").
+                                        body.children[0]);
+
+                                    var itemProp = {
+                                        f: f,
+                                        a: a,
+                                        i: i                 
+                                    }                                        
+
+                                    i.htmlElement.addEventListener("click", function () {
+                                        self.removeFile(itemProp);
+                                    }, false); 
+
+                                    self.addChildAt(i, a.childIndex + 1); 
+
+                                    self._filesProps.push(itemProp);
+                         
+                                    //self._i.setStyle("display", "inline-block");
+                                    
+                                    // self._fileInput.getBase64File().done(function(dataURI){
+                                    //     self._base64 = self.dataURItoBase64(dataURI);
+                                    // });
                                 });
                             }
+
+                            // if(files && files.length > 0){
+                            //     self.fileName = files[0].name;
+
+                            //     self.url = window.URL.createObjectURL(files[0]);                                
+                            //     self._i.setStyle("display", "inline-block");
+                                
+                            //     self._fileInput.getBase64File().done(function(dataURI){
+                            //         self._base64 = self.dataURItoBase64(dataURI);
+                            //     });
+                            // }
 
                         }, false);                    
                     }                  
@@ -3119,12 +3158,25 @@
 
                 return new Blob([ab], { type: type });
             },
-            removeFile: function(){
-                this.fileName = ""
-                window.URL.revokeObjectURL(this._a.url);
-                this._a.url = "";
-                this._fileInput.value = "";
-                this._i.setStyle("display", "none");
+            removeFile: function(itemProp){
+
+                window.URL.revokeObjectURL(itemProp.a.url);
+                const dt = new DataTransfer()
+
+                Array.prototype.slice.call(this._fileInput.htmlElement.files).forEach(function (f) {
+
+                    if (f !== itemProp.f) 
+                        dt.items.add(f)
+                });
+
+                this._fileInput.htmlElement.files = dt.files;
+                
+                this._fileInput.htmlElement.dispatchEvent(new Event("change"));
+                // this.fileName = ""
+                // window.URL.revokeObjectURL(this._a.url);
+                // this._a.url = "";
+                // this._fileInput.value = "";
+                // this._i.setStyle("display", "none");
             }
         };
 
