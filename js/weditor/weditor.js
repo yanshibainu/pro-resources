@@ -3026,7 +3026,9 @@
                             if (this._fileInput) {
 
                                 this._fileInput.htmlElement.addEventListener("change", function () {
-                                    self.removeFileAll();
+                                    if(!self._fileInput.htmlElement.getAttribute("multiple"))
+                                        self.removeFileAll();
+                                        
                                     var files = self._fileInput.htmlElement.files;
 
                                     if (files && files.length > 0) {
@@ -3156,15 +3158,15 @@
             removeFile: function (fileProp) {
 
                 window.URL.revokeObjectURL(fileProp.a.url);
-                const dt = new DataTransfer()
+                //const dt = new DataTransfer()
 
-                Array.prototype.slice.call(this._fileInput.htmlElement.files).forEach(function (f) {
+                // Array.prototype.slice.call(this._fileInput.htmlElement.files).forEach(function (f) {
 
-                    if (f !== fileProp.f)
-                        dt.items.add(f)
-                });
+                //     if (f !== fileProp.f)
+                //         dt.items.add(f)
+                // });
 
-                this._fileInput.htmlElement.files = dt.files;
+                // this._fileInput.htmlElement.files = dt.files;
                 fileProp.a.parent.remove();
 
                 this._filesProps = this._filesProps.splice(this._filesProps.indexOf(fileProp), 1);
