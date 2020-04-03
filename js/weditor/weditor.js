@@ -3031,70 +3031,59 @@
 
                                     if (files && files.length > 0) {
 
-                                        var index = 0;
+                                        //var index = 0;
                                         Array.prototype.slice.call(files).forEach(function (f) {
                                             var url = window.URL.createObjectURL(f);
-                                            var div = self.parseFromString('<div class="file-div"></div>');
-                                            var a;
 
-                                            if (self.htmlElement.querySelector("a") != null) {
-                                                var aHtmlElement = self.htmlElement.querySelector("a[data-id-attribute]");
-                                                a = InstanceManager.getInstance(aHtmlElement).clone();
-                                                a.setStyle("display", "inline-block");
-                                                a.htmlElement.removeAttribute("data-id-attribute");
+                                            self.createNewFile(url, f.name);
 
-                                                var idAttribute = aHtmlElement.getAttribute("data-id-attribute");
-                                                var idAttributeValue = a.htmlElement.getAttribute(idAttribute).replace("${id}", index);
+                                            // var div = self.parseFromString('<div class="file-div"></div>');
+                                            // var a;
 
-                                                a.htmlElement.setAttribute(idAttribute, idAttributeValue);
-                                                a.url = url;
-                                                a.textContent = f.name;
-                                            }
-                                            else
-                                                a = self.parseFromString('<a href="' + url + '" target="_blank">' + f.name + '</a>');
+                                            // if (self.htmlElement.querySelector("a") != null) {
+                                            //     var aHtmlElement = self.htmlElement.querySelector("a[data-id-attribute]");
+                                            //     a = InstanceManager.getInstance(aHtmlElement).clone();
+                                            //     a.setStyle("display", "inline-block");
+                                            //     a.htmlElement.removeAttribute("data-id-attribute");
 
-                                            self._fileInput.getBase64File().done(function(dataURI){
-                                                a.value = self.dataURItoBase64(dataURI);
-                                            });
+                                            //     var idAttribute = aHtmlElement.getAttribute("data-id-attribute");
+                                            //     var idAttributeValue = a.htmlElement.getAttribute(idAttribute).replace("${id}", index);
 
-                                            a.fileName = f.name;
-
-                                            var i = self.parseFromString('<i class="fa fa-trash"></i>');
-
-                                            div.addChild(a);
-                                            div.addChild(i);
-                                            self.addChildAt(div, self.children.length - 1);
-
-                                            var itemProp = {
-                                                f: f,
-                                                a: a,
-                                                i: i
-                                            }
-
-                                            i.htmlElement.addEventListener("click", function () {
-                                                self.removeFile(itemProp);
-                                            }, false);
-
-                                            self._filesProps.push(itemProp);
+                                            //     a.htmlElement.setAttribute(idAttribute, idAttributeValue);
+                                            //     a.url = url;
+                                            //     a.textContent = f.name;
+                                            // }
+                                            // else
+                                            //     a = self.parseFromString('<a href="' + url + '" target="_blank">' + f.name + '</a>');
 
                                             // self._fileInput.getBase64File().done(function(dataURI){
-                                            //     self._base64 = self.dataURItoBase64(dataURI);
+                                            //     a.value = self.dataURItoBase64(dataURI);
                                             // });
 
-                                            index ++;
+                                            // a.fileName = f.name;
+
+                                            // var i = self.parseFromString('<i class="fa fa-trash"></i>');
+
+                                            // div.addChild(a);
+                                            // div.addChild(i);
+                                            // self.addChildAt(div, self.children.length - 1);
+
+                                            // var itemProp = {
+                                            //     f: f,
+                                            //     a: a,
+                                            //     i: i
+                                            // }
+
+                                            // i.htmlElement.addEventListener("click", function () {
+                                            //     self.removeFile(itemProp);
+                                            // }, false);
+
+                                            // self._filesProps.push(itemProp);
+
+
+                                            // index ++;
                                         });
                                     }
-
-                                    // if(files && files.length > 0){
-                                    //     self.fileName = files[0].name;
-
-                                    //     self.url = window.URL.createObjectURL(files[0]);                                
-                                    //     self._i.setStyle("display", "inline-block");
-
-                                    //     self._fileInput.getBase64File().done(function(dataURI){
-                                    //         self._base64 = self.dataURItoBase64(dataURI);
-                                    //     });
-                                    // }
 
                                 }, false);
                             }
@@ -3204,35 +3193,77 @@
                     window.URL.revokeObjectURL(itemProp.a.url);
                 });
 
+                this._filesProps = [];
+
                 var fileBlockList = this.htmlElement.querySelectorAll("[class=file-div]");
 
                 for (var i = 0; i < fileBlockList.length; i++) {
                     InstanceManager.getInstance(fileBlockList[i]).remove();
                 }
             },
-            removeFile: function (itemProp) {
+            removeFile: function (fileProp) {
 
-                window.URL.revokeObjectURL(itemProp.a.url);
+                window.URL.revokeObjectURL(fileProp.a.url);
                 const dt = new DataTransfer()
 
                 Array.prototype.slice.call(this._fileInput.htmlElement.files).forEach(function (f) {
 
-                    if (f !== itemProp.f)
+                    if (f !== fileProp.f)
                         dt.items.add(f)
                 });
 
                 this._fileInput.htmlElement.files = dt.files;
-                itemProp.a.parent.remove();
+                fileProp.a.parent.remove();
 
-                //this._fileInput.htmlElement.dispatchEvent(new Event("change"));
+                this._filesProps = this._filesProps.splice(this._filesProps.indexOf(fileProp), 1);
+            },
+            createNewFile: function (url, name) {
 
+                var self = this;
+                var div = self.parseFromString('<div class="file-div"></div>');
+                var a;
+                var index = this._filesProps.length;
 
+                if (self.htmlElement.querySelector("a") != null) {
+                    var aHtmlElement = self.htmlElement.querySelector("a[data-id-attribute]");
+                    a = InstanceManager.getInstance(aHtmlElement).clone();
+                    a.setStyle("display", "inline-block");
+                    a.htmlElement.removeAttribute("data-id-attribute");
 
-                // this.fileName = ""
-                // window.URL.revokeObjectURL(this._a.url);
-                // this._a.url = "";
-                // this._fileInput.value = "";
-                // this._i.setStyle("display", "none");
+                    var idAttribute = aHtmlElement.getAttribute("data-id-attribute");
+                    var idAttributeValue = a.htmlElement.getAttribute(idAttribute).replace("${id}", index);
+
+                    a.htmlElement.setAttribute(idAttribute, idAttributeValue);
+                    a.url = url;
+                    a.textContent = name;
+                }
+                else
+                    a = self.parseFromString('<a href="' + url + '" target="_blank">' + name + '</a>');
+
+                self._fileInput.getBase64File().done(function(dataURI){
+                    a.value = self.dataURItoBase64(dataURI);
+                });
+
+                a.fileName = name;
+
+                var i = self.parseFromString('<i class="fa fa-trash"></i>');
+
+                div.addChild(a);
+                div.addChild(i);
+                self.addChildAt(div, self.children.length - 1);
+
+                var fileProp = {
+                    a: a,
+                    i: i
+                }
+
+                i.htmlElement.addEventListener("click", function () {
+                    self.removeFile(fileProp);
+                }, false);
+
+                self._filesProps.push(fileProp);
+
+                return div;
             },
         };
 
@@ -9872,7 +9903,7 @@
     weditor.prototype = {
 
         build: function (html) {
-            debugger
+            
             if (html)
                 this.html(html);
             else
@@ -10472,7 +10503,7 @@
             }
         },
         html: function (value, isChangeSatae) {
-            debugger
+            
             if (value == undefined) { //get
 
                 if (isChangeSatae == undefined)
