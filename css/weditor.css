@@ -6,6 +6,11 @@
     opacity: 1
 }
 
+/* input[multiple]::after{
+    content:"我是 after";
+    color:red;
+} */
+
 
         /* Tooltip */
         .tooltip > .tooltip-inner {

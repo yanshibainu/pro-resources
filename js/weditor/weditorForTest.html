@@ -255,7 +255,12 @@
                                 {
                                     "iOverride": "AddChild",
                                     "relativeTo": "中英文摘要",
-                                    "target": "<input type='file' name='中英文摘要' multiple='multiple' class='form-control-file'/>"
+                                    "target": "<input type='file' name='中英文摘要' class='form-control-file'/>"
+                                },
+                                {
+                                    "iOverride": "AddChild",
+                                    "relativeTo": "其他補充資料",
+                                    "target": "<input type='file' name='其他補充資料' multiple='multiple' class='form-control-file'/>"
                                 },
                                 {
                                     "iOverride": "SetProperty",
@@ -482,7 +487,8 @@
                                     <td width=47%
                                         style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
                                         <div class="checkbox checkbox-primary">
-                                            <input type="checkbox" id="是否基因重組" pro-variable-name="是否基因重組" disabled="disabled">
+                                            <input type="checkbox" id="是否基因重組" pro-variable-name="是否基因重組"
+                                                disabled="disabled">
                                             <label for="是否基因重組">
                                                 是
                                             </label>
@@ -497,7 +503,8 @@
                                     <td width=47%
                                         style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
                                         <div class="checkbox checkbox-primary">
-                                            <input type="checkbox" id="是否微生物培養" pro-variable-name="是否微生物培養" disabled="disabled">
+                                            <input type="checkbox" id="是否微生物培養" pro-variable-name="是否微生物培養"
+                                                disabled="disabled">
                                             <label for="是否微生物培養">
                                                 是
                                             </label>
@@ -512,7 +519,8 @@
                                     <td width=47%
                                         style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
                                         <div class="checkbox checkbox-primary">
-                                            <input type="checkbox" id="是否動物實驗" pro-variable-name="是否動物實驗" disabled="disabled">
+                                            <input type="checkbox" id="是否動物實驗" pro-variable-name="是否動物實驗"
+                                                disabled="disabled">
                                             <label for="是否動物實驗">
                                                 是
                                             </label>
@@ -527,7 +535,8 @@
                                     <td width=47%
                                         style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
                                         <div class="checkbox checkbox-primary">
-                                            <input type="checkbox" id="是否基因轉殖動物" pro-variable-name="是否基因轉殖動物" disabled="disabled">
+                                            <input type="checkbox" id="是否基因轉殖動物" pro-variable-name="是否基因轉殖動物"
+                                                disabled="disabled">
                                             <label for="是否基因轉殖動物">
                                                 是
                                             </label>
@@ -542,7 +551,8 @@
                                     <td width=47%
                                         style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
                                         <div class="checkbox checkbox-primary">
-                                            <input type="checkbox" id="是否基因轉殖植物" pro-variable-name="是否基因轉殖植物" disabled="disabled">
+                                            <input type="checkbox" id="是否基因轉殖植物" pro-variable-name="是否基因轉殖植物"
+                                                disabled="disabled">
                                             <label for="是否基因轉殖植物">
                                                 是
                                             </label>
@@ -557,7 +567,8 @@
                                     <td width=47%
                                         style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
                                         <div class="checkbox checkbox-primary">
-                                            <input type="checkbox" id="是否自交植物" pro-variable-name="是否自交植物" disabled="disabled">
+                                            <input type="checkbox" id="是否自交植物" pro-variable-name="是否自交植物"
+                                                disabled="disabled">
                                             <label for="是否自交植物">
                                                 是
                                             </label>
@@ -679,7 +690,9 @@
                                             <input type="radio" class="form-check-input" id="病毒載體" name="載體">
                                             <label class="form-check-label" for="r1">病毒載體</label>
                                         </div>
-                                        <i class="fa fa-info-circle" style="display: none;" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="依「持有、保存或處分感染性生物材料管理規定」，慢病毒載體(lentiviral vector)為病毒類型(lentivirus)者，比照第二級危險群(RG2)病原體之處分規定辦理。"></i>
+                                        <i class="fa fa-info-circle" style="display: none;" aria-hidden="true"
+                                            data-toggle="tooltip" data-placement="bottom"
+                                            title="依「持有、保存或處分感染性生物材料管理規定」，慢病毒載體(lentiviral vector)為病毒類型(lentivirus)者，比照第二級危險群(RG2)病原體之處分規定辦理。"></i>
                                     </td>
                                     <td width=61% valign=top
                                         style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
@@ -1078,10 +1091,10 @@
                                     </td>
                                     <td width=71%
                                         style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
-                                        <span id="中英文摘要" data-class="FileBlock" pro-variable-name='中英文摘要'
+                                        <div id="中英文摘要" data-class="FileBlock" pro-variable-name='中英文摘要'
                                             pro-variable-type='File'>
                                             <!-- <a href="" target="_blank"></a> -->
-                                        </span>
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr valign=top>
@@ -1130,10 +1143,10 @@
                                     </td>
                                     <td width=71%
                                         style="border: 1px solid #00000a; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in">
-                                        <span id="其他補充資料" data-class="FileBlock" pro-variable-name='其他補充資料'
-                                            pro-variable-type='File'>
-                                            <a href="" target="_blank"></a>
-                                        </span>
+                                        <div id="其他補充資料" data-class="FileBlock">
+                                            <a href="" target="_blank" style="display: none;" data-id-attribute="pro-variable-name"
+                                                pro-variable-name='其他補充資料_${id}' pro-variable-type='File'></a>
+                                        </div>
                                     </td>
                                 </tr>
                             </table>

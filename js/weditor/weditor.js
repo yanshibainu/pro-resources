@@ -9,7 +9,7 @@
 
 
 (function () {
-    
+
     //base
     var EditorHTMLElement = (function () {
 
@@ -47,7 +47,7 @@
             this.htmlElement = htmlElement;
             this.parent;
 
-            if (!this.htmlElement){
+            if (!this.htmlElement) {
                 this._createChildren();
                 this._childrenMapping();
             }
@@ -56,8 +56,8 @@
             }
             this._creationCompleteFlag = false;
             this._creationComplete();
-            
-            
+
+
             if (this.htmlElement && this.htmlElement.getAttribute)
                 this._contentEditable = this.htmlElement.getAttribute("contentEditable") != "false";
         };
@@ -101,7 +101,7 @@
                     }
                 }
             },
-            _creationComplete: function () {   
+            _creationComplete: function () {
                 this._creationCompleteFlag = true;
             },
             _invalidateProperties: function () {
@@ -129,11 +129,11 @@
 
                     this.htmlElement.uid = this._uid;
 
-                    if (!this.htmlElement.id) 
+                    if (!this.htmlElement.id)
                         this.htmlElement.id = this.name + "_" + new Date().getTime() + "_" + this._uid;
- 
+
                 }
-           
+
                 if (this._textContentChangedFlag) {//多子結點要處理
                     this._textContentChangedFlag = false;
 
@@ -144,10 +144,10 @@
                     //debugger
 
                     //this.htmlElement.textContent = this._textContent;
-                    if (this.htmlElement.nodeType == Node.TEXT_NODE) 
+                    if (this.htmlElement.nodeType == Node.TEXT_NODE)
                         this.htmlElement.textContent = this._textContent;
-                    else { 
-                        
+                    else {
+
                         //for (var i = this.htmlElement.childNodes.length - 1; i >= 0; i--) {
                         //    var node = this.htmlElement.childNodes[i];
 
@@ -211,11 +211,11 @@
                             this.addChild(InstanceManager.getInstance(document.createTextNode(this._textContent), text));
                             this.validateNow();
                         }
-                            
 
 
-                        
-                    }             
+
+
+                    }
                 }
 
                 if (this._titleChangedFlag) {
@@ -231,12 +231,12 @@
                         var selection = window.getSelection();
                         this.htmlElement.focus();
                         var treeWalker = document.createTreeWalker(
-                                    this.htmlElement,
-                                    NodeFilter.SHOW_TEXT,
-                                    function (node) {
-                                        return NodeFilter.FILTER_ACCEPT;
-                                    },
-                                false);
+                            this.htmlElement,
+                            NodeFilter.SHOW_TEXT,
+                            function (node) {
+                                return NodeFilter.FILTER_ACCEPT;
+                            },
+                            false);
 
                         var cursor = 0;
                         var node = null;
@@ -281,7 +281,7 @@
                     range.selectNodeContents(this.htmlElement);
 
                     if (this.htmlElement.nodeType == Node.ELEMENT_NODE) {
-                        
+
                         this.htmlElement.focus();
                         var treeWalker = document.createTreeWalker(
                             this.htmlElement,
@@ -304,7 +304,7 @@
                                 setStartFlag = true;
                             }
 
-                            if (cursor + text.length >= this._startEndOffset.endOffset){
+                            if (cursor + text.length >= this._startEndOffset.endOffset) {
                                 range.setEnd(node, this._startEndOffset.endOffset - cursor);
                                 break;
                             }
@@ -312,7 +312,7 @@
                             cursor += text.length;
                         }
 
-                        if (selection.rangeCount > 0) 
+                        if (selection.rangeCount > 0)
                             selection.removeAllRanges();
 
                         selection.addRange(range);
@@ -377,11 +377,11 @@
                     else
                         this.htmlElement.removeEventListener("click", onFocus, false);
                 }
-               
+
                 // console.debug("uid: " + this.uid + " _commitProperties");
             },
-            _invalidateDisplayList: function(){
-                
+            _invalidateDisplayList: function () {
+
                 if (!this._invalidateDisplayListFlag) {
 
                     this._invalidateDisplayListFlag = true;
@@ -390,14 +390,8 @@
                         var self = this;
 
                         setTimeout(function () {
-                            //self._updateDisplayList.call(self);
-
-                            //
-
                             if (self._invalidateDisplayListFlag)
                                 self.validateNow();
-
-                            //self._invalidateDisplayListFlag = false;
                         });
                     }
                 }
@@ -452,13 +446,13 @@
                     var self = this;
                     var onDOMNodeInserted = function (event) {
                         value.removeEventListener("DOMNodeInsertedIntoDocument", onDOMNodeInserted, false);
-                        
+
                         self._invalidateDisplayList.call(self);
                     };
 
                     value.addEventListener("DOMNodeInsertedIntoDocument", onDOMNodeInserted, false);
-                    
-                    if(!getConfig("undoRedoEnable"))
+
+                    if (!getConfig("undoRedoEnable"))
                         return;
 
                     var observer = new MutationObserver(function (mutations, observer) {
@@ -471,14 +465,14 @@
                         //        instance.parent = self;
                         //        self._childNodes.push(instance);
                         //    }
-                            
+
                         //});
 
                         self._validateChildNodes();
                     });
 
                     observer.observe(value, {
-                        childList:true
+                        childList: true
                     });
 
                 }
@@ -500,8 +494,8 @@
                 var pagingEditor = InstanceManager.getInstance(cloneHTMLElement, dataClass);
 
                 return pagingEditor;
-            },       
-            get uid(){
+            },
+            get uid() {
                 return this._uid;
             },
             set uid(value) {
@@ -512,25 +506,25 @@
                     this._invalidateProperties();
                     this.validateProperties();
                 }
-                
+
             },
-            get name(){
+            get name() {
                 return "EditorHTMLElement";
             },
             get textContent() {
 
                 if (this._textContentChangedFlag)
                     return this._textContent;
-                    //else if (this.htmlElement.firstChild)
-                    //    return this.htmlElement.firstChild.textContent;
+                //else if (this.htmlElement.firstChild)
+                //    return this.htmlElement.firstChild.textContent;
                 else {
 
-                    if (this.htmlElement.nodeType == Node.TEXT_NODE) 
+                    if (this.htmlElement.nodeType == Node.TEXT_NODE)
                         return this.htmlElement.textContent
                     else {
                         var text = "";
 
-                        for (var i = 0 ; i < this.htmlElement.childNodes.length; i++) {
+                        for (var i = 0; i < this.htmlElement.childNodes.length; i++) {
                             var node = this.htmlElement.childNodes[i];
 
                             if (node.nodeType == Node.TEXT_NODE) {
@@ -545,7 +539,7 @@
 
                     //return this.htmlElement.textContent;
                 }
-                    
+
             },
             set textContent(value) {
 
@@ -556,7 +550,7 @@
                     this._textContent = value;
                     this._textContentChangedFlag = true;
                     this._invalidateProperties();
-                }                
+                }
             },
             get title() {
                 return this._title;
@@ -564,13 +558,13 @@
             set title(value) {
 
                 if (value != undefined && value != this.title) {
-                    
+
                     this._title = value;
                     this._titleChangedFlag = true;
                     this._invalidateProperties();
-                }                
+                }
             },
-            get contenteditable(){
+            get contenteditable() {
                 return this._contentEditable;
             },
             set contenteditable(value) {
@@ -688,12 +682,12 @@
                             if (nextSiblingNode) {
                                 this.htmlElement.insertBefore(editorHTMLElement.htmlElement, nextSiblingNode);
                                 this.htmlElement.insertBefore(cloneNodeEditor.htmlElement, nextSiblingNode);
-                            }                             
+                            }
                             else {
                                 this.htmlElement.appendChild(editorHTMLElement.htmlElement);
                                 this.htmlElement.appendChild(cloneNodeEditor.htmlElement);
                             }
-                                
+
 
                             //var nextSibling;
 
@@ -799,13 +793,13 @@
 
                         return editorHTMLElement;
                     }
-                    else 
+                    else
                         return this.addChild(editorHTMLElement);
 
                     //if (this.htmlElement.children.length > 0 && this.children.length > 0) {
-                        
+
                     //    //this._children.splice(index, 0, editorHTMLElement);
-                        
+
                     //    //if (Array.prototype.slice.call(this.htmlElement.childNodes).indexOf(editorHTMLElement.htmlElement) == -1)
                     //    //    this.htmlElement.insertBefore(editorHTMLElement.htmlElement, this.htmlElement.children[index]);
 
@@ -823,17 +817,11 @@
                     //}
                     //else
                     //    return this.addChild(editorHTMLElement);
-                }       
+                }
             },
             addChild: function (editorHTMLElement /** EditorHTMLElement **/) {
-                
+
                 if (this._childNodes.indexOf(editorHTMLElement) == -1) {
-
-                    //this._children.push(editorHTMLElement);
-                    
-                    //if (Array.prototype.slice.call(this.htmlElement.childNodes).indexOf(editorHTMLElement.htmlElement) == -1)
-                    //    this.htmlElement.appendChild(editorHTMLElement.htmlElement);
-
                     if (Array.prototype.slice.call(this.htmlElement.childNodes).indexOf(editorHTMLElement.htmlElement) == -1)
                         this.htmlElement.appendChild(editorHTMLElement.htmlElement);
 
@@ -854,8 +842,12 @@
 
                 //if (index >= 0 && index < this.childNodes.length)
                 //    return this.childNodes[index];
-                
+
                 return null;
+            },
+            remove: function () {
+                this.removeChildAll();
+                this.parent.removeChild(this);
             },
             removeChild: function (editorHTMLElement) {
 
@@ -899,13 +891,13 @@
 
                 }
             },
-            removeChildAll: function(){
+            removeChildAll: function () {
                 for (var i = this.childNodes.length - 1; i >= 0; i--) {
                     this.removeChild(this.childNodes[i]);
                 }
             },
             //不含textNode
-            get children(){
+            get children() {
                 return this._childNodes.filter(function (editorHTMLElement) {
                     return editorHTMLElement.htmlElement.nodeType == Node.ELEMENT_NODE;
                 });
@@ -999,9 +991,9 @@
                         if (treeWalker.currentNode == range.startContainer) {
                             focusOffset += range.startOffset;
                             break;
-                        }                          
+                        }
                         else
-                            focusOffset += treeWalker.currentNode.length;                      
+                            focusOffset += treeWalker.currentNode.length;
                     };
                 }
                 else if (this.htmlElement.nodeType == Node.TEXT_NODE) {
@@ -1028,7 +1020,7 @@
 
                 var endOffset = 0;
 
-                if (this.name == "text") 
+                if (this.name == "text")
                     endOffset = this.textContent.length;
                 else {
                     var treeWalker = document.createTreeWalker(
@@ -1048,7 +1040,7 @@
 
                 return endOffset;
             },
-            focusToEnd: function(){
+            focusToEnd: function () {
                 this.focusOffset = this.endFocusOffset;
             },
             setStartEndOffset: function (value /** startOffset, endOffset **/) {
@@ -1151,18 +1143,18 @@
 
                 var node = null;
 
-                if (this.htmlElement.nodeType == Node.TEXT_NODE) 
+                if (this.htmlElement.nodeType == Node.TEXT_NODE)
                     node = this.htmlElement
                 else if (this.htmlElement.nodeType == Node.ELEMENT_NODE) {
                     var focusOffset = this.focusOffset;
 
                     var treeWalker = document.createTreeWalker(
-                                this.htmlElement,
-                                NodeFilter.SHOW_TEXT,
-                                function (node) {
-                                    return NodeFilter.FILTER_ACCEPT;
-                                },
-                            false);
+                        this.htmlElement,
+                        NodeFilter.SHOW_TEXT,
+                        function (node) {
+                            return NodeFilter.FILTER_ACCEPT;
+                        },
+                        false);
 
                     var cursor = 0;
 
@@ -1187,12 +1179,12 @@
 
                 var list = [];
                 var treeWalker = document.createTreeWalker(
-                            this.htmlElement,
-                            NodeFilter.SHOW_TEXT, (filterFunction || 
-                            function (node) {
-                                return NodeFilter.FILTER_ACCEPT;
-                            }),
-                        false);
+                    this.htmlElement,
+                    NodeFilter.SHOW_TEXT, (filterFunction ||
+                        function (node) {
+                            return NodeFilter.FILTER_ACCEPT;
+                        }),
+                    false);
 
                 var cursor = 0;
                 var node = null;
@@ -1201,7 +1193,7 @@
                 while (node = treeWalker.nextNode()) {
                     var text = node.textContent;
 
-                   // if ((cursor <= endOffset && cursor + text.length <= endOffset) || (cursor <= endOffset && cursor + text.length > endOffset)) {
+                    // if ((cursor <= endOffset && cursor + text.length <= endOffset) || (cursor <= endOffset && cursor + text.length > endOffset)) {
                     if (text.length > 0 && cursor < endOffset && ((cursor >= startOffset && cursor <= endOffset) || (cursor < startOffset && cursor + text.length > startOffset))) {
                         //if (node.nodeType == Node.TEXT_NODE)
                         //    node = node.parentNode;
@@ -1210,22 +1202,22 @@
                         var s, e;
 
                         //if (instance == this)
-                            //s = startOffset;
-                        if (cursor < startOffset) 
-                            s = startOffset - cursor;             
-                        else 
+                        //s = startOffset;
+                        if (cursor < startOffset)
+                            s = startOffset - cursor;
+                        else
                             s = 0;
-                            
 
-                       // if (instance == this)
-                            //e = endOffset;
+
+                        // if (instance == this)
+                        //e = endOffset;
                         if (cursor + text.length >= endOffset)
-                            e = endOffset - cursor;                  
-                        else 
+                            e = endOffset - cursor;
+                        else
                             e = text.length;
-       
+
                         //if (focusOffset == undefined)
-                            //focusOffset = s + e;
+                        //focusOffset = s + e;
 
 
                         list.push({
@@ -1326,7 +1318,7 @@
                 }
                 else {
 
-                    
+
                     var treeWalker = document.createTreeWalker(
                         this.htmlElement,
                         NodeFilter.SHOW_TEXT,
@@ -1373,7 +1365,7 @@
                     }
 
                     this.validateProperties();
-                    
+
                     return deleteTextContent;
                 }
             },
@@ -1689,7 +1681,7 @@
                         var focusEditor;
                         var startContainerEditor = focusEditor = InstanceManager.getInstance(range.startContainer);
                         var endContainerEditor = InstanceManager.getInstance(range.endContainer)
-                        
+
                         var removeContainer = function (editor) {
 
                             if (editor == ancestorEditor)
@@ -1724,7 +1716,7 @@
                         //if (startContainerChildIndex == undefined) {//commonAncestorContainer 本身, (說明文字...)
                         //var startContainer_startEndOffset = range.startOffset;
                         //var endContainer_startEndOffset = range.endOffset;
-                        
+
                         var startOffset = range.startOffset || 0;
                         //var endOffset = startContainerEditor.textContent.length;
                         var endOffset = startContainerEditor.textContent.length;
@@ -1780,7 +1772,7 @@
 
                         //}
 
-                       // deleteContents(endContainerEditor, range.startOffset, range.endOffset)
+                        // deleteContents(endContainerEditor, range.startOffset, range.endOffset)
 
                         return;
 
@@ -1947,12 +1939,17 @@
                 var cloneHTMLElement = InstanceManager.clone(this.htmlElement, false);
                 var dataClass;
 
-                if (cloneHTMLElement.nodeType == Node.ELEMENT_NODE) 
+                if (cloneHTMLElement.nodeType == Node.ELEMENT_NODE)
                     dataClass = eval(cloneHTMLElement.getAttribute("data-class"));
 
                 var cloneEditor = InstanceManager.getInstance(cloneHTMLElement, dataClass);
 
                 return cloneEditor;
+            },
+            parseFromString: function (str) {
+                return InstanceManager.getInstance(
+                    new DOMParser().parseFromString(str, "text/html").
+                        body.children[0]);
             },
             get childrenByPageBreak() {
                 return [];
@@ -1970,7 +1967,7 @@
             get mode() {
                 return this._mode;
             },
-            get contextMenuOwner(){
+            get contextMenuOwner() {
                 return this._contextMenuOwner;
             },
             isEmpty: function () {
@@ -1989,14 +1986,14 @@
         var UndoRedoEditor = function (htmlElement /** HTMLElement **/) {
             //this.state = StateManager.getState(getConfig("stateName"));
 
-            EditorHTMLElement.call(this, htmlElement); 
+            EditorHTMLElement.call(this, htmlElement);
         };
 
         UndoRedoEditor.prototype = {
-            get state(){
+            get state() {
                 return StateManager.currentState || StateManager.getState(getConfig("stateName"));
             },
-            addChildAtByTextNode: function (editorHTMLElement /** EditorHTMLElement **/, index) { 
+            addChildAtByTextNode: function (editorHTMLElement /** EditorHTMLElement **/, index) {
                 EditorHTMLElement.prototype.addChildAtByTextNode.call(this, editorHTMLElement, index);
 
                 if (this.state.enabled && this._creationCompleteFlag) {
@@ -2179,7 +2176,7 @@
 
             },*/
             startUndoRecord: function () {
-                if (this.state.enabled) 
+                if (this.state.enabled)
                     this.state.startBatchMode();
             },
             endUndoRecord: function () {
@@ -2238,7 +2235,7 @@
         section.prototype.__proto__ = UndoRedoEditor.prototype;
 
         return section;
-       
+
     }());
     var div = (function () {
 
@@ -2280,7 +2277,7 @@
 
                 UndoRedoEditor.prototype._createChildren.call(this);
                 this.htmlElement = document.createElement("span");
-                    
+
             }
         }
 
@@ -2356,7 +2353,7 @@
                 UndoRedoEditor.prototype._createChildren.call(this);
                 this.htmlElement = document.createElement("strong");
             },
-            get name(){
+            get name() {
                 return "strong";
             },
             get keyinWordAvoid() {
@@ -2380,7 +2377,7 @@
                 EditorHTMLElement.prototype._createChildren.call(this);
                 this.htmlElement = document.createElement("svg");
             },
-            get name(){
+            get name() {
                 return "svg";
             },
             get childrenByPageBreak() {
@@ -2452,7 +2449,7 @@
 
                         this.htmlElement.parentNode.appendChild(cloneSelect);
 
-                        if(cloneSelect.getBoundingClientRect().width > 0)
+                        if (cloneSelect.getBoundingClientRect().width > 0)
                             this.htmlElement.style.width = cloneSelect.getBoundingClientRect().width + "px";
 
                         this.htmlElement.parentNode.removeChild(cloneSelect);
@@ -2482,7 +2479,7 @@
                 if (this._dataProviderChangedFlag) {
                     this._dataProviderChangedFlag = false;
 
-                    for (var i = this.htmlElement.options.length - 1; i >= 0 ; i--) {
+                    for (var i = this.htmlElement.options.length - 1; i >= 0; i--) {
                         this.htmlElement.options.remove(i)
                     }
 
@@ -2585,7 +2582,7 @@
             },
             get name() {
                 return "input";
-            },          
+            },
             get selectedValue() {
                 return this.value;
             },
@@ -2596,7 +2593,7 @@
                 return this.htmlElement.value;
             },
             set value(value) {
-                if(this.type != "file")
+                if (this.type != "file")
                     this.htmlElement.value = value;
                 else
                     this.htmlElement.value = "";
@@ -2609,18 +2606,18 @@
             },
             get checked() {
                 return this.htmlElement.checked;
-            },  
+            },
             set checked(value) {
                 this.htmlElement.checked = value;
-            },              
+            },
             get type() {
                 return this.htmlElement.type;
-            }, 
+            },
             getBase64File: function () {
                 var self = this;
-                
+
                 var promise = new Promise(function (resolve, reject) {
-                    
+
                     var reader = new FileReader();
                     reader.readAsDataURL(self.htmlElement.files[0]);
                     reader.onload = function () {
@@ -2634,17 +2631,17 @@
                 });
 
                 return promise;
-            }, 
+            },
             get disabled() {
                 return this.htmlElement.getAttribute("disabled");
             },
             set disabled(value) {
-                if(value == "disabled")
+                if (value == "disabled")
                     this.htmlElement.setAttribute("disabled", value);
                 else
                     this.htmlElement.removeAttribute("disabled");
             },
-            
+
         }
 
         input.prototype.__proto__ = UndoRedoEditor.prototype;
@@ -2659,6 +2656,7 @@
             this._urlChangedFlag = false;
             this._fileName;
             this._fileNameChangedFlag = false;
+            this._value;
 
             UndoRedoEditor.call(this, htmlElement);
         };
@@ -2695,6 +2693,15 @@
                     this._fileName = value;
                     this._fileNameChangedFlag = true;
                     this._invalidateProperties();
+                }
+            },
+            get value() {
+                return this._value;
+            },
+            set value(value) {
+
+                if (value != undefined && value != this._value) {
+                    this._value = value;
                 }
             },
             _commitProperties: function () {
@@ -2954,7 +2961,7 @@
 
     var FileBlock = (function () {
         var FileBlock = function (htmlElement /** HTMLElement **/) {
- 
+
             // this._a;
             // this._i;
             this._fileInput;
@@ -2971,7 +2978,7 @@
             // this._base64ChangedFlag = false;
 
             EditorHTMLElement.call(this, htmlElement);
-        };      
+        };
 
         FileBlock.prototype = {
             _createChildren: function () {
@@ -2986,7 +2993,7 @@
                 // }    
                 // else
                 //     this._a = InstanceManager.getInstance(this.htmlElement.querySelector("a"));
-                    
+
                 // if (this.htmlElement.querySelector("i") == null){
                 //     this._i = InstanceManager.getInstance(
                 //         new DOMParser().parseFromString('<i class="fa fa-trash" style="display: none"></i>', "text/html").
@@ -2999,78 +3006,102 @@
             _creationComplete: function () {
                 UndoRedoEditor.prototype._creationComplete.call(this);
 
-                // var self = this;
-                // this._i.htmlElement.addEventListener("click", function () {
-                //     self.removeFile();
-
-                // }, false);                 
             },
             _updateDisplayList: function () {
 
                 EditorHTMLElement.prototype._updateDisplayList.call(this);
                 var self = this;
+
                 if (this._childrenChangedFlag) {
 
-                    if (this.htmlElement.querySelector("input[type=file]")){
-                        this._fileInput = InstanceManager.getInstance(this.htmlElement.querySelector("input[type=file]"));  
-                        this._fileInput.htmlElement.addEventListener("change", function () {
+                    this._childrenChangedFlag = false;
 
-                            var files = self._fileInput.htmlElement.files;
+                    if (!this._fileInput) {
 
-                            if(files && files.length > 0){
+                        var fileInputHtmlElement = this.htmlElement.querySelector("input[type=file]")
 
-                                Array.prototype.slice.call(files).forEach(function (f) {
-                                    var url =  window.URL.createObjectURL(f);
+                        if (fileInputHtmlElement) {
+                            this._fileInput = InstanceManager.getInstance(fileInputHtmlElement);
 
-                                    var a = InstanceManager.getInstance(
-                                        new DOMParser().parseFromString('<a href="' + url + '" target="_blank">' + f.name + '</a>', "text/html").
-                                        body.children[0]);                       
+                            if (this._fileInput) {
 
-                                    self.addChildAt(a, self._fileInput.childIndex);  
+                                this._fileInput.htmlElement.addEventListener("change", function () {
+                                    self.removeFileAll();
+                                    var files = self._fileInput.htmlElement.files;
 
-                                    var i = InstanceManager.getInstance(
-                                        new DOMParser().parseFromString('<i class="fa fa-trash"></i>', "text/html").
-                                        body.children[0]);
+                                    if (files && files.length > 0) {
 
-                                    var itemProp = {
-                                        f: f,
-                                        a: a,
-                                        i: i                 
-                                    }                                        
+                                        var index = 0;
+                                        Array.prototype.slice.call(files).forEach(function (f) {
+                                            var url = window.URL.createObjectURL(f);
+                                            var div = self.parseFromString('<div class="file-div"></div>');
+                                            var a;
 
-                                    i.htmlElement.addEventListener("click", function () {
-                                        self.removeFile(itemProp);
-                                    }, false); 
+                                            if (self.htmlElement.querySelector("a") != null) {
+                                                var aHtmlElement = self.htmlElement.querySelector("a[data-id-attribute]");
+                                                a = InstanceManager.getInstance(aHtmlElement).clone();
+                                                a.setStyle("display", "inline-block");
+                                                a.htmlElement.removeAttribute("data-id-attribute");
 
-                                    self.addChildAt(i, a.childIndex + 1); 
+                                                var idAttribute = aHtmlElement.getAttribute("data-id-attribute");
+                                                var idAttributeValue = a.htmlElement.getAttribute(idAttribute).replace("${id}", index);
 
-                                    self._filesProps.push(itemProp);
-                         
-                                    //self._i.setStyle("display", "inline-block");
-                                    
-                                    // self._fileInput.getBase64File().done(function(dataURI){
-                                    //     self._base64 = self.dataURItoBase64(dataURI);
-                                    // });
-                                });
+                                                a.htmlElement.setAttribute(idAttribute, idAttributeValue);
+                                                a.url = url;
+                                                a.textContent = f.name;
+                                            }
+                                            else
+                                                a = self.parseFromString('<a href="' + url + '" target="_blank">' + f.name + '</a>');
+
+                                            self._fileInput.getBase64File().done(function(dataURI){
+                                                a.value = self.dataURItoBase64(dataURI);
+                                            });
+
+                                            var i = self.parseFromString('<i class="fa fa-trash"></i>');
+
+                                            div.addChild(a);
+                                            div.addChild(i);
+                                            self.addChildAt(div, self.children.length - 1);
+
+                                            var itemProp = {
+                                                f: f,
+                                                a: a,
+                                                i: i
+                                            }
+
+                                            i.htmlElement.addEventListener("click", function () {
+                                                self.removeFile(itemProp);
+                                            }, false);
+
+                                            self._filesProps.push(itemProp);
+
+                                            // self._fileInput.getBase64File().done(function(dataURI){
+                                            //     self._base64 = self.dataURItoBase64(dataURI);
+                                            // });
+
+                                            index ++;
+                                        });
+                                    }
+
+                                    // if(files && files.length > 0){
+                                    //     self.fileName = files[0].name;
+
+                                    //     self.url = window.URL.createObjectURL(files[0]);                                
+                                    //     self._i.setStyle("display", "inline-block");
+
+                                    //     self._fileInput.getBase64File().done(function(dataURI){
+                                    //         self._base64 = self.dataURItoBase64(dataURI);
+                                    //     });
+                                    // }
+
+                                }, false);
                             }
-
-                            // if(files && files.length > 0){
-                            //     self.fileName = files[0].name;
-
-                            //     self.url = window.URL.createObjectURL(files[0]);                                
-                            //     self._i.setStyle("display", "inline-block");
-                                
-                            //     self._fileInput.getBase64File().done(function(dataURI){
-                            //         self._base64 = self.dataURItoBase64(dataURI);
-                            //     });
-                            // }
-
-                        }, false);                    
-                    }                  
+                        }
+                    }
                 }
             },
             _commitProperties: function () {
-                
+
                 EditorHTMLElement.prototype._commitProperties.call(this);
 
                 // if(this._base64ChangedFlag){
@@ -3080,108 +3111,131 @@
                 //     self._a.htmlElement.href = window.URL.createObjectURL(blob);   
                 // }
 
-                if(this._urlChangedFlag){
-                    this._urlChangedFlag = false;
+                // if(this._urlChangedFlag){
+                //     this._urlChangedFlag = false;
 
-                    this._a.url = this._url;    
-                }
+                //     this._a.url = this._url;    
+                // }
 
-                if(this._fileNameChangedFlag){
-                    this._fileNameChangedFlag = false;
+                // if(this._fileNameChangedFlag){
+                //     this._fileNameChangedFlag = false;
 
-                    this._a.fileName = this._fileName;                    
-                }
+                //     this._a.fileName = this._fileName;                    
+                // }
 
                 if (this._modeChangedFlag) {
-                    debugger;
                     this._modeChangedFlag = false;
-                    
+
                     switch (this._mode.name) {
                         case "編輯":
-                            if(this.contains(this._fileInput)){
+
+                            this._fileInput = null;
+
+                            if (this.contains(this._fileInput))
                                 this.removeChild(this._fileInput);
-                                this._i.setStyle("display", "inline-block");    
-                            }
+
+                            this.htmlElement.querySelectorAll("i").forEach(function (i) {
+                                InstanceManager.getInstance(i).setStyle("display", "inline-block");
+                            });
                             break;
                         case "追蹤修訂":
                         case "唯讀":
-                            this._i.setStyle("display", "none");
+                            this.htmlElement.querySelectorAll("i").forEach(function (i) {
+                                InstanceManager.getInstance(i).setStyle("display", "none");
+                            });
+
                             break;
                     }
                 }
             },
-            set base64(value) {
+            // set base64(value) {
 
-                this._base64 = value;
-                // this._base64ChangedFlag = true;
+            //     this._base64 = value;
+            //     // this._base64ChangedFlag = true;
 
-                // this._invalidateProperties();
-            },
-            get base64() {
-                return this._base64;
-            },
-            set fileName(value) {
+            //     // this._invalidateProperties();
+            // },
+            // get base64() {
+            //     return this._base64;
+            // },
+            // set fileName(value) {
 
-                if(value != undefined && this._fileName != value){
-                    this._fileName = value;
-                    this._fileNameChangedFlag = true;
-                    this._invalidateProperties();
-                }                
-            },   
-            get fileName() {
-                return this._fileName;
-            },  
-            set url(value) {
-                
-                if(value != undefined && this._url != value){
-                    this._url = value;
-                    this._urlChangedFlag = true;
-                    this._invalidateProperties();
-                }
-            },   
-            get url() {
-                return this._url;
-            },        
-            dataURItoBase64: function(dataURI){
+            //     if(value != undefined && this._fileName != value){
+            //         this._fileName = value;
+            //         this._fileNameChangedFlag = true;
+            //         this._invalidateProperties();
+            //     }                
+            // },   
+            // get fileName() {
+            //     return this._fileName;
+            // },  
+            // set url(value) {
+
+            //     if(value != undefined && this._url != value){
+            //         this._url = value;
+            //         this._urlChangedFlag = true;
+            //         this._invalidateProperties();
+            //     }
+            // },   
+            // get url() {
+            //     return this._url;
+            // },        
+            dataURItoBase64: function (dataURI) {
                 return dataURI.split(',')[1];
             },
-            base64toBlob: function(dataURI) {
+            base64toBlob: function (dataURI) {
 
                 var byteString = atob(dataURItoBase64(dataURI));
                 var type = dataURI.split(";")[0].split(":")[1];
                 var ab = new ArrayBuffer(byteString.length);
                 var ia = new Uint8Array(ab);
-            
+
                 for (var i = 0; i < byteString.length; i++) {
                     ia[i] = byteString.charCodeAt(i);
                 }
 
                 return new Blob([ab], { type: type });
             },
-            removeFile: function(itemProp){
+            removeFileAll: function () {
+
+                Array.prototype.slice.call(this._filesProps).forEach(function (itemProp) {
+                    window.URL.revokeObjectURL(itemProp.a.url);
+                });
+
+                var fileBlockList = this.htmlElement.querySelectorAll("[class=file-div]");
+
+                for (var i = 0; i < fileBlockList.length; i++) {
+                    InstanceManager.getInstance(fileBlockList[i]).remove();
+                }
+            },
+            removeFile: function (itemProp) {
 
                 window.URL.revokeObjectURL(itemProp.a.url);
                 const dt = new DataTransfer()
 
                 Array.prototype.slice.call(this._fileInput.htmlElement.files).forEach(function (f) {
 
-                    if (f !== itemProp.f) 
+                    if (f !== itemProp.f)
                         dt.items.add(f)
                 });
 
                 this._fileInput.htmlElement.files = dt.files;
-                
-                this._fileInput.htmlElement.dispatchEvent(new Event("change"));
+                itemProp.a.parent.remove();
+
+                //this._fileInput.htmlElement.dispatchEvent(new Event("change"));
+
+
+
                 // this.fileName = ""
                 // window.URL.revokeObjectURL(this._a.url);
                 // this._a.url = "";
                 // this._fileInput.value = "";
                 // this._i.setStyle("display", "none");
-            }
+            },
         };
 
         FileBlock.prototype.__proto__ = EditorHTMLElement.prototype;
-        
+
         return FileBlock;
     }());
 
@@ -3216,11 +3270,11 @@
 
                 if (this.htmlElement.getAttribute("data-data-field"))
                     this._dataField = this.htmlElement.getAttribute("data-data-field");
-                
+
                 this._value = this.textContent;
             },
             _setSelected: function () {
-                
+
                 if (this.inputSelect) {
 
                     if (this._value != undefined)
@@ -3238,7 +3292,7 @@
                     //debugger
                     if (this.htmlElement.querySelector("[data-class=InputSelect]"))
                         this._inputSelect = InstanceManager.getInstance(this.htmlElement.querySelector("[data-class=InputSelect]"));
-                    else if (this.htmlElement.querySelector("select"))                         
+                    else if (this.htmlElement.querySelector("select"))
                         this._inputSelect = InstanceManager.getInstance(this.htmlElement.querySelector("select"));
                     else if (this.htmlElement.querySelector("input"))
                         this._inputSelect = InstanceManager.getInstance(this.htmlElement.querySelector("input"));
@@ -3246,13 +3300,13 @@
                         this._inputSelect = InstanceManager.getInstance(this.htmlElement.querySelector("[data-class=SpanSelect]"));
 
                     if (this._inputSelect) {
-                        
+
                         this._inputSelect.labelField = this._labelField;
                         this._inputSelect.dataField = this._dataField;
 
                         this._setSelected();
                     }
-                        
+
                 }
 
                 if (this._dataProviderChangedFlag) {
@@ -3279,12 +3333,12 @@
 
                 if (this._modeChangedFlag) {
                     this._modeChangedFlag = false;
-                    
+
                     switch (this._mode.name) {
                         // case "Task_09xnpoc":
                         case "編輯":
                             this._value = this.textContent;
-                            
+
                             for (var i = this.htmlElement.childNodes.length - 1; i >= 0; i--) {
                                 this.htmlElement.removeChild(this.htmlElement.childNodes[i]);
                             }
@@ -3293,7 +3347,7 @@
                         case "唯讀":
                             //debugger
                             if (this.children.length > 0) {
-                                
+
                                 this.textContent = this._value = this.selectedValue;
 
                                 this.validateProperties();
@@ -3415,11 +3469,11 @@
                 }, false);
 
                 this._dropDown.htmlElement.addEventListener("dataProviderChange", function (event) {
-                    
+
                     if (this.nextElementSibling && this.value) {
                         this.nextElementSibling.value = self._value = this.value;
                     }
-                        
+
                 }, false);
 
             },
@@ -3435,14 +3489,14 @@
                     this._dataProviderChangedFlag = false;
 
                     this._dropDown.dataProvider = this._dataProvider;
-                  //  this._dropDown.validateProperties();
+                    //  this._dropDown.validateProperties();
                 }
 
                 if (this._labelFieldChangedFlag) {
                     this._labelFieldChangedFlag = false;
 
                     this._dropDown._labelField = this._labelField;
-                   // this._dropDown.validateProperties();
+                    // this._dropDown.validateProperties();
                 }
 
                 if (this._dataFieldChangedFlag) {
@@ -3454,7 +3508,7 @@
 
                 if (this._selectedValueChangedFlag) {
                     this._selectedValueChangedFlag = false;
-                    
+
                     this._dropDown.selectedValue = this._value;
                     this._input.htmlElement.value = this._value;
                     //this._dropDown.validateProperties();
@@ -3538,14 +3592,14 @@
 
                 UndoRedoEditor.prototype._createChildren.call(this);
 
-                this._createElement();             
+                this._createElement();
                 this.htmlElement.setAttribute("data-class", "TextBlock");
-                
+
 
                 //data-class="TextBlock"
 
                 //this.htmlElement.setAttribute("draggable", "false");
-            
+
                 //this.htmlElement.contentEditable = true;
                 //this.htmlElement.textContent = String.fromCharCode(8203);
                 //this.htmlElement.textContent = String.fromCharCode(8203);
@@ -3602,13 +3656,13 @@
                     this.validateProperties();
                 }
             },
-            _commitProperties:function () {
+            _commitProperties: function () {
 
 
                 if (this.childNodesModifiedFlag) {
 
                     this.childNodesModifiedFlag = false;
-                    
+
                     if (this.isEmpty() && this.children.length == 0) {
 
                         var stateEnabled = this.state.enabled;
@@ -3620,25 +3674,25 @@
 
                         this.state.enabled = stateEnabled;
                     }
-                        
+
                 }
 
                 UndoRedoEditor.prototype._commitProperties.call(this);
             },
-            get name(){
+            get name() {
                 return "TextBlock";
             },
             get isAddEmptyChar() {
                 return true;
             },
-            set textContent(value) {            
+            set textContent(value) {
                 UndoRedoEditor.prototype.__lookupSetter__('textContent').call(this, value);
             },
             get textContent() {
                 return UndoRedoEditor.prototype.__lookupGetter__('textContent').call(this);
             },
             //需實做
-            validateRects: function () {    
+            validateRects: function () {
                 var clientRects = this.htmlElement.getClientRects();
                 //this.rects = {};
                 debugger
@@ -3697,7 +3751,7 @@
                         nodeRange.setStart(node, index);
                         nodeRange.setEnd(node, index + 1);
 
-                        
+
                         flag = true;
 
                         index--;
@@ -3710,8 +3764,8 @@
                         mid = index + 1;
 
                     return mid;
-                }       
-                else if (bottom < targetBottom) 
+                }
+                else if (bottom < targetBottom)
                     return this._binarySearch(node, nodeRange, mid, heigh, targetBottom);
                 else if (bottom > targetBottom)
                     return this._binarySearch(node, nodeRange, 0, mid, targetBottom);
@@ -3732,19 +3786,19 @@
                     var self = this;
                     var text = "";
                     var treeWalker = document.createTreeWalker(
-                                this.htmlElement,
-                                NodeFilter.SHOW_TEXT,
-                                function (node) {
-                                    if (self.htmlElement == node.parentNode)
-                                        return NodeFilter.FILTER_ACCEPT;
-                                    else
-                                        return NodeFilter.FILTER_REJECT;
-                                },
-                            false);
+                        this.htmlElement,
+                        NodeFilter.SHOW_TEXT,
+                        function (node) {
+                            if (self.htmlElement == node.parentNode)
+                                return NodeFilter.FILTER_ACCEPT;
+                            else
+                                return NodeFilter.FILTER_REJECT;
+                        },
+                        false);
 
                     var node = null;
                     var cursor = 0;
-                    
+
                     while (node = treeWalker.nextNode()) {
 
                         var nodeRange = document.createRange();
@@ -3752,13 +3806,13 @@
                         //nodeRange.selectNode(node);
                         debugger
                         var clientRects = nodeRange.getClientRects();
-                        
+
                         for (var i = 0; i < clientRects.length; i++) {
                             console.log("clientRects")
                             var rect = clientRects[i];
-    
+
                             if (rect.bottom > offset) {
-    
+
                                 var endOffset = nodeRange.endOffset;
 
                                 var targetOffset = this._binarySearch(node, nodeRange, 0, endOffset - 1, rect.bottom);
@@ -3797,7 +3851,7 @@
                                 //        break;
                                 //    }
                                 //}
-    
+
                                 break;
                             }
                         }
@@ -3810,10 +3864,10 @@
                 }
 
 
-                if (startIndex != undefined) {                   
+                if (startIndex != undefined) {
                     pagingEditorHTMLElement.textContent = this.deleteContents(startIndex, this.textContent.length);
 
-                    if (!this.isEmpty()) 
+                    if (!this.isEmpty())
                         pagingEditorHTMLElement.isPagingFlag = true;
 
                     pagingEditorHTMLElement.validateProperties()
@@ -3823,7 +3877,7 @@
                     pagingEditorHTMLElement.textContent = String.fromCharCode(8203);
                     pagingEditorHTMLElement.validateProperties()
                 }
-                           
+
                 //pagingEditorHTMLElement.removeChildAll();
 
                 //for (var i = pagingEditorHTMLElement.children.length - 1; i >= 0; i--) {
@@ -3929,17 +3983,17 @@
 
                 this._dropDown.htmlElement.addEventListener("blur", function (event) {
                     debugger
-                    if (event.relatedTarget == self._displayText.htmlElement) 
+                    if (event.relatedTarget == self._displayText.htmlElement)
                         return false;
-                    else if (event.relatedTarget && self._dropDown.htmlElement.contains(event.relatedTarget)) 
+                    else if (event.relatedTarget && self._dropDown.htmlElement.contains(event.relatedTarget))
                         return false;
                     else if (self._dropDown.htmlElement.contains(document.activeElement))//ie
                         return false;
-                        
+
                     self._displayDropDown.call(self, false);
 
                 }, false);
-                
+
 
 
 
@@ -3951,7 +4005,7 @@
             },
             _displayDropDown: function (display) {
 
-                if (display == undefined) 
+                if (display == undefined)
                     display = this._dropDown.getStyle("display") == "none"
 
                 if (display) {
@@ -3963,10 +4017,10 @@
                     if (left < 0)
                         left = 0;
 
-                    this._dropDown.setStyle("left", left) 
+                    this._dropDown.setStyle("left", left)
 
                     this._dropDown.htmlElement.focus();
-                }  
+                }
                 else
                     this._dropDown.setStyle("display", "none");
             },
@@ -3985,7 +4039,7 @@
 
                     for (var i = 0; i < this._dataProvider.length; i++) {
                         var data = this._dataProvider[i];
-                        var optionHtmlElement = document.createElement("span");                    
+                        var optionHtmlElement = document.createElement("span");
                         optionHtmlElement.className = "spanSelect_dropDownItem"
                         optionHtmlElement.style.display = "block";
                         optionHtmlElement.tabIndex = -1;
@@ -4020,10 +4074,10 @@
 
                     if (selectedValue == undefined) {
                         //debugger
-                        if (this._dataProvider.length > 0) 
+                        if (this._dataProvider.length > 0)
                             selectedValue = this._dataProvider[0][this._dataField]
                     }
-                        
+
 
                     this._value = selectedValue;
                     //this._dropDown.validateProperties();
@@ -4035,9 +4089,9 @@
                     this._selectedValueChangedFlag = false;
                     if (this.selectedItem) {
                         this._displayText.textContent = this.selectedItem[this._labelField];
-                       // this._dropDown.htmlElement.left = this._displayText.htmlElement.getBoundingClientRect().
+                        // this._dropDown.htmlElement.left = this._displayText.htmlElement.getBoundingClientRect().
                     }
-                        
+
                 }
 
                 //if (dispatchDataProviderChangeEventFlag) {
@@ -4129,9 +4183,9 @@
                 span.prototype._childrenMapping.call(this);
 
                 this._textBlock = InstanceManager.getInstance(this.htmlElement.querySelector("[data-class=TextBlock]"), TextBlock);
-                
+
             },
-            get childrenByPageBreak() {              
+            get childrenByPageBreak() {
                 return [this._textBlock];
             }
         }
@@ -4206,7 +4260,7 @@
             _commitProperties: function () {
 
                 ul.prototype._commitProperties.call(this);
-                
+
                 if (this._dataProviderChangedFlag) {
                     this._dataProviderChangedFlag = false;
 
@@ -4267,10 +4321,10 @@
 
 
             },
-            get borderDragger(){
+            get borderDragger() {
                 return this._borderDragger;
             },
-            get borderGuide(){
+            get borderGuide() {
                 return this._borderGuide;
             },
             resize: function () {
@@ -4427,7 +4481,7 @@
                     this.borderDragger.htmlElement.style.height = this._borderGuide.htmlElement.style.height = this.parent.htmlElement.getBoundingClientRect().height + "px";
 
                     this.borderDragger.htmlElement.style.top = this._borderGuide.htmlElement.style.top = this.parent.htmlElement.offsetTop + "px";
-                        
+
                 }
 
 
@@ -4530,7 +4584,7 @@
 
             span.call(this, htmlElement);
         },
-        self;
+            self;
 
         ResizeTableBlock.prototype = {
             _createChildren: function () {
@@ -4546,7 +4600,7 @@
 
                 this._draggerColumn = InstanceManager.getInstance(undefined, ResizeTableColumnDraggerDiv);
                 this.addChild(this._draggerColumn);
-            //    <div><div class="kix-table-row-border-dragger" style="left: 0px; top: 313px;"></div><div class="kix-table-row-border-guide" style="top: 85px; left: 0px;"></div></div>
+                //    <div><div class="kix-table-row-border-dragger" style="left: 0px; top: 313px;"></div><div class="kix-table-row-border-guide" style="top: 85px; left: 0px;"></div></div>
 
 
             },
@@ -4565,7 +4619,7 @@
 
                 if (this._resizeChangedFlag) {
                     this._resizeChangedFlag = false;
-                    
+
                     //var boundingClientRect = this._resizeTable.htmlElement.getBoundingClientRect();
 
                     //this._draggerRow.htmlElement.style.width = boundingClientRect.width + "px";
@@ -4611,13 +4665,13 @@
                 resizeTdHtmlElement.addEventListener("mousedown", this._onMouseDown);
             },
             _onDragStart: function (event) {
-                
+
                 if ((event.which && event.which != 1) || (event.button && event.button != 1))
                     return; //only allow mouse left key
 
                 var instance = InstanceManager.getInstance(this);
                 instance.parent.borderGuide.htmlElement.style.display = "block";
-                
+
                 self._currentDragger = instance;
                 self._draggingFlag = true;
 
@@ -4637,7 +4691,7 @@
                         self._currentDragger.parent.borderDragger.htmlElement.style.left = (event.clientX - boundingClientRect.left) + "px";
                     }
                     else {
-                       // debugger
+                        // debugger
                         //self._currentDragger.parent.borderGuide.htmlElement.style.top = event.clientY - 11 + "px";
                         //self._currentDragger.parent.borderDragger.htmlElement.style.top = event.clientY - 11 + "px";
 
@@ -4651,7 +4705,7 @@
                     console.log(event.target)
                     event.preventDefault();
                 }
-                
+
             },
             _onDragStop: function (event) {
 
@@ -4691,7 +4745,7 @@
                     else {//tr
                         var target = self._draggerRow.borderDragger.target;
 
-                        if (target) {                        
+                        if (target) {
                             boundingClientRect = target.htmlElement.getBoundingClientRect();
                             var y = boundingClientRect.top;
 
@@ -4737,31 +4791,31 @@
                     targetInstance;
 
                 if (instance.name == "ResizeTd") {
-                    
-                    if (event.clientX < boundingClientRect.left + (boundingClientRect.width / 2)){
+
+                    if (event.clientX < boundingClientRect.left + (boundingClientRect.width / 2)) {
                         setLeft = this.offsetParent.offsetLeft + this.offsetLeft;
                         targetInstance = instance.parent.getChildAt(instance.childNodeIndex - 1);
                     }
-                        
+
                     else {
                         setLeft = this.offsetParent.offsetLeft + this.offsetLeft + boundingClientRect.width;
                         targetInstance = instance;
                     }
-                        
+
                     self._draggerColumn.borderDragger.htmlElement.style.left = setLeft - 3 + "px";
                     self._draggerColumn.borderDragger.target = targetInstance;
                     self._draggerColumn.borderGuide.htmlElement.style.left = setLeft + "px";
                 }
                 else {
 
-                    if (event.clientY < boundingClientRect.top + (boundingClientRect.height / 2)){
+                    if (event.clientY < boundingClientRect.top + (boundingClientRect.height / 2)) {
                         setTop = this.offsetParent.offsetTop + this.offsetTop;
                         targetInstance = instance.parent.getChildAt(instance.childNodeIndex - 1);
-                    }                      
+                    }
                     else {
-                        setTop = this.offsetParent.offsetTop + this.offsetTop + boundingClientRect.height;                       
+                        setTop = this.offsetParent.offsetTop + this.offsetTop + boundingClientRect.height;
                         targetInstance = instance;
-                        
+
                     }
 
                     self._draggerRow.borderDragger.htmlElement.style.top = setTop - 3 + "px";
@@ -4769,7 +4823,7 @@
                     self._draggerRow.borderGuide.htmlElement.style.top = setTop + "px";
                 }
 
-            //未完成
+                //未完成
                 /* 
 
 
@@ -4848,7 +4902,7 @@
 
             },
             _onMouseDown: function (event) {
-                
+
                 var instance = InstanceManager.getInstance(this);
 
                 if ((event.which && event.which != 3) || (event.button && event.button != 2))
@@ -4916,7 +4970,7 @@
                         insetCol(insertIndex);
                     }
                 }]
-                
+
                 var selection = window.getSelection();
 
                 if (selection.rangeCount > 0) {
@@ -4956,7 +5010,7 @@
             get resizeTable() {
                 return this._resizeTable;
             },
-            resize: function(){
+            resize: function () {
                 this._resizeChangedFlag = true;
                 this._invalidateDisplayList();
             }
@@ -4999,7 +5053,7 @@
 
                 if (this._childrenChangedFlag) {
                     this._childrenChangedFlag = false;
-                    
+
                     var trHtmlElementList = this.htmlElement.querySelectorAll("[data-class=ResizeTr]");
 
                     this._tr = [];
@@ -5046,7 +5100,7 @@
                 tr.prototype._createChildren.call(this);
 
                 this.htmlElement.setAttribute("data-class", "ResizeTr");
-                
+
 
                 //this.htmlElement.style.border = "1px solid black";
 
@@ -5181,17 +5235,17 @@
         };
 
         OrderedList.prototype = {
-            get name(){
+            get name() {
                 return "OrderedList";
             },
-            get isNumberedFormatEnd(){
+            get isNumberedFormatEnd() {
                 return this.level == this._numberedFormat.length;
             },
             get deleteEnabled() {
                 return this._deleteEnabled;
             },
             _createChildren: function () {
-                
+
                 ol.prototype._createChildren.call(this);
 
                 this.htmlElement.setAttribute("data-class", "OrderedList");
@@ -5220,8 +5274,8 @@
                         this.validateProperties();
                     }
 
-                    ol.prototype._childrenMapping.call(this);         
-                }    
+                    ol.prototype._childrenMapping.call(this);
+                }
             },
             get numberedFormat() {
                 return this._numberedFormat;
@@ -5253,8 +5307,8 @@
                         var childItem = this.getChildAt(i); //OrderedList or  ListItem
 
                         if (childItem.name == "OrderedList") {
-                            
-                            if (this.children.length == 1){
+
+                            if (this.children.length == 1) {
                                 prevIsOrderedList = true;
                                 prevOrderedList = this;
                             }
@@ -5304,11 +5358,11 @@
 
                     var breakParent = PageBreakManager.getPagingParent(this);
 
-                    if (breakParent) 
+                    if (breakParent)
                         this._serialNumberStartIndex = breakParent.children.length + 1
 
                     var serialNumberIndex = this._serialNumberStartIndex;
-                    
+
                     for (var i = 0; i < this.children.length; i++) {
                         var childItem = this.getChildAt(i);
 
@@ -5380,7 +5434,7 @@
     var ListItem = (function () {
 
         var ListItem = function (htmlElement, numberedFormat /** HTMLElement **/) {
-            
+
             this._numberedFormat = numberedFormat;
             this._serialNumber;
             this._textBlock;
@@ -5402,7 +5456,7 @@
 
                 this.htmlElement.setAttribute("data-class", "ListItem");
                 this.htmlElement.style.listStyleType = "none";
-                
+
                 //this.htmlElement.contentEditable = false;
                 //this.htmlElement.setAttribute("unselectable", "on");
 
@@ -5414,10 +5468,10 @@
             },
             _childrenMapping: function () {
 
-                if(this.htmlElement.querySelector("[data-class=ListItemSerialNumber]"))
+                if (this.htmlElement.querySelector("[data-class=ListItemSerialNumber]"))
                     this._serialNumber = InstanceManager.getInstance(this.htmlElement.querySelector("[data-class=ListItemSerialNumber]"), ListItemSerialNumber);
-                
-                if(this.htmlElement.querySelector("[data-class=ListItemTextBlock]"))
+
+                if (this.htmlElement.querySelector("[data-class=ListItemTextBlock]"))
                     this._textBlock = InstanceManager.getInstance(this.htmlElement.querySelector("[data-class=ListItemTextBlock]"), ListItemTextBlock);
 
                 if (this.htmlElement.getAttribute("data-serial-number-enabled") != undefined)
@@ -5447,12 +5501,12 @@
                 //    event.preventDefault();
                 //});
             },
-            get SN(){
+            get SN() {
                 return this._SN;
             },
             set SN(value) {
 
-                if (this.isJumpSN()) 
+                if (this.isJumpSN())
                     this._serialNumber.htmlElement.style.marginLeft = "0pt";
                 else
                     this._serialNumber.htmlElement.style.marginLeft = this._serialNumber.marginLeft;
@@ -5466,7 +5520,7 @@
                     this.validateProperties();
                 }
             },
-            isJumpSN: function(){//是否跳號
+            isJumpSN: function () {//是否跳號
                 return (this.textBlock && this.textBlock.isPagingFlag) || !this.serialNumberEnabled;
                 //return this.textBlock && this.textBlock.isPagingFlag
             },
@@ -5476,7 +5530,7 @@
 
                 if (this._SNChangedFlag && this._serialNumber) {
                     this._SNChangedFlag = false;
-                    
+
                     this._serialNumber.textContent = this._SN
                     this._serialNumber.validateProperties();
                 }
@@ -5488,18 +5542,18 @@
 
                     if (this.serialNumberEnabled) {
                         this._serialNumber.htmlElement.style.display = "inline-block";
-                        this.htmlElement.removeAttribute("data-serial-number-enabled");    
+                        this.htmlElement.removeAttribute("data-serial-number-enabled");
 
                         //this._serialNumber.setStyle("display", "inline-block");
                         //this.setStyle("data-serial-number-enabled", true);    
                     }
                     else {
-                        this._serialNumber.htmlElement.style.display = "none";                      
+                        this._serialNumber.htmlElement.style.display = "none";
                         this.htmlElement.setAttribute("data-serial-number-enabled", "false");
 
                         //this._serialNumber.setStyle("display", "none");
                         //this.setStyle("data-serial-number-enabled", false);    
-                        
+
                     }
                 }
             },
@@ -5510,7 +5564,7 @@
                 return [this._serialNumber, this._textBlock];
             },
             get otherChildren() {
-                return this._children.filter(function(item){
+                return this._children.filter(function (item) {
                     return [this._serialNumber, this._textBlock].indexOf(item) >= 0;
                 });
             },
@@ -5518,7 +5572,7 @@
                 return this._serialNumberEnabled;
             },
             set serialNumberEnabled(value) {
-                
+
                 if (value != undefined && value != this._serialNumberEnabled) {
                     this._serialNumberEnabledChangedFlag = true;
                     this._serialNumberEnabled = value;
@@ -5539,7 +5593,7 @@
 
         ListItem.prototype.__proto__ = li.prototype;
 
-        return ListItem ;
+        return ListItem;
     }());
 
     var ListItemSerialNumber = (function () {
@@ -5592,7 +5646,7 @@
 
                 TextBlock.prototype._createChildren.call(this);
                 this.htmlElement.setAttribute("data-class", "ListItemTextBlock");
-                
+
             },
             _creationComplete: function () {
                 TextBlock.prototype._creationComplete.call(this);
@@ -5741,13 +5795,13 @@
             _childrenMapping: function () {
                 TextBlock.prototype._childrenMapping.call(this);
 
-                this._textNodeBlock = InstanceManager.getInstance(this.htmlElement.querySelector("[data-class=TextBlock]"), TextBlock);              
+                this._textNodeBlock = InstanceManager.getInstance(this.htmlElement.querySelector("[data-class=TextBlock]"), TextBlock);
             },
             get childrenByPageBreak() {
                 return [this._textNodeBlock];
             },
             getPagingEditorHTMLElement: function (offset) { //這裡還要處理表格分頁
-                
+
                 return TextBlock.prototype.getPagingEditorHTMLElement.call(this, offset);
             },
             _commitProperties: function () {
@@ -5769,22 +5823,22 @@
             },
             get endFocusOffset() {
                 var treeWalker = document.createTreeWalker(
-                            this.htmlElement,
-                            NodeFilter.SHOW_TEXT,
-                            function (node) {
+                    this.htmlElement,
+                    NodeFilter.SHOW_TEXT,
+                    function (node) {
+                        node = node.parentNode;
+
+                        while (node) {
+
+                            if (node.getAttribute("data-class") == "ParagraphTextBlock")
+                                return NodeFilter.FILTER_ACCEPT;
+                            else if (node.getAttribute("data-class") == "OrderedList")
+                                return NodeFilter.FILTER_REJECT;
+                            else
                                 node = node.parentNode;
-
-                                while (node) {
-
-                                    if (node.getAttribute("data-class") == "ParagraphTextBlock")
-                                        return NodeFilter.FILTER_ACCEPT;
-                                    else if (node.getAttribute("data-class") == "OrderedList")
-                                        return NodeFilter.FILTER_REJECT;
-                                    else
-                                        node = node.parentNode;
-                                }
-                            },
-                        false);
+                        }
+                    },
+                    false);
 
                 var node = null;
                 var endOffset = 0;
@@ -5839,9 +5893,9 @@
                 this._paragraphName = InstanceManager.getInstance(this.htmlElement.querySelector("[data-class=ParagraphName]"), ParagraphName);
                 this._paragraphSuffix = InstanceManager.getInstance(this.htmlElement.querySelector("[data-class=ParagraphSuffix]"), ParagraphSuffix);
                 this._paragraphTextBlock = InstanceManager.getInstance(this.htmlElement.querySelector("[data-class=ParagraphTextBlock]"), ParagraphTextBlock);
-                
+
             },
-            get childrenByPageBreak() {              
+            get childrenByPageBreak() {
                 //return [this._paragraphName, this._paragraphSuffix, this._paragraphTextBlock];
                 return [this._paragraphName, this._paragraphSuffix];
             },
@@ -5910,7 +5964,7 @@
                     var self = this;
                     var prevHeight;
                     var onDOMSubtreeModified = function (event) {
-                        
+
                         var articleBlock = self.articleBlock;
                         var height = articleBlock.htmlElement.scrollHeight + articleBlock.htmlElement.offsetTop;
 
@@ -5923,7 +5977,7 @@
                                 var rootOverFlowEditorList = [];
                                 var footerTop = self.footer.htmlElement.getBoundingClientRect().top;
                                 self._overFlowFlag = true;
-                                
+
                                 for (var i = articleBlock.children.length - 1; i >= 0; i--) {
                                     var childEditor = articleBlock.getChildAt(i);
                                     if (childEditor.htmlElement.getBoundingClientRect().bottom > footerTop) {
@@ -5936,7 +5990,7 @@
                                     {
                                         detail: {
                                             break: function () {
-                                                
+
                                                 var breakEditorList = [];
 
                                                 for (var i = rootOverFlowEditorList.length - 1; i >= 0; i--) {
@@ -5951,7 +6005,7 @@
                                         cancelable: true
                                     }
                                 );
-                                
+
                                 self.htmlElement.dispatchEvent(event);
                                 self.htmlElement.removeEventListener("DOMSubtreeModified", onDOMSubtreeModified, false);
                             }
@@ -5981,7 +6035,7 @@
                 }*/
 
                 if (this.children.length > 0) {
-                    
+
                     for (var i = 0; i < this.children.length; i++) {
                         var childEditor = this.getChildAt(i);
 
@@ -5996,18 +6050,18 @@
                         }
                     }
                 }
-                    
+
             },
             _commitProperties: function () {
 
                 div.prototype._commitProperties.call(this);
-                
+
                 if (this._modeChangedFlag) {
                     this._modeChangedFlag = false;
-                    
+
                     var pageNoHtmlElement = this.htmlElement.querySelector("[data-twedr='頁碼']");
 
-                    if(!pageNoHtmlElement)
+                    if (!pageNoHtmlElement)
                         return;
                     switch (this._mode.name) {
                         case "分頁":
@@ -6033,7 +6087,7 @@
                     this._pageCountChangedFlag = false;
 
                     this._updatePageNoHtmlElement();
-                }                
+                }
             },
             _updatePageNoHtmlElement: function () {
 
@@ -6046,34 +6100,34 @@
                     pageNoHtmlElement.textContent = text;
                 }
             },
-            removeOverFlowEditor: function (){
+            removeOverFlowEditor: function () {
 
-                if(this._overFlowFlag){
+                if (this._overFlowFlag) {
                     var self = this;
                     var overFlowEditorList = [];
 
                     var treeWalker = document.createTreeWalker(
-                                this.articleBlock.htmlElement,
-                                NodeFilter.SHOW_ELEMENT,
-                                function (node) {
+                        this.articleBlock.htmlElement,
+                        NodeFilter.SHOW_ELEMENT,
+                        function (node) {
 
-                                    if (node.children.length > 0)
-                                        return NodeFilter.FILTER_SKIP;
+                            if (node.children.length > 0)
+                                return NodeFilter.FILTER_SKIP;
 
-                                    if (node.offsetTop != undefined) {
-                                        
-                                        if (node.offsetHeight + node.offsetTop > self.footer.htmlElement.offsetTop) {
-                                
-                                            return NodeFilter.FILTER_ACCEPT;
-                                        }
-                                    }
+                            if (node.offsetTop != undefined) {
 
-                                    //if (node.getAttribute("data-class") != undefined)
-                                    //   return NodeFilter.FILTER_ACCEPT;
-                                    //else
-                                    return NodeFilter.FILTER_SKIP;
-                                },
-                            false);
+                                if (node.offsetHeight + node.offsetTop > self.footer.htmlElement.offsetTop) {
+
+                                    return NodeFilter.FILTER_ACCEPT;
+                                }
+                            }
+
+                            //if (node.getAttribute("data-class") != undefined)
+                            //   return NodeFilter.FILTER_ACCEPT;
+                            //else
+                            return NodeFilter.FILTER_SKIP;
+                        },
+                        false);
 
                     var node = null;
 
@@ -6120,7 +6174,7 @@
                 return this.articleBlock.htmlElement.getBoundingClientRect().top + this.parent.pagePixelContentHeight;
             },
             getRootOverFlowEditorList: function () {
-                
+
                 var rootOverFlowEditorList = [];
                 var articleBlock = this.articleBlock;
                 var height = articleBlock.htmlElement.scrollHeight;
@@ -6131,7 +6185,7 @@
 
                     for (var i = articleBlock.children.length - 1; i >= 0; i--) {
                         var childEditor = articleBlock.getChildAt(i);
-                       
+
                         if (childEditor.htmlElement.getBoundingClientRect().bottom - 4 > pagingOffsetTop) {
                             rootOverFlowEditorList.push(childEditor);
                         }
@@ -6142,7 +6196,7 @@
             },
             getPagingEditorList: function () {
                 var pagingEditorList = [];
-                var rootOverFlowEditorList = this.getRootOverFlowEditorList();               
+                var rootOverFlowEditorList = this.getRootOverFlowEditorList();
                 var list = [];
                 var pagingOffsetTop = this.pagingOffsetTop;
 
@@ -6158,14 +6212,14 @@
                         boundingClientRect: rootOverFlowEditorList[i].htmlElement.getBoundingClientRect()
                     });
                 }
-                
+
                 for (var i = 0; i < list.length; i++) {
 
                     var pagingEditor = PageBreakManager.break(list[i].editorHTMLElement, list[i].offset, list[i].boundingClientRect);
 
                     pagingEditorList.push(pagingEditor);
                 }
-                
+
                 return pagingEditorList;
             },
             get header() {
@@ -6266,7 +6320,7 @@
                 //var breakParent = PageBreakManager.getPagingParent(editorHTMLElement);
 
                 //if (breakParent) {
-                    
+
 
 
                 //}
@@ -6319,7 +6373,7 @@
 
         Document.prototype = {
             _createChildren: function () {
-                
+
                 //if (!this.htmlElement) {
                 //    div.prototype._createChildren.call(this);
 
@@ -6440,11 +6494,11 @@
                         var boundingClientRect = draggedEditor.htmlElement.offsetParent.getBoundingClientRect();
                         draggedEditor.setStyle("left", (event.clientX - boundingClientRect.left - draggedEditor.dragOverOffsetX) + "px");
                         draggedEditor.setStyle("top", (event.clientY - boundingClientRect.top - draggedEditor.dragOveroffsetY) + "px");
-                    }                  
+                    }
                 });
             },
             get pagePixelContentHeight() {
-                if (this._pagePixelContentHeight == undefined){
+                if (this._pagePixelContentHeight == undefined) {
 
                     var divPixel = document.createElement("div");
                     divPixel.style.height = this.pageContentHeight;
@@ -6471,7 +6525,7 @@
                     for (var i = 0; i < dataFirstPageList.length; i++) {
                         dataFirstPageList[i].innerHTML = "";
                     }
-                }         
+                }
 
                 var newPage = InstanceManager.getInstance(clonePageHtmlElement, Page);
                 this.addChild(newPage);
@@ -6531,7 +6585,7 @@
                             page = pageEditor;
                             break;
                         }
-                            
+
                     }
                 }
 
@@ -6541,7 +6595,7 @@
                 debugger
                 var self = this;
                 var promise = new Promise(function (resolve, reject) {
-                    
+
                     if (self.pageMode != "paging") {
 
                         self.singleState = StateManager.currentState;
@@ -6563,7 +6617,7 @@
                         doPaging(pageEditor, pagingEditorList);
 
                         self.pageMode = "paging";
-  
+
                         function doPaging(pageEditor, pagingEditorList) {
 
                             var pageIndex = pageEditor.childIndex;
@@ -6578,18 +6632,18 @@
                                 }
                                 else
                                     nextPage = self.getChildAt(pageIndex + 1);
-                                
+
                                 while (pagingEditorList.length > 0) {
                                     var breakEditor = pagingEditorList.shift();
 
-                                    nextPage.articleBlock.addChild(breakEditor);                                                            
+                                    nextPage.articleBlock.addChild(breakEditor);
                                 }
 
-                                breakEditor.validateNow();   
+                                breakEditor.validateNow();
 
                                 var nextPagingEditorList = nextPage.getPagingEditorList();
                                 if (nextPagingEditorList.length > 0) {
-                                    
+
                                     pagingEditorList = nextPagingEditorList.concat(pagingEditorList)
 
                                     setTimeout(function () {
@@ -6605,9 +6659,9 @@
                         }
                     }
 
-                    
-                }); 
-               
+
+                });
+
                 return promise;
             },
             single: function () {//單頁模式
@@ -6636,7 +6690,7 @@
                     ang,
                     index = 0;
 
-                for (var i = 0; i < this.children.length - 1 ; i++) {
+                for (var i = 0; i < this.children.length - 1; i++) {
 
                     var pageEditor = this.getChildAt(i);
                     //var value = self.docArr[d].pageCount + self.docArr[d].blankPageCount;
@@ -6671,7 +6725,7 @@
                     if (this.doublePagePrint && pageEditor.disableDoublePagePrint) {//未完成
 
                         if ((i + 2) < value) {
-                            
+
                             var cloneImage = tallyImpressionImage.cloneNode(true);
                             cloneImage.style.right = 0 - x;
                             pageEditor.addChild(InstanceManager.getInstance(cloneImage));
@@ -6702,7 +6756,7 @@
             },
             //移除騎縫章 未完成
             removeTallyImpression: function () {
-                
+
                 var htmlElementList = this.htmlElement.querySelectorAll(".docTallyImpression");
 
                 for (var i = 0; i < htmlElementList.length; i++) {
@@ -6712,11 +6766,11 @@
 
             },
             //自動插入分隔頁 未完成
-            autoInsertBlankPage: function(){
+            autoInsertBlankPage: function () {
 
 
 
-                for (var i = 0; i < this.children.length ; i++) {
+                for (var i = 0; i < this.children.length; i++) {
 
                     var pageEditor = this.getChildAt(i);
 
@@ -6735,7 +6789,7 @@
                         var blankPageCount = 0;
 
                         if (value.disableDoublePagePrint) {
-                            for (var i = 0; i < (value.pageCount - 1) ; i++) {
+                            for (var i = 0; i < (value.pageCount - 1); i++) {
                                 var $blankPage = self.blankPage();
                                 $blankPage.attr("data-ifd-blank-page", "true");
                                 $blankPage = $blankPage.insertAfter($($pageList[(cusor + i)]));
@@ -6781,12 +6835,12 @@
                 else {
                     window.print();
                 }
-                
+
 
                 //alert(window.document.WebBrowser)
                 //alert(window.document.WebBrowser.ExecWB)
                 //if (window.document.WebBrowser && window.document.WebBrowser.ExecWB) {
-                   
+
                 //    window.document.WebBrowser.ExecWB(6, 6);
                 //}                              
                 //else
@@ -6795,7 +6849,7 @@
         }
 
         Document.prototype.__proto__ = div.prototype;
-        
+
         return Document;
     }());
 
@@ -6838,7 +6892,7 @@
                     UndoRedoEditor.prototype.__lookupSetter__('textContent').call(this, value);
 
                     var self = this;
-                    
+
                     this.getSignTitle().then(function (title) {
                         debugger
                         self.title = title;
@@ -6899,7 +6953,7 @@
             set exectime(value) {
                 this._exectime = value;
             },
-            get isStack(){
+            get isStack() {
                 return this._isStack;
             },
             clone: function () {
@@ -7021,7 +7075,7 @@
     }());
 
     //刪除文字
-    var DelText  = (function () {
+    var DelText = (function () {
 
         var DelText = function (htmlElement /** HTMLElement **/) {
             SignEditor.call(this, htmlElement);
@@ -7104,7 +7158,7 @@
         };
 
         HoverBlock.prototype = {
-            get name(){
+            get name() {
                 return "HoverBlock";
             },
             set enabled(value) {
@@ -7114,7 +7168,7 @@
                     this._enabled = value;
                     this._enabledChangedFlag = true;
                     this._invalidateProperties();
-                }  
+                }
             },
             get enabled() {
                 return this._enabled;
@@ -7199,7 +7253,7 @@
 
         var State = function () {
             this.name;
-            this.overrides = []; /* of IOverride */          
+            this.overrides = []; /* of IOverride */
             this.removeds = []; /* of IOverride */
 
             this._startBatchModeFlag = false;
@@ -7246,7 +7300,7 @@
             undo: function () {
                 if (!this.enabled)
                     return;
-               debugger
+                debugger
                 if (this.overrides.length > 0) {
 
                     this._undoingFlag = true;
@@ -7315,7 +7369,7 @@
             this.value = value;
 
             this._oldValue;
-            
+
             IOverride.call(this);
         };
 
@@ -7378,7 +7432,7 @@
             this.arg.splice(0, 0, null);
 
             this.controller = new (Function.prototype.bind.apply(controller, this.arg))
-            
+
 
             IOverride.call(this);
         };
@@ -7409,7 +7463,7 @@
         };
 
         BatchOverride.prototype = {
-            get name(){
+            get name() {
                 return "BatchOverride";
             },
             initialize: function () {
@@ -7422,7 +7476,7 @@
 
                 var validateEditorList = [];
 
-                for (var i = 0; i < this.overrides.length; i++) {               
+                for (var i = 0; i < this.overrides.length; i++) {
                     this.overrides[i].apply();
 
                     if (this.overrides[i].target && validateEditorList.indexOf(this.overrides[i].target) == -1)
@@ -7457,7 +7511,7 @@
     }());
 
     var AddChild = (function () {
-       
+
         var AddChild = function (relativeTo, target, position, index, recoveryTextNode) {
             this.relativeTo = relativeTo;
             this.target = target;
@@ -7474,8 +7528,7 @@
             initialize: function () {
             },
             apply: function () {
-                switch (this.position)
-                {
+                switch (this.position) {
                     case "before":
                         this.relativeTo.parent.addChildAt(this.target, this.relativeTo.childNodeIndex - 1);
                         this.relativeTo.parent.validateNow();
@@ -7497,7 +7550,7 @@
                         if (this.recoveryTextNode && this.textInstance) {
                             this.textInstance.textContent = "";
                         }
-                       
+
                         break;
                     case "lastChild":
                     default:
@@ -7533,7 +7586,7 @@
                         break;
                 }
 
-                
+
             }
         }
 
@@ -7550,22 +7603,22 @@
             this._parent = parent;
             this._oldParent
             this._oldIndex;
-            
+
 
             IOverride.call(this);
         };
 
         RemoveChild.prototype = {
-            initialize: function () {      
+            initialize: function () {
 
-                if (this._parent) 
+                if (this._parent)
                     this._oldParent = this._parent;
                 else {
                     this._oldParent = this.target.parent;
                     this._oldIndex = this.target.childNodeIndex;
                 }
             },
-            apply: function () {             
+            apply: function () {
                 if (this._parent)
                     this._oldParent = this._parent;
                 else {
@@ -7579,7 +7632,7 @@
                 if (this._oldIndex >= 0)
                     this._oldParent.addChildAt(this.target, this._oldIndex);
                 else
-                    this._oldParent.addChild(this.target);  
+                    this._oldParent.addChild(this.target);
             }
         }
 
@@ -7595,7 +7648,7 @@
             this.target = target;
             this.name = name;
             this.handler = function (event) {
-                
+
                 var targetEditor = InstanceManager.getInstance(event.currentTarget);
                 var getEditorByIdFunction = function (id) {
                     return InstanceManager.getInstance(targetEditor.htmlElement.ownerDocument.querySelector("#" + id));
@@ -7704,7 +7757,7 @@
             set states(value) {
                 _states = value;
             },
-            get states(){
+            get states() {
                 return _states;
             },
             set container(value) {
@@ -7722,16 +7775,16 @@
                 dictionary[state.name] = {
                     state: state,
                     initOverrides: []
-                }   
+                }
             },
-            get currentState () {
+            get currentState() {
                 return _currentState;
             },
             set currentState(state) {
 
                 if (this.currentState && this.currentState.name == state.name)
                     return;
-                
+
                 var validateEditorList = [];
                 var dataClassList = _container.querySelectorAll("[data-class]");
                 for (var i = 0; i < dataClassList.length; i++) {
@@ -7742,7 +7795,7 @@
                 }
 
                 this.addState(state);
-                
+
                 if (this.currentState && this.currentState.name != state.name && state.name != "分頁") {
 
                     for (var i = 0, l = dictionary[this.currentState.name].initOverrides.length; i < l; i++) {
@@ -7780,7 +7833,7 @@
                 addOverride(stateInfo.iOverrides, dictionary[state.name].initOverrides);
 
                 function addOverride(IOverrides, initOverrides) {
-                    
+
                     for (var i = 0; i < IOverrides.length; i++) {
                         var IOverrideInfo = IOverrides[i];
 
@@ -7806,7 +7859,7 @@
                                 var relativeTo = InstanceManager.getInstance(htmlElement);
                                 var targetHtmlElement = new DOMParser().parseFromString(IOverrideInfo.target, "text/html").body.children[0];
 
-                                if (targetHtmlElement.getAttribute("id") && document.getElementById(targetHtmlElement.getAttribute("id"))) 
+                                if (targetHtmlElement.getAttribute("id") && document.getElementById(targetHtmlElement.getAttribute("id")))
                                     continue;
 
                                 var targetClass = undefined;
@@ -7815,7 +7868,7 @@
 
                                 var verifyHandler = IOverrideInfo.verifyHandler;
 
-                                if (verifyHandler != undefined && !verifyHandler(targetHtmlElement, relativeTo)) 
+                                if (verifyHandler != undefined && !verifyHandler(targetHtmlElement, relativeTo))
                                     continue;
 
                                 var target = InstanceManager.getInstance(targetHtmlElement, targetClass);
@@ -7861,16 +7914,16 @@
 
                                 if (type == "SetEventHandler") {
                                     var infoObject = getConfig("infoObject");
-                                    IOverride = new (IOverrideClassName)(undoRedoEditor, IOverrideInfo.name, IOverrideInfo.handler);                       
-                                }                                                                  
+                                    IOverride = new (IOverrideClassName)(undoRedoEditor, IOverrideInfo.name, IOverrideInfo.handler);
+                                }
                                 else if (type == "SetProperty") {
 
-                                    if (IOverrideInfo.onlyFirst && undoRedoEditor[IOverrideInfo.name].replace(new RegExp(String.fromCharCode(8203), "g"), "").length > 0) 
+                                    if (IOverrideInfo.onlyFirst && undoRedoEditor[IOverrideInfo.name].replace(new RegExp(String.fromCharCode(8203), "g"), "").length > 0)
                                         continue;
 
                                     IOverride = new (IOverrideClassName)(undoRedoEditor, IOverrideInfo.name, IOverrideInfo.value, IOverrideInfo.onlyFirst);
                                 }
-                                else if(type == "SetStyle")
+                                else if (type == "SetStyle")
                                     IOverride = new (IOverrideClassName)(undoRedoEditor, IOverrideInfo.name, IOverrideInfo.value);
 
                                 break;
@@ -7894,7 +7947,7 @@
 
                         IOverride.apply();
 
-                        if (IOverrideInfo.onlyFirst) 
+                        if (IOverrideInfo.onlyFirst)
                             IOverrideInfo.destroy = true;
                         else
                             initOverrides.push(IOverride);
@@ -7951,7 +8004,7 @@
                             case "childList":
 
                                 if (mutation.addedNodes.length > 0) {
-                                    
+
                                     Array.prototype.slice.call(mutation.addedNodes).forEach(function (addedNode) {
 
                                         var addedNodeInstance = InstanceManager.getInstance(addedNode);
@@ -7960,8 +8013,8 @@
 
                                         parentInstance._validateChildNodes();
 
-                                        if (addedNode.parentNode) 
-                                            childIndex = addedNodeInstance.childNodeIndex;                                        
+                                        if (addedNode.parentNode)
+                                            childIndex = addedNodeInstance.childNodeIndex;
                                         else {
                                             if (mutation.nextSibling && mutation.nextSibling.parentNode)
                                                 childIndex = InstanceManager.getInstance(mutation.nextSibling).childNodeIndex - 1;
@@ -7982,30 +8035,30 @@
 
                                         //if (removedNode.nodeType == Node.ELEMENT_NODE) {
 
-                                            var removedNodeInstance = InstanceManager.getInstance(removedNode);
-                                            var parentInstance = InstanceManager.getInstance(mutation.target);
+                                        var removedNodeInstance = InstanceManager.getInstance(removedNode);
+                                        var parentInstance = InstanceManager.getInstance(mutation.target);
 
-                                            if (parentInstance && parentInstance.htmlElement.localName == "html")
-                                                return;
+                                        if (parentInstance && parentInstance.htmlElement.localName == "html")
+                                            return;
 
-                                            var childIndex = -1;
+                                        var childIndex = -1;
 
-                                            parentInstance._validateChildNodes();
+                                        parentInstance._validateChildNodes();
 
-                                            if (mutation.nextSibling && mutation.nextSibling.parentNode)
-                                                childIndex = InstanceManager.getInstance(mutation.nextSibling).childNodeIndex;
-                                            else if (mutation.previousSibling && mutation.previousSibling.parentNode)
-                                                childIndex = InstanceManager.getInstance(mutation.previousSibling).childNodeIndex + 1;
-                                            else
-                                                parentInstance.childNodes.length - 1;
-                                            //else
-                                            //    childIndex = 0;
+                                        if (mutation.nextSibling && mutation.nextSibling.parentNode)
+                                            childIndex = InstanceManager.getInstance(mutation.nextSibling).childNodeIndex;
+                                        else if (mutation.previousSibling && mutation.previousSibling.parentNode)
+                                            childIndex = InstanceManager.getInstance(mutation.previousSibling).childNodeIndex + 1;
+                                        else
+                                            parentInstance.childNodes.length - 1;
+                                        //else
+                                        //    childIndex = 0;
 
-                                            //if (childIndex >= 0) {
-                                                override = new RemoveChild(removedNodeInstance, parentInstance);
-                                                override._oldIndex = childIndex;
-                                                state.addOverride(override);
-                                            //}
+                                        //if (childIndex >= 0) {
+                                        override = new RemoveChild(removedNodeInstance, parentInstance);
+                                        override._oldIndex = childIndex;
+                                        state.addOverride(override);
+                                        //}
 
 
                                         //}
@@ -8121,7 +8174,7 @@
                 //this.hours.htmlElement.value = this.dateTime.getHours();
                 //this.minutes.htmlElement.value = this.dateTime.getMinutes();
 
-               // min = "1" max= "5"
+                // min = "1" max= "5"
             }
         }
 
@@ -8159,7 +8212,7 @@
 
         var contentUneditableImpl = {
         }
- 
+
         var Behavior = function () {
             //editor
             this.increaseIndent = EditorIncreaseIndentImpl;
@@ -8172,8 +8225,8 @@
             this.copy = EditorCopyImpl;
             this.cut = EditorCutImpl;
             this.paste = EditorPasteImpl;
-            this.bold = EditorBoldImpl;          
-            this.link = EditorLinkImpl;          
+            this.bold = EditorBoldImpl;
+            this.link = EditorLinkImpl;
             this.color = EditorColorImpl;
             this.underline = EditorUnderlineImpl;
             this.sup = EditorSupImpl;
@@ -8205,7 +8258,7 @@
 
     //EditorImpl
     var EditorIncreaseIndentImpl = function (contenteditable_id, editorHTMLElement /** EditorHTMLElement **/) {
-        
+
         var autoList = InstanceManager.getInstance(document.querySelector("#" + contenteditable_id)).autoList;
 
         if (autoList != "Numbered")
@@ -8240,7 +8293,7 @@
                         //new
                         focusEditor.removeChildAll();
                         for (var i = editorHTMLElement.childNodes.length - 1; i >= 0; i--) {
-                            
+
                             focusEditor.addChildAt(editorHTMLElement.childNodes[i], 0);
                         }
                         //
@@ -8331,9 +8384,9 @@
 
     //如果有子結點(如:粗體)這裡要調
     var EditorAddListItemImpl = function (contenteditable_id, editorHTMLElement /** EditorHTMLElement **/, opt) {
-        
+
         if (!window.getSelection().isCollapsed)
-            BehaviorManager.getFunction("delete")(contenteditable_id, editorHTMLElement); 
+            BehaviorManager.getFunction("delete")(contenteditable_id, editorHTMLElement);
 
         var autoList = InstanceManager.getInstance(document.querySelector("#" + contenteditable_id)).autoList;
 
@@ -8431,7 +8484,7 @@
                         if (parentEditor.isEmpty()) {
                             parentEditor.textContent = String.fromCharCode(8203);
                             parentEditor.validateProperties();
-                        }      
+                        }
 
                         var newEditor;
 
@@ -8493,12 +8546,12 @@
             var startOffset = startEndOffset.startOffset;
             var endOffset = startEndOffset.endOffset;
 
-            if (endOffset > 0){
-                    
+            if (endOffset > 0) {
+
                 var deleteOffset = endOffset - startOffset;
 
-               // if (deleteOffset == 0 && startOffset < editorHTMLElement.textContent.length)
-                  //  deleteOffset = 1;
+                // if (deleteOffset == 0 && startOffset < editorHTMLElement.textContent.length)
+                //  deleteOffset = 1;
 
                 if (deleteOffset > 0) {
                     editorHTMLElement.focusOffset = startOffset;
@@ -8541,7 +8594,7 @@
                 //    startOffset = 1;
 
                 editorHTMLElement.focusOffset = startOffset;
-                editorHTMLElement.deleteContents(startOffset, endOffset)         
+                editorHTMLElement.deleteContents(startOffset, endOffset)
                 editorHTMLElement.validateProperties();
             }
             else if (editorHTMLElement.parent.name == "ListItem") {//往上移
@@ -8602,7 +8655,7 @@
                 if (focusEditor) {
 
                     //var focusOffset = focusEditor.textContent.length;
-                    
+
                     //if (moveTextContent.replace(String.fromCharCode(8203), "").length > 0)
                     //    focusEditor.textContent = focusEditor.textContent + moveTextContent;
 
@@ -8644,7 +8697,7 @@
 
             if (startContainer.nodeType == Node.TEXT_NODE)
                 startContainer = range.startContainer.parentNode;
-                
+
             if (endContainer.nodeType == Node.TEXT_NODE)
                 endContainer = range.endContainer.parentNode;
 
@@ -8668,7 +8721,7 @@
     }
 
     var EditorCutImpl = function (contenteditable_id, editorHTMLElement /** EditorHTMLElement **/, clipboardEvent) {
-        
+
         if (clipboardEvent && clipboardEvent.clipboardData && clipboardEvent.clipboardData.setData)
             clipboardEvent.clipboardData.setData("text", window.getSelection().toString());
         else
@@ -8695,7 +8748,7 @@
         if (editorHTMLElement.htmlElement.getAttribute("contentEditable") != "false") {
 
             if (!window.getSelection().isCollapsed)
-                BehaviorManager.getFunction("delete")(contenteditable_id, editorHTMLElement); 
+                BehaviorManager.getFunction("delete")(contenteditable_id, editorHTMLElement);
 
             var text = clipboardEvent.clipboardData ? clipboardEvent.clipboardData.getData("text") : window.clipboardData.getData("text");
             editorHTMLElement.insertContents(text, getConfig("color"));
@@ -8743,7 +8796,7 @@
         }
 
         var selection = window.getSelection();
-        
+
         if (selection.rangeCount > 0) {
 
             var range = selection.getRangeAt(0)
@@ -8766,7 +8819,7 @@
                             editorClassNameHTMLElement = currentEditorHTMLElement;
                             return true;
                         }
-                            
+
 
                         currentEditorHTMLElement = currentEditorHTMLElement.parent;
                     }
@@ -8778,9 +8831,9 @@
 
 
             //node本身 無跨物件
-            if (isUndo){
-            //if (options.editorClassName != undefined && editorHTMLElement.name == options.editorClassName) {//未完成 
-            //if (ancestorEditor == editorHTMLElement) {//未完成 
+            if (isUndo) {
+                //if (options.editorClassName != undefined && editorHTMLElement.name == options.editorClassName) {//未完成 
+                //if (ancestorEditor == editorHTMLElement) {//未完成 
                 debugger
                 if (options.updateInstanceFunction)
                     options.updateInstanceFunction(editorHTMLElement);
@@ -8797,12 +8850,12 @@
                             editorHTMLElement.insertContents(insertText, getConfig("color"));
                         }
                     }
-                    else if (options.undoMode){//undo 成text, 但要保留其他樣式 未完成
+                    else if (options.undoMode) {//undo 成text, 但要保留其他樣式 未完成
 
                         //if (editorHTMLElement.parent.name == "TextBlock")
-                            opt.editorClassName = "text";
-                       // else
-                          //  opt.editorClassName = editorHTMLElement.parent.name;
+                        opt.editorClassName = "text";
+                        // else
+                        //  opt.editorClassName = editorHTMLElement.parent.name;
 
                         delete opt.newInstanceFunction;
                         debugger
@@ -8825,13 +8878,13 @@
                         return false;
                 }
                 debugger
-      
+
                 var childEditorList = ancestorEditor.getChildEditorList(startOffset, endOffset);
                 //foucs還要處理 text 會被父結點 focus蓋掉
                 if (childEditorList.length > 0) {
                     if (startOffset >= 0) {
 
-                        var prevNewEditor; 
+                        var prevNewEditor;
 
                         for (var i = 0; i < childEditorList.length; i++) {
                             var info = childEditorList[i];
@@ -8851,12 +8904,12 @@
                                     //if (i > 0 && childEditorList[i - 1].newEditor &&
                                     //    childEditorList[i].instance.htmlElement.previousSibling == childEditorList[i - 1].newEditor.htmlElement) {
 
-                                    
+
 
                                     if (i > 0 && ((childEditorList[i - 1].newEditor &&
                                         info.instance.htmlElement.previousSibling == childEditorList[i - 1].newEditor.htmlElement) ||
                                         (!childEditorList[i - 1].newEditor &&
-                                        info.instance.htmlElement.previousSibling == childEditorList[i - 1].instance.htmlElement))) {
+                                            info.instance.htmlElement.previousSibling == childEditorList[i - 1].instance.htmlElement))) {
 
                                         //var prevEditor = childEditorList[i - 1].newEditor;
 
@@ -8892,7 +8945,7 @@
 
                                             var insertContainerEditor = InstanceManager.getInstance(info.instance.htmlElement.parentNode);
 
-                                            if(newEditor.isStack)
+                                            if (newEditor.isStack)
                                                 insertContainerEditor = editorHTMLElement;
                                             else if (newEditor.name == "text") {
 
@@ -8901,7 +8954,7 @@
                                                 //}        
 
                                                 insertContainerEditor = editorHTMLElement;
-                                            }                                               
+                                            }
 
                                             insertContainerEditor.insertContents(newEditor, getConfig("color"));
                                         }
@@ -8909,8 +8962,8 @@
                                 }
                             }
                         }
-                     
-                        if (options.refreshFocusOffsetFunction) 
+
+                        if (options.refreshFocusOffsetFunction)
                             ancestorEditor.focusOffset = options.refreshFocusOffsetFunction(startOffset, endOffset);
                     }
                 }
@@ -8954,7 +9007,7 @@
             }
         }
 
-        
+
 
         return false;
     }
@@ -9010,7 +9063,7 @@
             }
         });
     }
-        
+
     var EditorLinkImpl = function (contenteditable_id, editorHTMLElement /** EditorHTMLElement **/, url, textToDisplay, title) {
 
         return EditorInsetHTMLElementBase.call(this, contenteditable_id, editorHTMLElement, {
@@ -9037,7 +9090,7 @@
                     editorHTMLElement.parent.focusOffset = editorHTMLElement.parent.getStartEndOffset().startOffset - editorHTMLElement.getStartEndOffset().startOffset;
                     editorHTMLElement.parent.validateProperties();
                     editorHTMLElement.parent.insertContents(textNodeInstance, getConfig("color"));
-                }             
+                }
                 else {
                     editorHTMLElement.textContent = textToDisplay;
                     editorHTMLElement.url = url;
@@ -9068,7 +9121,7 @@
     }
 
     var EditorColorImpl = function (contenteditable_id, editorHTMLElement /** EditorHTMLElement **/, color) {
-        
+
         return EditorInsetHTMLElementBase.call(this, contenteditable_id, editorHTMLElement, {
             newInstanceFunction: function (deleteText) {
                 var newEditor = InstanceManager.getInstance(undefined, span);
@@ -9077,7 +9130,8 @@
                 newEditor.validateProperties();
 
                 return newEditor;
-            }});
+            }
+        });
     }
 
     var EditorInsertTableImpl = function (contenteditable_id, editorHTMLElement /** EditorHTMLElement **/, maxRows, maxColumns) {
@@ -9198,7 +9252,7 @@
             editorClassName: "delText",
             undoMode: false,
             newInstanceFunction: function (deleteText, info) {
-                
+
                 if (InstanceManager.getInstance(info.instance.htmlElement.parentNode).name != "InsertText") {
 
                     var newEditor = InstanceManager.getInstance(undefined, DelText);
@@ -9329,7 +9383,7 @@
 
         var signLog = new SignLog(editorHTMLElement, "刪除簽核物件", undefined, undefined, true);
         signLogList.push(signLog);
-        
+
         editorHTMLElement.startUndoRecord();
 
         editorHTMLElement.parent.removeChild(editorHTMLElement);
@@ -9372,7 +9426,7 @@
 
             //    return startOffset + value.length;
             //},
-            
+
 
             /*, getStartEndOffsetFunction: function (editorHTMLElement) {
 
@@ -9491,7 +9545,7 @@
 
                 if (!contextMenu)
                     contextMenu = InstanceManager.getInstance(undefined, ContextMenu);
-               
+
                 contextMenu.dataProvider = _dataProvider;
                 contextMenu.setStyle("left", x);
                 contextMenu.setStyle("top", y);
@@ -9503,11 +9557,11 @@
                 if (contextMenu) {
                     contextMenu.dataProvider = _dataProvider = [];
                     contextMenu.htmlElement.style.display = "none";
-                }                  
+                }
             },
             set dataProvider(value) {
 
-                if (_dataProvider != value) 
+                if (_dataProvider != value)
                     _dataProvider = value;
             },
 
@@ -9549,12 +9603,12 @@
     //    return OrderedListEditorBehavior;
     //}());
 
-    
+
 
     var InstanceManager = (function (EditorHTMLElement, section, p, span, UndoRedoEditor) {
         var dictionary = {};
         var id = 0;
-        
+
         var InstanceManager = {
             getInstance: function (htmlElement, className) {
                 if (htmlElement && dictionary[htmlElement.uid])
@@ -9620,7 +9674,7 @@
                 */
 
                 if (htmlElement.nodeType == Node.ELEMENT_NODE) {
-                    if (this.hasInstance(htmlElement.parentNode)) 
+                    if (this.hasInstance(htmlElement.parentNode))
                         var parentInstance = this.getInstance(htmlElement.parentNode);
 
                     var instance = this.getInstance(htmlElement, eval(htmlElement.getAttribute("data-class")));
@@ -9629,7 +9683,7 @@
 
                     var instance = this.getInstance(htmlElement);
                 }
-                             
+
             },
             clone: function (htmlElement, deep) {
 
@@ -9640,7 +9694,7 @@
                     if (deep) {
                         var idNodeList = cloneHtmlElement.querySelectorAll("[id]");
 
-                        for (var i = idNodeList.length - 1; i >= 0 ; i--) {
+                        for (var i = idNodeList.length - 1; i >= 0; i--) {
                             var node = idNodeList[i];
                             node.removeAttribute("id");
                         }
@@ -9654,23 +9708,23 @@
                 dictionary = {};
             }
         }
-        
+
         return InstanceManager;
     }(EditorHTMLElement, section, p, span, UndoRedoEditor));
 
     var PageBreakManager = (function () {
 
         var dictionary = {};
-        
+
         var PageBreakManager = {
             break: function (editorHTMLElement, offset, boundingClientRect) {
                 //debugger
-                if (boundingClientRect ) {
-                    
+                if (boundingClientRect) {
+
                     if (boundingClientRect.top > offset) {
                         editorHTMLElement.parent.removeChild(editorHTMLElement);
                         return editorHTMLElement;
-                     }
+                    }
                 }
 
                 var fragmentEditor = editorHTMLElement.clone();
@@ -9737,17 +9791,17 @@
         self = this;
 
         self.signEditorSelectorList = ["[data-class=DelText]"];
-        
+
         self.currentState;
-        
+
         self.optioins = ((function () {
 
             var o = {
                 html: null,
                 container: document.body,
-                defaultConfig:{
+                defaultConfig: {
                     undoRedoEnable: true,
-                    wrap: true,                  
+                    wrap: true,
                     autoList: "None", //Numbered, Bullet(未完成), None, Free(未完成)         
                     numberedFormat: [{
                         style: "#、",
@@ -9781,7 +9835,7 @@
 
                     }
                 },
-                config:{
+                config: {
 
                 }
             }
@@ -9801,7 +9855,7 @@
     };
 
     function getConfig(key, id) {
-        
+
         if (id) {
             //if (self.optioins.config.Selector[id])
             //    if (self.optioins.config.Selector[id].hasOwnProperty(key))
@@ -9824,13 +9878,13 @@
 
             self.currentState = new State();
             self.currentState.name = getConfig("stateName");
-            
+
             StateManager.container = self.optioins.container;
             StateManager.states = self.optioins.config.States;
             StateManager.addState(self.currentState);
 
             InstanceManager.parse(self.optioins.container);
-            
+
             this.changeSatae(self.currentState);
 
             self.bind();
@@ -9850,8 +9904,8 @@
                         instance.focusOffset = instance.textContent.length;
                     }
                 }
-                
-                if(getConfig("undoRedoEnable"))
+
+                if (getConfig("undoRedoEnable"))
                     MutationObserverManager.init();
             })
         },
@@ -9897,11 +9951,11 @@
             document.addEventListener("click", function (event) {
                 ContextMenuManager.hide();
             });
-            
+
             var contenteditableNodes = self.optioins.container.querySelectorAll('[contenteditable]');
 
             this.addEventListener(contenteditableNodes);
-                     
+
             var state = StateManager.getState(getConfig("stateName"));
             state.enabled = true;
 
@@ -9947,7 +10001,7 @@
             }
 
             function keydownHandler(event) {
-                
+
                 if (this.contentEditable != "true")
                     return;
 
@@ -9998,8 +10052,8 @@
                             event.preventDefault();
                         }
 
-                       // if (isPreventDefault)
-                            
+                        // if (isPreventDefault)
+
 
                         console.log("keyCodeCtrlKeyCodeMappingFunction")
                     }
@@ -10014,7 +10068,7 @@
                         //StateManager.currentState.enabled = false;
 
                         //StateManager.currentState.enabled = true;
-                        
+
 
                         var startEndOffset = editorHTMLElement.getStartEndOffset();
                         var startOffset = startEndOffset.startOffset;
@@ -10023,7 +10077,7 @@
                         //
 
                         //var keyInTextFunction = BehaviorManager.getFunction("keyInText");
-                        
+
 
                         //if (keyInTextFunction) {
 
@@ -10049,11 +10103,11 @@
                         }, 50);
 
                         if (editorHTMLElement.keyinWordAvoid) {
-                     
+
                             var range = document.createRange();
                             //newNode = document.createTextNode(event.key);
                             newNode = document.createTextNode(String.fromCharCode(8203));
-                            
+
                             range.selectNode(window.getSelection().getRangeAt(0).commonAncestorContainer.parentNode.nextSibling);
                             range.insertNode(newNode);
 
@@ -10090,8 +10144,8 @@
                     }
 
                     //else
-                        //event.preventDefault();
-                    
+                    //event.preventDefault();
+
                 }
             }
 
@@ -10102,7 +10156,7 @@
                 //var selection = window.getSelection();
                 //var range = selection.getRangeAt(0);
                 //var commonAncestorContainer = range.commonAncestorContainer;
-                
+
                 editorHTMLElement.startUndoRecord();
                 console.log("editorHTMLElement.startUndoRecord")
 
@@ -10147,7 +10201,7 @@
             var selection = window.getSelection();
             var focusNode
 
-            if (selection.rangeCount > 0) 
+            if (selection.rangeCount > 0)
                 focusNode = window.getSelection().getRangeAt(0).commonAncestorContainer;
             else
                 focusNode = window.getSelection().focusNode;
@@ -10161,7 +10215,7 @@
         getFocusElementEditor: function () {
             return InstanceManager.getInstance(this.getFocusElement());
         },
-        selectionIsCross: function(){
+        selectionIsCross: function () {
             var selection = window.getSelection();
 
             if (selection.rangeCount > 0) {
@@ -10184,15 +10238,15 @@
         },
         undo: function () {
             debugger
-           var state = StateManager.getState(getConfig("stateName"));
-           state.undo();
+            var state = StateManager.getState(getConfig("stateName"));
+            state.undo();
         },
         redo: function () {
 
             var state = StateManager.getState(getConfig("stateName"));
             state.redo();
         },
-        getState: function() {
+        getState: function () {
             return StateManager.getState(getConfig("stateName"));
         },
         getIOverrides: function (signLog) {
@@ -10240,7 +10294,7 @@
                     var documentNode = documentNodeArray.shift();
                     var documentEditor = InstanceManager.getInstance(documentNode);
 
-                    documentEditor.paging().then(function() {
+                    documentEditor.paging().then(function () {
 
                         if (documentNodeArray.length > 0)
                             queue()
@@ -10252,7 +10306,7 @@
             });
 
 
-            
+
 
             //var documentNode = self.optioins.container.querySelector("[data-class=Document]");
             //var documentEditor = InstanceManager.getInstance(documentNode);
@@ -10268,7 +10322,7 @@
 
             documentEditor.single();
         },
-        print: function(){
+        print: function () {
             var documentNode = self.optioins.container.querySelector("[data-class=Document]");
             var documentEditor = InstanceManager.getInstance(documentNode);
 
@@ -10299,7 +10353,7 @@
 
             if (htmlElement)
                 return InstanceManager.getInstance(htmlElement);
-            
+
             return undefined;
         },
         queryEditorSelectorAll: function (selectors) {
@@ -10314,9 +10368,9 @@
             });
 
             return editorList;
-        }, 
+        },
         pageCount: function () {
-            
+
             var documentNode = self.optioins.container.querySelector("[data-class=Document]");
             var documentEditor = InstanceManager.getInstance(documentNode);
 
@@ -10342,7 +10396,7 @@
             }
             else
                 updateTextContent(name, value);
-         
+
             function updateTextContent(name, value) {
                 var node = self.optioins.container.querySelector("[" + attrName + "=" + name + "]");
 
@@ -10364,7 +10418,7 @@
             documentEditor.endUndoRecord();
 
         },
-        config: function(){
+        config: function () {
             return self.optioins.config;
         },
         addParagraph: function (paragraphName) {
@@ -10383,10 +10437,10 @@
                 paragraphTextBlockEditor.removeChildAll();
                 paragraphTextBlockEditor.textContent = "";
                 paragraphTextBlockEditor.autoList = "Numbered"
-               
-                var lastParagraphEditor = InstanceManager.getInstance(lastParagraph, Paragraph);                
+
+                var lastParagraphEditor = InstanceManager.getInstance(lastParagraph, Paragraph);
                 lastParagraphEditor.parent.addChildAt(newParagraphEditor, lastParagraphEditor.childNodeIndex + 1);
-                
+
                 this.addEventListener(newParagraphEditor.htmlElement.querySelectorAll('[contenteditable]'));
                 newParagraphEditor.getChildAt(0).paragraphTextBlock.focusOffset = 0;
             }
@@ -10425,7 +10479,7 @@
                 var templatenameNode;
                 var xml;
 
-                function getTemplatenameNode(){
+                function getTemplatenameNode() {
                     return self.optioins.container.querySelector("[templatename]") || self.optioins.container.querySelector("[data-class='TextBlock']") || self.optioins.container.firstElementChild;
                 }
 
@@ -10447,7 +10501,7 @@
                 }
 
                 return xml;
-            }          
+            }
             else if (typeof (value) == "string") {
                 var htmlElement = new DOMParser().parseFromString(value, "text/html").body.children[0];
 
@@ -10459,7 +10513,7 @@
                 self.optioins.container.uid = undefined;
                 self.optioins.container.appendChild(htmlElement);
                 $('[data-toggle="tooltip"]').tooltip()
-            }              
+            }
             else {
 
                 for (var i = self.optioins.container.children.length - 1; i >= 0; i--) {
@@ -10470,7 +10524,7 @@
 
                 self.optioins.container.appendChild(value);
                 $('[data-toggle="tooltip"]').tooltip()
-            }               
+            }
         },
         revised: function (name) {
             debugger
@@ -10520,7 +10574,7 @@
                 "}";
         },
         finalVersionMode: function (final) {
-            
+
             if (final) {
                 debugger
                 var signEditorList = document.querySelectorAll(self.signEditorSelectorList.join(","));
@@ -10529,13 +10583,13 @@
                     var instance = InstanceManager.getInstance(signEditorList[i]);
                     instance.finalVersion();
 
-                }  
+                }
             }
-            else{
+            else {
             }
         },
         changeSatae: function (state, undoAll, redoAll) {
-            
+
             if (typeof (state) == "string") {
                 var s = StateManager.getState(state);
 
@@ -10575,7 +10629,7 @@
             this.currentState.enabled = true;
 
             MutationObserverManager.observe();
-            
+
         },
         action: function (name, arg) {
             debugger
@@ -10611,37 +10665,37 @@
                     return node;
 
                 })();
-                    
+
                 if (contentEditableHtmlElement) {
                     var id = contentEditableHtmlElement.id;
                     //var autoList = getConfig("autoList", id);
 
                     //if (autoList == "Numbered") {
 
-                        var editorHTMLElement = InstanceManager.getInstance(focusElement);
+                    var editorHTMLElement = InstanceManager.getInstance(focusElement);
 
-                        if (editorHTMLElement.startUndoRecord == undefined) 
-                            return;
+                    if (editorHTMLElement.startUndoRecord == undefined)
+                        return;
 
-                        argArray.splice(0, 0, id);
-                        argArray.splice(1, 0, editorHTMLElement);
+                    argArray.splice(0, 0, id);
+                    argArray.splice(1, 0, editorHTMLElement);
 
-                        editorHTMLElement.startUndoRecord();
-                        BehaviorManager.getFunction(name).apply(contentEditableHtmlElement, argArray);
+                    editorHTMLElement.startUndoRecord();
+                    BehaviorManager.getFunction(name).apply(contentEditableHtmlElement, argArray);
 
-                        setTimeout(function () {
-                            editorHTMLElement.endUndoRecord();
-                        }, 50);
-                        
+                    setTimeout(function () {
+                        editorHTMLElement.endUndoRecord();
+                    }, 50);
+
 
                     //}
                 }
             }
         },
-        states: function(value){
+        states: function (value) {
             if (value == undefined) { //get
 
-            }else{
+            } else {
                 StateManager.states = value;
             }
         }
@@ -10660,7 +10714,7 @@
     NumericFormatTranslation.session.NumericChineseCars2 = ["零", "一", "二", "三", "四", "五", "六", "七", "八", "九"];
     NumericFormatTranslation.session.NumericChineseWords = ["零", "壹", "貳", "參", "肆", "伍", "陸", "柒", "捌", "玖"];
     NumericFormatTranslation.session.NumericHeavenly = ["甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸"];
-    NumericFormatTranslation.session.NumericEarthly = ["子", "丑", "寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥", ];
+    NumericFormatTranslation.session.NumericEarthly = ["子", "丑", "寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥",];
     NumericFormatTranslation.session.Unit = ["萬", "億", "兆", "京"];
     NumericFormatTranslation.session.UnitPart1 = ["", "十", "百", "千"];
     NumericFormatTranslation.session.UnitPart2 = ["", "拾", "佰", "仟"];
@@ -10687,7 +10741,7 @@
         function ToNumericSplitFormat() {
             var tmpStr = "";
 
-            for (var i = (Num.length - 1) ; i >= 0; i--) {
+            for (var i = (Num.length - 1); i >= 0; i--) {
                 tmpStr = Num.substr(i, 1) + tmpStr;
 
                 if (((Num.length - i - 1) % 3 == 2) && (Num.length - i - 1) > 0 && i > 0) {
@@ -10701,7 +10755,7 @@
         //轉換 全型數字 EX:012345 => １２３４５
         function ToNumeric2BitCharFormat() {
             var tmpStr = "";
-            for (var i = 0 ; i < Num.length ; i++) {
+            for (var i = 0; i < Num.length; i++) {
                 if (IsNumeric(Num.substr(i, 1)))
                     tmpStr += NumericFormatTranslation.session.Numeric2BitCars[parseInt(Num.substr(i, 1))];
             }
@@ -10712,7 +10766,7 @@
         function ToNumericChineseCharFormat1() {
             var tmpStr = "";
 
-            for (var i = 0 ; i < Num.length ; i++) {
+            for (var i = 0; i < Num.length; i++) {
                 if (IsNumeric(Num.substr(i, 1)))
                     tmpStr += NumericFormatTranslation.session.NumericChineseCars1[parseInt(Num.substr(i, 1))];
             }
@@ -10751,7 +10805,7 @@
         function ToNumericChineseCharFormat2() {
             var tmpStr = "";
 
-            for (var i = 0 ; i < Num.length ; i++) {
+            for (var i = 0; i < Num.length; i++) {
                 if (IsNumeric(Num.substr(i, 1)))
                     tmpStr += NumericFormatTranslation.session.NumericChineseCars2[parseInt(Num.substr(i, 1))];
             }
@@ -10762,7 +10816,7 @@
         function ToNumericChineseWordFormat() {
             var tmpStr = "";
 
-            for (var i = 0 ; i < Num.length ; i++) {
+            for (var i = 0; i < Num.length; i++) {
                 if (IsNumeric(Num.substr(i, 1)))
                     tmpStr += NumericFormatTranslation.session.NumericChineseWords[parseInt(Num.substr(i, 1))];
             }
@@ -10815,7 +10869,7 @@
             var tempChar;
             var sourceText = Num;
 
-            for (var i = (sourceText.length - 1) ; i >= 0; i--) {
+            for (var i = (sourceText.length - 1); i >= 0; i--) {
                 tempChar = sourceText.substr(i, 1);
 
                 if (IsNumeric(tempChar)) {
@@ -10869,7 +10923,7 @@
         function ToNumericChineseSentence2() {
             var tmpStr = "";
             var tempUnit1 = 0;
-            for (var i = (Num.length - 1) ; i >= 0; i--) {
+            for (var i = (Num.length - 1); i >= 0; i--) {
 
                 (tempUnit1 >= 4) ? tmpStr = NumericFormatTranslation.session.UnitPart2[getUnit1Num(tempUnit1)] + tmpStr : tmpStr = NumericFormatTranslation.session.UnitPart2[tempUnit1] + tmpStr;
 
