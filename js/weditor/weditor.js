@@ -2959,7 +2959,8 @@
         return colgroup;
     }());
 
-    var FileBlock = (function () {
+    var 
+     = (function () {
         var FileBlock = function (htmlElement /** HTMLElement **/) {
 
             // this._a;
@@ -3056,6 +3057,8 @@
                                             self._fileInput.getBase64File().done(function(dataURI){
                                                 a.value = self.dataURItoBase64(dataURI);
                                             });
+
+                                            a.fileName = f.name;
 
                                             var i = self.parseFromString('<i class="fa fa-trash"></i>');
 
