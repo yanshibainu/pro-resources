@@ -2962,20 +2962,8 @@
     var FileBlock = (function () {
         var FileBlock = function (htmlElement /** HTMLElement **/) {
 
-            // this._a;
-            // this._i;
             this._fileInput;
-
             this._filesProps = [];
-
-            // this._url;
-            // this._urlChangedFlag = false;
-
-            // this._fileName;
-            // this._fileNameChangedFlag = false;
-
-            // this._base64;
-            // this._base64ChangedFlag = false;
 
             EditorHTMLElement.call(this, htmlElement);
         };
@@ -2985,23 +2973,7 @@
                 EditorHTMLElement.prototype._createChildren.call(this);
             },
             _childrenMapping: function () {
-                EditorHTMLElement.prototype._childrenMapping.call(this);
-
-                // if (this.htmlElement.querySelector("a") == null){
-                //     this._a = new a();
-                //     this.addChild(this._a);  
-                // }    
-                // else
-                //     this._a = InstanceManager.getInstance(this.htmlElement.querySelector("a"));
-
-                // if (this.htmlElement.querySelector("i") == null){
-                //     this._i = InstanceManager.getInstance(
-                //         new DOMParser().parseFromString('<i class="fa fa-trash" style="display: none"></i>', "text/html").
-                //         body.children[0]);
-                //     this.addChild(this._i);                       
-                // }
-                // else
-                //     this._i = InstanceManager.getInstance(this.htmlElement.querySelector("i"));                   
+                EditorHTMLElement.prototype._childrenMapping.call(this);                 
             },
             _creationComplete: function () {
                 UndoRedoEditor.prototype._creationComplete.call(this);
@@ -3092,39 +3064,7 @@
                             break;
                     }
                 }
-            },
-            // set base64(value) {
-
-            //     this._base64 = value;
-            //     // this._base64ChangedFlag = true;
-
-            //     // this._invalidateProperties();
-            // },
-            // get base64() {
-            //     return this._base64;
-            // },
-            // set fileName(value) {
-
-            //     if(value != undefined && this._fileName != value){
-            //         this._fileName = value;
-            //         this._fileNameChangedFlag = true;
-            //         this._invalidateProperties();
-            //     }                
-            // },   
-            // get fileName() {
-            //     return this._fileName;
-            // },  
-            // set url(value) {
-
-            //     if(value != undefined && this._url != value){
-            //         this._url = value;
-            //         this._urlChangedFlag = true;
-            //         this._invalidateProperties();
-            //     }
-            // },   
-            // get url() {
-            //     return this._url;
-            // },        
+            },      
             dataURItoBase64: function (dataURI) {
                 return dataURI.split(',')[1];
             },
@@ -3176,7 +3116,6 @@
                 var self = this;
                 var div = self.parseFromString('<div class="file-div"></div>');
                 var a;
-                var index = this._filesProps.length;
 
                 if (self.htmlElement.querySelector("a") != null) {
                     var aHtmlElement = self.htmlElement.querySelector("a[data-id-attribute]");
@@ -3185,7 +3124,7 @@
                     a.htmlElement.removeAttribute("data-id-attribute");
 
                     var idAttribute = aHtmlElement.getAttribute("data-id-attribute");
-                    var idAttributeValue = a.htmlElement.getAttribute(idAttribute).replace("${id}", index);
+                    var idAttributeValue = a.htmlElement.getAttribute(idAttribute).replace("${id}", new Date().getTime());
 
                     a.htmlElement.setAttribute(idAttribute, idAttributeValue);
                     a.url = url;
@@ -10346,7 +10285,7 @@
             return undefined;
         },
         queryEditorSelectorAll: function (selectors) {
-            debugger
+            
             var htmlElementList;
             var editorList = [];
 
