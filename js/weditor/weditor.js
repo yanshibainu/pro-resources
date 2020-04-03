@@ -3124,7 +3124,7 @@
                     a.htmlElement.removeAttribute("data-id-attribute");
 
                     var idAttribute = aHtmlElement.getAttribute("data-id-attribute");
-                    var idAttributeValue = a.htmlElement.getAttribute(idAttribute).replace("${id}", id || new Date().getTime());
+                    var idAttributeValue = id ? id : a.htmlElement.getAttribute(idAttribute).replace("${id}", new Date().getTime());
 
                     a.htmlElement.setAttribute(idAttribute, idAttributeValue);
                     a.url = url;
