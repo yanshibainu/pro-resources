@@ -2959,8 +2959,7 @@
         return colgroup;
     }());
 
-    var 
-     = (function () {
+    var FileBlock = (function () {
         var FileBlock = function (htmlElement /** HTMLElement **/) {
 
             // this._a;
