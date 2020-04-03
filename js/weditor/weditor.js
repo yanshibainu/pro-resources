@@ -3030,58 +3030,10 @@
                                     var files = self._fileInput.htmlElement.files;
 
                                     if (files && files.length > 0) {
-
-                                        //var index = 0;
                                         Array.prototype.slice.call(files).forEach(function (f) {
                                             var url = window.URL.createObjectURL(f);
 
                                             self.createNewFile(url, f.name);
-
-                                            // var div = self.parseFromString('<div class="file-div"></div>');
-                                            // var a;
-
-                                            // if (self.htmlElement.querySelector("a") != null) {
-                                            //     var aHtmlElement = self.htmlElement.querySelector("a[data-id-attribute]");
-                                            //     a = InstanceManager.getInstance(aHtmlElement).clone();
-                                            //     a.setStyle("display", "inline-block");
-                                            //     a.htmlElement.removeAttribute("data-id-attribute");
-
-                                            //     var idAttribute = aHtmlElement.getAttribute("data-id-attribute");
-                                            //     var idAttributeValue = a.htmlElement.getAttribute(idAttribute).replace("${id}", index);
-
-                                            //     a.htmlElement.setAttribute(idAttribute, idAttributeValue);
-                                            //     a.url = url;
-                                            //     a.textContent = f.name;
-                                            // }
-                                            // else
-                                            //     a = self.parseFromString('<a href="' + url + '" target="_blank">' + f.name + '</a>');
-
-                                            // self._fileInput.getBase64File().done(function(dataURI){
-                                            //     a.value = self.dataURItoBase64(dataURI);
-                                            // });
-
-                                            // a.fileName = f.name;
-
-                                            // var i = self.parseFromString('<i class="fa fa-trash"></i>');
-
-                                            // div.addChild(a);
-                                            // div.addChild(i);
-                                            // self.addChildAt(div, self.children.length - 1);
-
-                                            // var itemProp = {
-                                            //     f: f,
-                                            //     a: a,
-                                            //     i: i
-                                            // }
-
-                                            // i.htmlElement.addEventListener("click", function () {
-                                            //     self.removeFile(itemProp);
-                                            // }, false);
-
-                                            // self._filesProps.push(itemProp);
-
-
-                                            // index ++;
                                         });
                                     }
 
@@ -3240,9 +3192,11 @@
                 else
                     a = self.parseFromString('<a href="' + url + '" target="_blank">' + name + '</a>');
 
-                self._fileInput.getBase64File().done(function(dataURI){
-                    a.value = self.dataURItoBase64(dataURI);
-                });
+                if(self._fileInput){
+                    self._fileInput.getBase64File().done(function (dataURI) {
+                        a.value = self.dataURItoBase64(dataURI);
+                    });
+                }
 
                 a.fileName = name;
 
@@ -9903,7 +9857,7 @@
     weditor.prototype = {
 
         build: function (html) {
-            
+
             if (html)
                 this.html(html);
             else
@@ -10503,7 +10457,7 @@
             }
         },
         html: function (value, isChangeSatae) {
-            
+
             if (value == undefined) { //get
 
                 if (isChangeSatae == undefined)
