@@ -3217,7 +3217,7 @@
 
                 self._filesProps.push(fileProp);
 
-                return div;
+                return fileProp;
             },
         };
 
