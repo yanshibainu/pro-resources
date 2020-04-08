@@ -2118,7 +2118,7 @@ section {
     -o-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     transition: all 0.5s ease;
-    z-index: 1000;
+    z-index: 1001;
 }
 
 .menu-sidebar2 .logo {
@@ -2517,10 +2517,6 @@ section {
     color: #c9c9c9;
     height: 63px;
     line-height: 63px;
-}
-
-table.fixedHeader-floating.no-footer {
-    z-index: 1000;
 }
 
 .setting-menu {
@@ -14759,12 +14755,16 @@ table.fixedHeader-floating.no-footer {
 
 .fixedHeader-floating{
     top: 75px !important;
-    z-index: 1001;
+    z-index: 1000;
+}
+
+table.fixedHeader-floating.no-footer {
+    z-index: 1000;
 }
 
 @media (max-width: 991px){
     
     .fixedHeader-floating{
-        top: 0opx !important;
+        top: 0px !important;
     }
 }
