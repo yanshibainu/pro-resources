@@ -3346,14 +3346,14 @@ section {
     border-top-right-radius: 10px;
 }
 
-.au-card-title h3 {
+.au-card-title h3, .au-card-title h2 {
     position: relative;
     z-index: 2;
     color: #fff;
     font-weight: 400;
 }
 
-.au-card-title h3 i {
+.au-card-title h3 i, .au-card-title h2 i {
     color: #fff;
     font-size: 24px;
     margin-right: 12px;
