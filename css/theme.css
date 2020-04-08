@@ -2519,8 +2519,12 @@ section {
     line-height: 63px;
 }
 
+table.fixedHeader-floating.no-footer {
+    z-index: 1000;
+}
+
 .setting-menu {
-    z-index: 100000;
+    z-index: 1001;
     position: fixed;
     min-width: 300px;
     right: -300px;
