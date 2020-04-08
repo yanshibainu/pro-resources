@@ -10554,6 +10554,13 @@
             StateManager.currentState = this.currentState;
             self.optioins.config.stateName = this.currentState.name;
 
+            $('.datepicker, .input-daterange input').datepicker({
+                language: "zh-TW",
+                format: "yyyy-mm-dd",
+                autoclose: true,
+                clearBtn: true
+            });
+
             this.currentState.enabled = true;
 
             MutationObserverManager.observe();
