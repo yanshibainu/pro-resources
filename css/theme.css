@@ -2520,6 +2520,7 @@ section {
 }
 
 .setting-menu {
+    z-index: 100000;
     position: fixed;
     min-width: 300px;
     right: -300px;
