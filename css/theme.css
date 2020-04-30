@@ -14753,18 +14753,18 @@ section {
     border-right: 5px solid black;
   }
 
-.fixedHeader-floating{
+/* .fixedHeader-floating{
     top: 75px !important;
     z-index: 1000;
-}
+} */
 
 table.fixedHeader-floating.no-footer {
     z-index: 1000;
 }
 
-@media (max-width: 991px){
+/* @media (max-width: 991px){
     
     .fixedHeader-floating{
         top: 0px !important;
     }
-}
+} */
