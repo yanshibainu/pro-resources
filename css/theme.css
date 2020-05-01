@@ -14701,7 +14701,9 @@ section {
   tr.details td.details-control.level-2 {
       padding-left:50px;
   }
+  
 
+/************************************************/
 
 
 .action-bar {
@@ -14758,9 +14760,9 @@ section {
     z-index: 1000;
 } */
 
-table.fixedHeader-floating.no-footer {
+/* table.fixedHeader-floating.no-footer {
     z-index: 1000;
-}
+} */
 
 /* @media (max-width: 991px){
     
