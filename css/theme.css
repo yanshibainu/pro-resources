@@ -14706,7 +14706,7 @@ section {
 /************************************************/
 
 
-.action-bar {
+/* .action-bar {
     text-align: right;
     background: powderblue;
     position: fixed;
@@ -14717,14 +14717,13 @@ section {
 
 .action-bar > button {
     margin-right: 5px;
-}
+} */
 
-@media (max-width: 991px){
+/* @media (max-width: 991px){
     .action-bar {
         left: 0;
-        /* position: relative; */
     }
-}
+} */
 
 .checkbox.checkbox-inline {
     margin-left: 0;
