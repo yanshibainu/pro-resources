@@ -14753,6 +14753,11 @@ section {
   .tooltip.right > .tooltip-arrow {
     border-right: 5px solid black;
   }
+  
+  /************************************************/
+  .tab-content div[id='history'] > div >section {    
+    font-size:   100% !important;
+  }
 
 /* .fixedHeader-floating{
     top: 75px !important;
