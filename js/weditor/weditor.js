@@ -10166,16 +10166,16 @@
         },
         undo: function () {
             debugger
-            var state = StateManager.getState(getConfig("stateName"));
+            var state = StateManager.currentState || StateManager.getState(getConfig("stateName"))
             state.undo();
         },
         redo: function () {
 
-            var state = StateManager.getState(getConfig("stateName"));
+            var state = StateManager.currentState || StateManager.getState(getConfig("stateName"))
             state.redo();
         },
         getState: function () {
-            return StateManager.getState(getConfig("stateName"));
+            return StateManager.currentState || StateManager.getState(getConfig("stateName"))
         },
         getIOverrides: function (signLog) {
             var overrides = [];
