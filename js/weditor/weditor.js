@@ -2795,6 +2795,14 @@
             get name() {
                 return "table";
             },
+            set value(val){
+                var self = this;
+                val.forEach(function (v) { 
+                    var newTr = new tr();
+                    newTr.value = v;
+                    self.addChild(newTr);
+                });             
+            },
             get value(){
                 var v = [];
 
@@ -2824,6 +2832,14 @@
             },
             get name() {
                 return "tr";
+            },
+            set value(val){
+                var self = this;
+                val.forEach(function (v) { 
+                    var newTd = new td();
+                    newTd.textContent = v;
+                    self.addChild(newTd);
+                });  
             },
             get value(){
                 var v = {};
