@@ -2798,8 +2798,8 @@
             get value(){
                 var v = [];
 
-                this.queryEditorSelectorAll("table > tr").forEach(function (tr) {
-                    v.push(tr.value);
+                this.htmlElement.querySelectorAll("table > tr").forEach(function (tr) { 
+                    v.push(InstanceManager.getInstance(tr).value);
                 });
 
                 return v;
@@ -2828,10 +2828,10 @@
             get value(){
                 var v = {};
 
-                this.queryEditorSelectorAll("tr > td").forEach(function (td) {
+                this.htmlElement.querySelectorAll("tr > td").forEach(function (td) {
                     var key = td.getAttribute("data-key");
                     if(key)
-                        v[key] = td.textContent;
+                        v[key] = InstanceManager.getInstance(td).textContent;
                 });
 
                 return v;
