@@ -2794,6 +2794,15 @@
             },
             get name() {
                 return "table";
+            },
+            get value(){
+                var v = [];
+
+                this.queryEditorSelectorAll("table > tr").forEach(function (tr) {
+                    v.push(tr.value);
+                });
+
+                return v;
             }
         }
 
@@ -2815,6 +2824,17 @@
             },
             get name() {
                 return "tr";
+            },
+            get value(){
+                var v = {};
+
+                this.queryEditorSelectorAll("tr > td").forEach(function (td) {
+                    var key = td.getAttribute("data-key");
+                    if(key)
+                        v[key] = td.textContent;
+                });
+
+                return v;
             }
         }
 
