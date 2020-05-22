@@ -2835,11 +2835,12 @@
             },
             set value(val){
                 var self = this;
-                val.forEach(function (v) { 
+                for(var key in val){
                     var newTd = new td();
-                    newTd.textContent = v;
-                    self.addChild(newTd);
-                });  
+                    newTd.htmlElement.setAttribute("data-key", key)
+                    newTd.textContent = val[key];
+                    self.addChild(newTd);             
+                }
             },
             get value(){
                 var v = {};
