@@ -232,3 +232,9 @@
        url('../fonts/poppins/poppins-v5-latin-900italic.ttf') format('truetype'), /* Safari, Android, iOS */
        url('../fonts/poppins/poppins-v5-latin-900italic.svg#Poppins') format('svg'); /* Legacy iOS */
 }
+
+/* NotoSansTC-Regular */
+@font-face {
+  font-family: 'NotoSansTC-Regular';
+  src: url('../fonts/noto-sans-tc/NotoSansTC-Regular'); /* IE9 Compat Modes */
+}
