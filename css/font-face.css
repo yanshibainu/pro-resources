@@ -236,5 +236,5 @@
 /* NotoSansTC-Regular */
 @font-face {
   font-family: 'NotoSansTC-Regular';
-  src: url('../fonts/noto-sans-tc/NotoSansTC-Regular'); /* IE9 Compat Modes */
+  src: url('../fonts/noto-sans-tc/NotoSansTC-Regular.otf'); /* IE9 Compat Modes */
 }
