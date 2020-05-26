@@ -2835,11 +2835,19 @@
             },
             set value(val){
                 var self = this;
+                var rowId = 1;
+
                 for(var key in val){
-                    var newTd = new td();
+                    newTd = new td();
                     newTd.htmlElement.setAttribute("data-key", key)
+                    
                     newTd.textContent = val[key];
-                    self.addChild(newTd);             
+                    if(key == "rowId" && val[key] == null)
+                        newTd.textContent = rowId;
+
+                    self.addChild(newTd);   
+                    
+                    rowId ++;
                 }
             },
             get value(){
