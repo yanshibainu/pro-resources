@@ -2842,7 +2842,7 @@
                 
                 if (this._childrenChangedFlag) {
                     this._childrenChangedFlag = false;
-                    refreshRowId();
+                    this.refreshRowId();
                 }
             },            
             refreshRowId: function(){
