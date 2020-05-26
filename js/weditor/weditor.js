@@ -2848,8 +2848,9 @@
                         var link = new a();
                         link.addChild(self.parseFromString('<i class="fa fa-trash"></i>'))
                         newTd.addChild(link);
-                        link.htmlElement.addEventListener("click", function () {
+                        link.htmlElement.addEventListener("click", function (event) {
                             self.parent.removeChild(self);
+                            event.preventDefault();
                         }, false);
                     }
                 }
