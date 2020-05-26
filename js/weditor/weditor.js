@@ -2792,6 +2792,17 @@
                 UndoRedoEditor.prototype._createChildren.call(this);
                 this.htmlElement = document.createElement("table");
             },
+            _updateDisplayList: function () {
+                UndoRedoEditor.prototype._updateDisplayList.call(this);
+                
+                if (this._childrenChangedFlag) {
+                    this._childrenChangedFlag = false;
+
+                    this.htmlElement.querySelectorAll("table > tr").forEach(function (tr) { 
+                        InstanceManager.getInstance(tr).refreshRowId();
+                    });
+                }
+            },   
             get name() {
                 return "table";
             },
@@ -2835,17 +2846,11 @@
             },
             get rowIndex(){
                 return this.childIndex
-            },
-            _updateDisplayList: function () {
-                debugger
-                UndoRedoEditor.prototype._updateDisplayList.call(this);
-                
-                if (this._childrenChangedFlag) {
-                    this._childrenChangedFlag = false;
-                    this.refreshRowId();
-                }
             },            
             refreshRowId: function(){
+                if(!this.children)
+                    return;
+
                 var self = this;
                 this.htmlElement.querySelectorAll("tr > td[data-key=rowId]").forEach(function (td) {
                     InstanceManager.getInstance(td).textContent = self.rowIndex;
@@ -2865,8 +2870,8 @@
                         link.addChild(self.parseFromString('<i class="fa fa-trash"></i>'))
                         newTd.addChild(link);
                         link.htmlElement.addEventListener("click", function (event) {
-                            debugger
-                            self.parent.removeChild(self);                          
+                            self.parent.removeChild(self);    
+                                                  
                             event.preventDefault();
                         }, false);
                     }
