@@ -2799,8 +2799,8 @@
                 var self = this;
                 val.forEach(function (v) { 
                     var newTr = new tr();
-                    newTr.value = v;
                     self.addChild(newTr);
+                    newTr.value = v;
                 });             
             },
             get value(){
@@ -2838,13 +2838,12 @@
                 
                 for(var key in val){
                     newTd = new td();
+                    self.addChild(newTd);  
                     newTd.htmlElement.setAttribute("data-key", key)
                     
                     newTd.textContent = val[key];
                     if(key == "rowId" && val[key] == null)
-                        newTd.textContent = self.htmlElement.childIndex + 1;
-
-                    self.addChild(newTd);   
+                        newTd.textContent = self.childIndex + 1; 
                 }
             },
             get value(){
