@@ -2799,7 +2799,7 @@
                     this._childrenChangedFlag = false;
 
                     for (var i = 0; i < this.children.length; i++) {
-                        if(this.children[i].name = "tr")
+                        if(this.children[i].name == "tr")
                             this.children[i].refreshRowId();
                     }
                 }
