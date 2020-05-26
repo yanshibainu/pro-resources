@@ -2844,6 +2844,14 @@
                     newTd.textContent = val[key];
                     if(key == "rowId" && val[key] == null)
                         newTd.textContent = self.childIndex;
+                    else if(key == "remove"){
+                        var a = new a();
+                        a.addChild(self.parseFromString('<i class="fa fa-trash"></i>'))
+                        newTd.addChild(a);
+                        a.htmlElement.addEventListener("click", function () {
+                            self.parent.removeChild(self);
+                        }, false);
+                    }
                 }
             },
             get value(){
