@@ -2798,9 +2798,10 @@
                 if (this._childrenChangedFlag) {
                     this._childrenChangedFlag = false;
 
-                    this.htmlElement.querySelectorAll("table > tr").forEach(function (tr) { 
-                        InstanceManager.getInstance(tr).refreshRowId();
-                    });
+                    for (var i = 0; i < this.children.length; i++) {
+                        if(this.children[i].name = "tr")
+                            this.children[i].refreshRowId();
+                    }
                 }
             },   
             get name() {
@@ -2845,7 +2846,7 @@
                 return "tr";
             },
             get rowIndex(){
-                return this.childIndex
+                return this.childIndex;
             },            
             refreshRowId: function(){
                 if(!this.children)
