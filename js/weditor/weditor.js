@@ -2842,11 +2842,9 @@
                     
                     newTd.textContent = val[key];
                     if(key == "rowId" && val[key] == null)
-                        newTd.textContent = this.htmlElement.childIndex + 1;
+                        newTd.textContent = self.htmlElement.childIndex + 1;
 
                     self.addChild(newTd);   
-                    
-                    rowId ++;
                 }
             },
             get value(){
