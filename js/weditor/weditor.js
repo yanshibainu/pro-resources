@@ -2843,7 +2843,7 @@
                     
                     newTd.textContent = val[key];
                     if(key == "rowId" && val[key] == null)
-                        newTd.textContent = self.childIndex + 1; 
+                        newTd.textContent = self.childIndex;
                 }
             },
             get value(){
