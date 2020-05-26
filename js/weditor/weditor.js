@@ -2835,15 +2835,14 @@
             },
             set value(val){
                 var self = this;
-                var rowId = 1;
-
+                
                 for(var key in val){
                     newTd = new td();
                     newTd.htmlElement.setAttribute("data-key", key)
                     
                     newTd.textContent = val[key];
                     if(key == "rowId" && val[key] == null)
-                        newTd.textContent = rowId;
+                        newTd.textContent = this.htmlElement.childIndex + 1;
 
                     self.addChild(newTd);   
                     
