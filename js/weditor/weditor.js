@@ -426,7 +426,7 @@
                     //}
                     //子結點跟TextNode要先更新
                     for (var i = 0; i < this.htmlElement.childNodes.length; i++) {
-                        InstanceManager.getInstance(this.htmlElement.childNodes[i]).validateProperties();
+                        InstanceManager.getInstance(this.htmlElement.childNodes[i]).validateNow();
                     }
 
                     this._updateDisplayList();
@@ -2833,6 +2833,24 @@
             get name() {
                 return "tr";
             },
+            get rowIndex(){
+                return this.childIndex
+            },
+            _updateDisplayList: function () {
+                debugger
+                UndoRedoEditor.prototype._updateDisplayList.call(this);
+                
+                if (this._childrenChangedFlag) {
+                    this._childrenChangedFlag = false;
+                    refreshRowId();
+                }
+            },            
+            refreshRowId: function(){
+                var self = this;
+                this.htmlElement.querySelectorAll("tr > td[data-key=rowId]").forEach(function (td) {
+                    InstanceManager.getInstance(td).textContent = self.rowIndex;
+                });             
+            },
             set value(val){
                 var self = this;
                 
@@ -2842,14 +2860,13 @@
                     newTd.htmlElement.setAttribute("data-key", key)
                     
                     newTd.textContent = val[key];
-                    if(key == "rowId" && val[key] == null)
-                        newTd.textContent = self.childIndex;
-                    else if(key == "remove"){
+                    if(key == "remove"){
                         var link = new a();
                         link.addChild(self.parseFromString('<i class="fa fa-trash"></i>'))
                         newTd.addChild(link);
                         link.htmlElement.addEventListener("click", function (event) {
-                            self.parent.removeChild(self);
+                            debugger
+                            self.parent.removeChild(self);                          
                             event.preventDefault();
                         }, false);
                     }
