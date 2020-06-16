@@ -99,7 +99,9 @@ p {
 
 /* ----- Typography ----- */
 body {
-    font-family: "標楷體", "Poppins", sans-serif;
+    font-family: "NotoSansTC-Regular", "Lucida Grande",
+    "Avenir Next", "Helvetica Neue", Helvetica, Arial, "PingFang SC",
+    "Hiragino Sans GB", "Microsoft YaHei", "標楷體";
     font-weight: 400;
     font-size: 20px;
     line-height: 1.625;
