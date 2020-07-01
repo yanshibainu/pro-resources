@@ -14760,7 +14760,14 @@ section {
   .tab-content div[id='history'] > div >section {    
     font-size:   100% !important;
   }
+  
+  div.DTED_Lightbox_Wrapper {
+    z-index: 1050;
+  }
 
+  div.DTED_Lightbox_Background {
+    z-index: 1050;
+  }
 /* .fixedHeader-floating{
     top: 75px !important;
     z-index: 1000;
