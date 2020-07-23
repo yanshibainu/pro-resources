@@ -2802,6 +2802,11 @@
                         if(this.children[i].name == "tr")
                             this.children[i].refreshRowId();
                     }
+
+                    if(this.children.length == 0)
+                        this.setStyle("display", "none");
+                    else
+                        this.setStyle("display", "block");
                 }
             },   
             get name() {
