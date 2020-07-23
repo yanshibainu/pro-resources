@@ -2803,7 +2803,7 @@
                             this.children[i].refreshRowId();
                     }
 
-                    if(this.children.length == 0)
+                    if(this.children.length <= 1)
                         this.setStyle("display", "none");
                     else
                         this.htmlElement.style.display = null;
