@@ -2806,7 +2806,7 @@
                     if(this.children.length == 0)
                         this.setStyle("display", "none");
                     else
-                        this.setStyle("display", "block");
+                        this.htmlElement.style.display = null;
                 }
             },   
             get name() {
