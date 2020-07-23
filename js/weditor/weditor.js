@@ -2803,10 +2803,10 @@
                             this.children[i].refreshRowId();
                     }
 
-                    if(this.children.length <= 1)
-                        this.setStyle("display", "none");
-                    else
-                        this.htmlElement.style.display = null;
+                    // if(this.children.length <= 1)
+                    //     this.setStyle("display", "none");
+                    // else
+                    //     this.htmlElement.style.display = null;
                 }
             },   
             get name() {
