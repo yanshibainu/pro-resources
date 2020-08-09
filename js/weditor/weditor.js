@@ -2648,6 +2648,40 @@
 
         return input;
     }());
+
+    var textarea = (function () {
+
+        var textarea = function (htmlElement /** HTMLElement **/) {
+            UndoRedoEditor.call(this, htmlElement);
+        };
+
+        textarea.prototype = {
+            _createChildren: function () {
+
+                UndoRedoEditor.prototype._createChildren.call(this);
+                this.htmlElement = document.createElement("textarea");
+            },
+            get name() {
+                return "textarea";
+            },
+            get selectedValue() {
+                return this.value;
+            },
+            set selectedValue(value) {
+                this.value = value;
+            },
+            get value() {
+                return this.htmlElement.value;
+            },
+            set value(value) {
+                this.htmlElement.value = value;
+            },
+        }
+
+        input.prototype.__proto__ = UndoRedoEditor.prototype;
+
+        return input;
+    }());
     var a = (function () {
 
         var a = function (htmlElement /** HTMLElement **/) {
@@ -3304,6 +3338,8 @@
                         this._inputSelect = InstanceManager.getInstance(this.htmlElement.querySelector("input"));
                     else if (this.htmlElement.querySelector("[data-class=SpanSelect]"))
                         this._inputSelect = InstanceManager.getInstance(this.htmlElement.querySelector("[data-class=SpanSelect]"));
+                    else if (this.htmlElement.querySelector("textarea"))
+                        this._inputSelect = InstanceManager.getInstance(this.htmlElement.querySelector("textarea"));
 
                     if (this._inputSelect) {
 
@@ -3351,7 +3387,7 @@
                             break;
                         case "追蹤修訂":
                         case "唯讀":
-                            //debugger
+                            debugger
                             if (this.children.length > 0) {
 
                                 this.textContent = this._value = this.selectedValue;
