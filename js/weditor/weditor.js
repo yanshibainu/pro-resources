@@ -3152,28 +3152,34 @@
                 //     this._a.fileName = this._fileName;                    
                 // }
 
+                
+                var changeEditMode = function () {
+                    this._value = this.textContent;
+
+                    for (var i = this.htmlElement.childNodes.length - 1; i >= 0; i--) {
+                        this.htmlElement.removeChild(this.htmlElement.childNodes[i]);
+                    }        
+                }
+
                 if (this._modeChangedFlag) {
                     this._modeChangedFlag = false;
 
+
                     switch (this._mode.name) {
                         case "編輯":
-
-                            this._fileInput = null;
-
-                            if (this.contains(this._fileInput))
-                                this.removeChild(this._fileInput);
-
-                            this.htmlElement.querySelectorAll("i").forEach(function (i) {
-                                InstanceManager.getInstance(i).setStyle("display", "inline-block");
-                            });
+                            changeEditMode.apply(this);
                             break;
                         case "追蹤修訂":
                         case "唯讀":
                             this.htmlElement.querySelectorAll("i").forEach(function (i) {
                                 InstanceManager.getInstance(i).setStyle("display", "none");
                             });
-
                             break;
+                        default: 
+                            if(StateManager.hasOwnBaseOn(this._mode.name, "Base-編輯"))
+                                changeEditMode.apply(this);
+
+                        break;                            
                     }
                 }
             },      
@@ -3373,17 +3379,20 @@
                     this._setSelected();
                 }
 
+                var changeEditMode = function () {
+                    this._value = this.textContent;
+
+                    for (var i = this.htmlElement.childNodes.length - 1; i >= 0; i--) {
+                        this.htmlElement.removeChild(this.htmlElement.childNodes[i]);
+                    }        
+                }
+
                 if (this._modeChangedFlag) {
                     this._modeChangedFlag = false;
 
                     switch (this._mode.name) {
-                        // case "Task_09xnpoc":
                         case "編輯":
-                            this._value = this.textContent;
-
-                            for (var i = this.htmlElement.childNodes.length - 1; i >= 0; i--) {
-                                this.htmlElement.removeChild(this.htmlElement.childNodes[i]);
-                            }
+                            changeEditMode.apply(this);
                             break;
                         case "追蹤修訂":
                         case "唯讀":
@@ -3396,11 +3405,12 @@
                             }
 
                             break;
-                        // default: 
-                        //     for (var i = this.htmlElement.childNodes.length - 1; i >= 0; i--) {
-                        //         this.htmlElement.removeChild(this.htmlElement.childNodes[i]);
-                        //     }
-                        //     break;
+                        default: 
+
+                            if(StateManager.hasOwnBaseOn(this._mode.name, "Base-編輯"))
+                                changeEditMode.apply(this);
+
+                            break;
                     }
                 }
             },
@@ -8007,6 +8017,19 @@
                     }
                 })();
             },
+            hasOwnBaseOn(stateName, compareBaseOn){
+                var state = StateManager.states[stateName];
+
+                while(state.basedOn != compareBaseOn){
+
+                    if(!state.basedOn)
+                        return false;
+
+                    state = StateManager.states[state.basedOn];
+                }
+
+                return true;      
+            }
 
         }
 

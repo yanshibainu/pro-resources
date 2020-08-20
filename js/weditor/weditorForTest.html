@@ -52,7 +52,15 @@
                             iOverrides: [],
                             basedOn: "唯讀"
                         },
-                        "編輯": {
+                        "Base-編輯": {
+                            iOverrides: []
+                        },  
+                        "承辦區編輯": {
+                            "basedOn": "Base-編輯",
+                            iOverrides: []
+                        },                        
+                        "編輯1": {
+                            "basedOn": "承辦區編輯",
                             "actions": [
                                 //{
                                 //  "name": "儲存",
@@ -121,7 +129,7 @@
                                 {
                                     "iOverride": "AddChild",
                                     "relativeTo": "計畫名稱",
-                                    "target": "<input style='font-size: 16pt; padding: 0; width: 100%; margin-top: 5px; margin-bottom: 5px;' type='text'></input>"
+                                    "target": "<textarea style='font-size: 16px; padding: 0; width: 100%; margin-top: 5px; margin-bottom: 5px;' type='text' rows='5'></textarea>"
                                 },
                                 {
                                     "iOverride": "AddChild",
