@@ -3154,11 +3154,14 @@
 
                 
                 var changeEditMode = function () {
-                    this._value = this.textContent;
+                    this._fileInput = null;
 
-                    for (var i = this.htmlElement.childNodes.length - 1; i >= 0; i--) {
-                        this.htmlElement.removeChild(this.htmlElement.childNodes[i]);
-                    }        
+                    if (this.contains(this._fileInput))
+                        this.removeChild(this._fileInput);
+
+                    this.htmlElement.querySelectorAll("i").forEach(function (i) {
+                        InstanceManager.getInstance(i).setStyle("display", "inline-block");
+                    });      
                 }
 
                 if (this._modeChangedFlag) {
