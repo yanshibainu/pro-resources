@@ -7479,6 +7479,32 @@
         return SetStyle;
     }());
 
+    var RemoveClass = (function () {
+
+        var RemoveClass = function (target, name) {
+
+            this.target = target;
+            this.name = name;
+
+            IOverride.call(this);
+        };
+
+        RemoveClass.prototype = {
+            initialize: function () {
+            },
+            apply: function () {
+                this.target.htmlElement.class.remove(this.name);
+            },
+            remove: function () {
+                this.target.htmlElement.class.add(this.name);
+            }
+        }
+
+        RemoveClass.prototype.__proto__ = IOverride.prototype;
+
+        return RemoveClass;
+    }());
+
     var SetController = (function () {
 
         var SetController = function (controller, arg) {
@@ -7887,6 +7913,16 @@
 
                 addOverride(stateInfo.iOverrides, dictionary[state.name].initOverrides);
 
+                function query(selector){
+                    var htmlElement = document.getElementById(selector);
+
+                    if (!htmlElement)
+                        htmlElement = document.querySelector(selector);
+
+                    if (!htmlElement)
+                        throw new Error("not querySelector =" + selector);                   
+                }
+
                 function addOverride(IOverrides, initOverrides) {
 
                     for (var i = 0; i < IOverrides.length; i++) {
@@ -7983,18 +8019,27 @@
 
                                 break;
                             case "RemoveChild":
-                                var htmlElement = document.getElementById(IOverrideInfo.target);
+                                // var htmlElement = document.getElementById(IOverrideInfo.target);
 
-                                if (!htmlElement)
-                                    htmlElement = document.querySelector(IOverrideInfo.target);
+                                // if (!htmlElement)
+                                //     htmlElement = document.querySelector(IOverrideInfo.target);
 
-                                if (!htmlElement)
-                                    throw new Error("not querySelector =" + IOverrideInfo.target);
+                                // if (!htmlElement)
+                                //     throw new Error("not querySelector =" + IOverrideInfo.target);
+
+                                var htmlElement = query(IOverrideInfo.target);
 
                                 var undoRedoEditor = InstanceManager.getInstance(htmlElement);
                                 IOverride = new (IOverrideClassName)(undoRedoEditor);
 
                                 break;
+                            case "RemoveClass":
+                                var htmlElement = query(IOverrideInfo.target);
+
+                                var undoRedoEditor = InstanceManager.getInstance(htmlElement);
+                                IOverride = new (IOverrideClassName)(undoRedoEditor, IOverrideInfo.name);
+
+                                break;                                  
                             default:
 
                                 break;
