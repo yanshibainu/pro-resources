@@ -8047,18 +8047,23 @@
                                 break;
                         }
 
-                        IOverride.apply();
+                        if(!Array.isArray(IOverride))
+                            IOverride = [IOverride];
 
-                        if (IOverrideInfo.onlyFirst)
-                            IOverrideInfo.destroy = true;
-                        else
-                            initOverrides.push(IOverride);
+                        IOverride.forEach(function (i) {
 
-                        if (IOverride.target && validateEditorList.indexOf(IOverride.target) == -1)
-                            validateEditorList.push(IOverride.target);
+                            i.apply();     
+
+                            if (IOverrideInfo.onlyFirst)
+                                IOverrideInfo.destroy = true;
+                            else
+                                initOverrides.push(i);
+
+                            if (i.target && validateEditorList.indexOf(i.target) == -1)
+                                validateEditorList.push(i.target);                             
+                        });                    
                     }
                 }
-
 
                 (function validate() {
                     for (var i = 0; i < validateEditorList.length; i++) {
