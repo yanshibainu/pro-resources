@@ -7493,10 +7493,10 @@
             initialize: function () {
             },
             apply: function () {
-                this.target.htmlElement.class.remove(this.name);
+                this.target.htmlElement.classList.remove(this.name);
             },
             remove: function () {
-                this.target.htmlElement.class.add(this.name);
+                this.target.htmlElement.classList.add(this.name);
             }
         }
 

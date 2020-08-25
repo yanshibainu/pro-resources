@@ -109,3 +109,7 @@
     margin-top: 0;
     margin-left: 0px;
 }
+
+.radio-inline+.radio-inline-disabled {
+    display: inherit;
+}
