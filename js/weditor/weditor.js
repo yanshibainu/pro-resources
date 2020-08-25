@@ -7913,14 +7913,18 @@
 
                 addOverride(stateInfo.iOverrides, dictionary[state.name].initOverrides);
 
-                function query(selector){
+                function getElementByIdOrSelectorAll(selector){
                     var htmlElement = document.getElementById(selector);
 
                     if (!htmlElement)
-                        htmlElement = document.querySelector(selector);
+                        htmlElement = document.querySelectorAll(selector);
+                    else
+                        return [htmlElement];
 
                     if (!htmlElement)
-                        throw new Error("not querySelector =" + selector);                   
+                        throw new Error("not querySelector =" + selector);         
+                        
+                    return htmlElement;
                 }
 
                 function addOverride(IOverrides, initOverrides) {
@@ -8019,25 +8023,23 @@
 
                                 break;
                             case "RemoveChild":
-                                // var htmlElement = document.getElementById(IOverrideInfo.target);
+                                var htmlElement = document.getElementById(IOverrideInfo.target);
 
-                                // if (!htmlElement)
-                                //     htmlElement = document.querySelector(IOverrideInfo.target);
+                                if (!htmlElement)
+                                    htmlElement = document.querySelector(IOverrideInfo.target);
 
-                                // if (!htmlElement)
-                                //     throw new Error("not querySelector =" + IOverrideInfo.target);
-
-                                var htmlElement = query(IOverrideInfo.target);
+                                if (!htmlElement)
+                                    throw new Error("not querySelector =" + IOverrideInfo.target);
 
                                 var undoRedoEditor = InstanceManager.getInstance(htmlElement);
                                 IOverride = new (IOverrideClassName)(undoRedoEditor);
 
                                 break;
                             case "RemoveClass":
-                                var htmlElement = query(IOverrideInfo.target);
 
-                                var undoRedoEditor = InstanceManager.getInstance(htmlElement);
-                                IOverride = new (IOverrideClassName)(undoRedoEditor, IOverrideInfo.name);
+                                getElementByIdOrSelectorAll(IOverrideInfo.target).forEach(function (i) {
+                                    IOverride = new (IOverrideClassName)(InstanceManager.getInstance(i), IOverrideInfo.name);                                   
+                                });                                 
 
                                 break;                                  
                             default:

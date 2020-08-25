@@ -102,5 +102,10 @@
 }
 
 .radio-inline-disabled {
-    display: none;
+    padding-left: 0px;
+}
+
+.radio-inline+.radio-inline+.radio-inline-disabled {
+    margin-top: 0;
+    margin-left: 0px;
 }
