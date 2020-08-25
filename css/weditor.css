@@ -78,3 +78,25 @@
                 -webkit-print-color-adjust: exact;
             }
         }
+
+
+.radio input[type="radio"]:disabled + label {
+    opacity: 1;
+    padding-left: 0px;
+}       
+
+.radio input[type="radio"]:disabled:not(:checked) + label {
+    display: none;
+}
+
+.radio input[type="radio"]:disabled + label::before {
+    display: none;
+}
+
+.radio input[type="radio"]:disabled + label::after {
+    display: none;
+}
+
+.radio input[type="radio"]:disabled {
+    display: none;
+}
