@@ -8036,9 +8036,9 @@
 
                                 break;
                             case "RemoveClass":
-
-                                getElementByIdOrSelectorAll(IOverrideInfo.target).forEach(function (i) {
-                                    IOverride = new (IOverrideClassName)(InstanceManager.getInstance(i), IOverrideInfo.name);                                   
+                                IOverride = [];
+                                getElementByIdOrSelectorAll(IOverrideInfo.target).forEach(function (i) {      
+                                    IOverride.push(new (IOverrideClassName)(InstanceManager.getInstance(i), IOverrideInfo.name));                               
                                 });                                 
 
                                 break;                                  
