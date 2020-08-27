@@ -2843,6 +2843,43 @@
                     //     this.htmlElement.style.display = null;
                 }
             },   
+            _commitProperties: function () {
+
+                UndoRedoEditor.prototype._commitProperties.call(this);
+                
+                var changeEditMode = function () {
+                    // this._fileInput = null;
+
+                    // if (this.contains(this._fileInput))
+                    //     this.removeChild(this._fileInput);
+
+                    // this.htmlElement.querySelectorAll("i").forEach(function (i) {
+                    //     InstanceManager.getInstance(i).setStyle("display", "inline-block");
+                    // });      
+                }
+
+                if (this._modeChangedFlag) {
+                    this._modeChangedFlag = false;
+
+
+                    switch (this._mode.name) {
+                        case "編輯":
+                            changeEditMode.apply(this);
+                            break;
+                        case "追蹤修訂":
+                        case "唯讀":
+                            // this.htmlElement.querySelectorAll("i").forEach(function (i) {
+                            //     InstanceManager.getInstance(i).setStyle("display", "none");
+                            // });
+                            break;
+                        default: 
+                            if(StateManager.hasOwnBaseOn(this._mode.name, "Base-編輯"))
+                                changeEditMode.apply(this);
+
+                        break;                            
+                    }
+                }
+            },             
             get name() {
                 return "table";
             },
@@ -2873,6 +2910,9 @@
 
         var tr = function (htmlElement /** HTMLElement **/) {
             UndoRedoEditor.call(this, htmlElement);
+
+            this._link;
+            this._removeActionTd;
         };
 
         tr.prototype = {
@@ -2896,6 +2936,36 @@
                     InstanceManager.getInstance(td).textContent = self.rowIndex;
                 });             
             },
+            _commitProperties: function () {
+
+                UndoRedoEditor.prototype._commitProperties.call(this);
+                
+                var changeEditMode = function () {
+                    if(self._removeActionTd)
+                        self._removeActionTd.setStyle("display", "table-cell");   
+                }
+
+                if (this._modeChangedFlag) {
+                    this._modeChangedFlag = false;
+
+
+                    switch (this._mode.name) {
+                        case "編輯":
+                            changeEditMode.apply(this);
+                            break;
+                        case "追蹤修訂":
+                        case "唯讀":
+                            if(self._removeActionTd)
+                                self._removeActionTd.setStyle("display", "none");
+                            break;
+                        default: 
+                            if(StateManager.hasOwnBaseOn(this._mode.name, "Base-編輯"))
+                                changeEditMode.apply(this);
+
+                        break;                            
+                    }
+                }
+            }, 
             set value(val){
                 var self = this;
                 
@@ -2906,10 +2976,11 @@
                     
                     newTd.textContent = val[key];
                     if(key == "remove"){
-                        var link = new a();
-                        link.addChild(self.parseFromString('<i class="fa fa-trash"></i>'))
-                        newTd.addChild(link);
-                        link.htmlElement.addEventListener("click", function (event) {
+                        self._link = new a();
+                        self._link.addChild(self.parseFromString('<i class="fa fa-trash"></i>'))
+                        newTd.addChild(self._link);
+                        self._removeActionTd = newTd;
+                        self._link.htmlElement.addEventListener("click", function (event) {
                             self.parent.removeChild(self);    
                                                   
                             event.preventDefault();
