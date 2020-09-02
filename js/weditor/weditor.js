@@ -2818,6 +2818,8 @@
 
         var table = function (htmlElement /** HTMLElement **/) {
             UndoRedoEditor.call(this, htmlElement);
+
+            this.tbody;
         };
 
         table.prototype = {
@@ -2885,16 +2887,25 @@
             },
             set value(val){
                 var self = this;
+
+                var tbody = this.htmlElement.querySelector("table > tbody");
+
                 val.forEach(function (v) { 
+                    
                     var newTr = new tr();
-                    self.addChild(newTr);
+                    
+                    if(tbody != null)
+                        InstanceManager.getInstance(tbody).addChild(newTr)
+                    else     
+                        self.addChild(newTr);
+
                     newTr.value = v;
                 });             
             },
             get value(){
                 var v = [];
 
-                this.htmlElement.querySelectorAll("table > tr").forEach(function (tr) { 
+                this.htmlElement.querySelectorAll("table > tr, table > tbody > tr").forEach(function (tr) { 
                     v.push(InstanceManager.getInstance(tr).value);
                 });
 
