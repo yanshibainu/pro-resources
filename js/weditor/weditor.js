@@ -7998,8 +7998,10 @@
                 function getElementByIdOrSelectorAll(selector){
                     var htmlElement = document.getElementById(selector);
 
-                    if (!htmlElement)
-                        htmlElement = document.querySelectorAll(selector);
+                    if (!htmlElement){
+                        //htmlElement = document.querySelectorAll(selector);
+                        htmlElement = $(selector).toArray();
+                    }
                     else
                         return [htmlElement];
 
