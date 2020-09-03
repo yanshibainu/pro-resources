@@ -112,5 +112,4 @@
 
 .radio-inline+.radio-inline-disabled {
     display: inherit;
-    padding-left: 0 !important;
 }
