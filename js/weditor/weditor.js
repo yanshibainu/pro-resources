@@ -2818,8 +2818,6 @@
 
         var table = function (htmlElement /** HTMLElement **/) {
             UndoRedoEditor.call(this, htmlElement);
-
-            this.tbody;
         };
 
         table.prototype = {
@@ -2925,6 +2923,46 @@
         table.prototype.__proto__ = UndoRedoEditor.prototype;
 
         return table;
+    }());
+    var tbody = (function () {
+
+        var tbody = function (htmlElement /** HTMLElement **/) {
+            UndoRedoEditor.call(this, htmlElement);
+        };
+
+        tbody.prototype = {
+            _createChildren: function () {
+
+                UndoRedoEditor.prototype._createChildren.call(this);
+                this.htmlElement = document.createElement("tbody");
+            },
+            _updateDisplayList: function () {
+                UndoRedoEditor.prototype._updateDisplayList.call(this);
+                
+                if (this._childrenChangedFlag) {
+                    this._childrenChangedFlag = false;
+
+                    for (var i = 0; i < this.children.length; i++) {
+                        this.getChildAt(i).refreshRowId();
+                    }  
+
+                    if(this.parent.getAttribute("data-hidden-empty")){
+                        if(this.children.length == 0)
+                            this.parent.setStyle("display", "none");
+                        else
+                            this.parent.setStyle("display", "table");    
+                    }
+
+                }
+            },   
+            get name() {
+                return "tbody";
+            }
+        }
+
+        tbody.prototype.__proto__ = UndoRedoEditor.prototype;
+
+        return tbody;
     }());
     var tr = (function () {
 
