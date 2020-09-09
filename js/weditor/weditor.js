@@ -2834,19 +2834,19 @@
                 if (this._childrenChangedFlag) {
                     this._childrenChangedFlag = false;
 
-                    for (var i = 0; i < this.children.length; i++) {
-                        if(this.children[i].name == "tr")
-                            this.children[i].refreshRowId();
-                    }
+                    // for (var i = 0; i < this.children.length; i++) {
+                    //     if(this.children[i].name == "tr")
+                    //         this.children[i].refreshRowId();
+                    // }
 
                     var tbody = this.htmlElement.querySelector("table > tbody");
     
                     for (var i = 0; i < InstanceManager.getInstance(tbody).children.length; i++) {
-                        InstanceManager.getInstance(tbody).getChildAt().refreshRowId();
+                        InstanceManager.getInstance(tbody).getChildAt(i).refreshRowId();
                     }  
 
                     if(td.getAttribute("data-hidden-empty")){
-                       if(InstanceManager.getInstance(tbody).children.length == 0)
+                       if(InstanceManager.getInstance(tbody).child.length == 0)
                             this.setStyle("display", "none");
                         else
                             this.setStyle("display", "table");    
