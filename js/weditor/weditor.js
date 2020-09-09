@@ -2845,7 +2845,7 @@
                         InstanceManager.getInstance(tbody).getChildAt(i).refreshRowId();
                     }  
 
-                    if(td.getAttribute("data-hidden-empty")){
+                    if(this.htmlElement.getAttribute("data-hidden-empty")){
                        if(InstanceManager.getInstance(tbody).child.length == 0)
                             this.setStyle("display", "none");
                         else
