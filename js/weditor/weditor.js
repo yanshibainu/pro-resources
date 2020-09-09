@@ -2839,10 +2839,19 @@
                             this.children[i].refreshRowId();
                     }
 
-                    // if(this.children.length <= 1)
-                    //     this.setStyle("display", "none");
-                    // else
-                    //     this.htmlElement.style.display = null;
+                    var tbody = this.htmlElement.querySelector("table > tbody");
+    
+                    for (var i = 0; i < InstanceManager.getInstance(tbody).children.length; i++) {
+                        InstanceManager.getInstance(tbody).getChildAt().refreshRowId();
+                    }  
+
+                    if(td.getAttribute("data-hidden-empty")){
+                       if(InstanceManager.getInstance(tbody).children.length == 0)
+                            this.setStyle("display", "none");
+                        else
+                            this.setStyle("display", "table");    
+                    }
+
                 }
             },   
             _commitProperties: function () {
