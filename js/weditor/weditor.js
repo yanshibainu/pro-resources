@@ -2946,7 +2946,7 @@
                         this.getChildAt(i).refreshRowId();
                     }  
 
-                    if(this.parent.getAttribute("data-hidden-empty")){
+                    if(this.parent.htmlElement.getAttribute("data-hidden-empty")){
                         if(this.children.length == 0)
                             this.parent.setStyle("display", "none");
                         else
