@@ -2946,15 +2946,19 @@
                         this.getChildAt(i).refreshRowId();
                     }  
 
-                    if(this.parent.htmlElement.getAttribute("data-hidden-empty") === "true"){
-                        if(this.children.length == 0)
-                            this.parent.setStyle("display", "none");
-                        else
-                            this.parent.setStyle("display", "table");    
-                    }
+                    this.hiddenEmpty();
 
                 }
             },   
+            hiddenEmpty: function(){ 
+
+                if(this.parent.htmlElement.getAttribute("data-hidden-empty") === "true"){
+                    if(this.children.length == 0)
+                        this.parent.setStyle("display", "none");
+                    else
+                        this.parent.setStyle("display", "table");    
+                }
+            },
             get name() {
                 return "tbody";
             }
@@ -3011,14 +3015,18 @@
                         case "編輯":
                             changeEditMode.apply(this);
                             break;
-                        case "追蹤修訂":
-                        case "唯讀":
-                            if(self._removeActionTd)
-                                self._removeActionTd.setStyle("display", "none");
-                            break;
+                        // case "追蹤修訂":
+                        // case "唯讀":
+                        //     if(self._removeActionTd)
+                        //         self._removeActionTd.setStyle("display", "none");
+                        //     break;
                         default: 
                             if(StateManager.hasOwnBaseOn(this._mode.name, "Base-編輯"))
                                 changeEditMode.apply(this);
+                            else{
+                                if(self._removeActionTd)
+                                    self._removeActionTd.setStyle("display", "none");                              
+                            }
 
                         break;                            
                     }
