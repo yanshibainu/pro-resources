@@ -2946,7 +2946,7 @@
                         this.getChildAt(i).refreshRowId();
                     }  
 
-                    if(this.parent.htmlElement.getAttribute("data-hidden-empty")){
+                    if(this.parent.htmlElement.getAttribute("data-hidden-empty") === "true"){
                         if(this.children.length == 0)
                             this.parent.setStyle("display", "none");
                         else
@@ -2991,7 +2991,7 @@
 
                 var self = this;
                 this.htmlElement.querySelectorAll("tr > td[data-key=rowId]").forEach(function (td) {
-                    InstanceManager.getInstance(td).textContent = self.rowIndex;
+                    InstanceManager.getInstance(td).textContent = self.rowIndex + 1;
                 });             
             },
             _commitProperties: function () {
