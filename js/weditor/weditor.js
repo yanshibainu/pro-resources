@@ -2837,18 +2837,18 @@
                     //         this.children[i].refreshRowId();
                     // }
 
-                    var tbody = this.htmlElement.querySelector("table > tbody");
+                    // var tbody = this.htmlElement.querySelector("table > tbody");
     
-                    for (var i = 0; i < InstanceManager.getInstance(tbody).children.length; i++) {
-                        InstanceManager.getInstance(tbody).getChildAt(i).refreshRowId();
-                    }  
+                    // for (var i = 0; i < InstanceManager.getInstance(tbody).children.length; i++) {
+                    //     InstanceManager.getInstance(tbody).getChildAt(i).refreshRowId();
+                    // }  
 
-                    if(this.htmlElement.getAttribute("data-hidden-empty")){
-                       if(InstanceManager.getInstance(tbody).child.length == 0)
-                            this.setStyle("display", "none");
-                        else
-                            this.setStyle("display", "table");    
-                    }
+                    // if(this.htmlElement.getAttribute("data-hidden-empty")){
+                    //    if(InstanceManager.getInstance(tbody).child.length == 0)
+                    //         this.setStyle("display", "none");
+                    //     else
+                    //         this.setStyle("display", "table");    
+                    // }
 
                 }
             },   
