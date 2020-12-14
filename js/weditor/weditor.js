@@ -208,8 +208,10 @@
 
                         }
                         else {
-                            this.addChild(InstanceManager.getInstance(document.createTextNode(this._textContent), text));
-                            this.validateNow();
+                            // this.addChild(InstanceManager.getInstance(document.createTextNode(this._textContent), text));
+                            // this.validateNow();
+
+                            this.htmlElement.textContent = this._textContent;
                         }
 
 
