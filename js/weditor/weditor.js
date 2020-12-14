@@ -2995,7 +2995,7 @@
 
                 var self = this;
                 this.htmlElement.querySelectorAll("tr > td[data-key=rowId]").forEach(function (td) {
-                    InstanceManager.getInstance(td).textContent = self.rowIndex + 1;
+                    InstanceManager.getInstance(td).textContent = parseInt(self.rowIndex) + 1;
                 });             
             },
             _commitProperties: function () {
