@@ -79,7 +79,7 @@
             }
         }
 
-
+/*
 .radio input[type="radio"]:disabled + label {
     opacity: 1;
     padding-left: 0px;
@@ -113,3 +113,4 @@
 .radio-inline+.radio-inline-disabled {
     display: inherit;
 }
+*/
