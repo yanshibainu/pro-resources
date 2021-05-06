@@ -281,7 +281,19 @@
                                     "name": "display",
                                     "value": "inline",
                                     "target": ".fa-info-circle"
-                                }
+                                },
+                                {
+                                    "iOverride": "SetProperty",
+                                    "name": "disabled",
+                                    "value": "false",
+                                    "target": "#是否基因重組_是"
+                                },
+                                {
+                                    "iOverride": "SetProperty",
+                                    "name": "disabled",
+                                    "value": "false",
+                                    "target": "#是否基因重組_否"
+                                },
                                 //  "iOverride": "AddChild",
                                 //  "relativeTo": "請假人員",
                                 //  "target": "<input style='font-size: 16pt; padding: 0; width: 50mm;' type='text'></input>"
@@ -502,6 +514,16 @@
                                                 是
                                             </label>
                                         </div>
+                                       
+                                        <div class="radio radio-danger radio-inline">
+                                            <input type="radio" id="是否基因重組_是" name="是否基因重組1" pro-variable-name="是否基因重組_是" disabled="disabled">
+                                            <label for="是否基因重組_是"> 是 </label>
+                                         
+                                        </div>     
+                                        <div class="radio radio-danger radio-inline">
+                                            <input type="radio" id="是否基因重組_否" name="是否基因重組1" pro-variable-name="是否基因重組_否" disabled="disabled">
+                                            <label for="是否基因重組_否"> 否 </label>
+                                        </div>   
                                     </td>
                                 </tr>
                                 <tr valign=top>

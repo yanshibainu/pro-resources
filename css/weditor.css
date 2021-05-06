@@ -6,6 +6,10 @@
     opacity: 1
 }
 
+.radio input[type="radio"]:disabled + label {
+    opacity: 1;
+}   
+
 /* input[multiple]::after{
     content:"我是 after";
     color:red;
@@ -112,5 +116,4 @@
 
 .radio-inline+.radio-inline-disabled {
     display: inherit;
-}
-*/
+}*/
