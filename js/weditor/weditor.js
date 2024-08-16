@@ -446,13 +446,21 @@
                     this._htmlElement = value;
 
                     var self = this;
+
+                    const observer = new MutationObserver(mutationList =>  
+                        mutationList.filter(m => m.type === 'childList').forEach(m => {  
+                            m.addedNodes.forEach(() => self._invalidateDisplayList.call(self));  
+                    }));  
+
                     var onDOMNodeInserted = function (event) {
-                        value.removeEventListener("DOMNodeInsertedIntoDocument", onDOMNodeInserted, false);
+                        observer.disconnect();
+                        // value.removeEventListener("DOMNodeInsertedIntoDocument", onDOMNodeInserted, false);
 
                         self._invalidateDisplayList.call(self);
                     };
 
-                    value.addEventListener("DOMNodeInsertedIntoDocument", onDOMNodeInserted, false);
+                    observer.observe(value,{childList: true, subtree: true}); 
+                    // value.addEventListener("DOMNodeInsertedIntoDocument", onDOMNodeInserted, false);
 
                     if (!getConfig("undoRedoEnable"))
                         return;
